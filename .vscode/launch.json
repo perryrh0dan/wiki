@@ -8,9 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}\\wiki-server\\server.js",
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
+      "program": "${workspaceFolder}/server/server.js",
+      "skipFiles": [
+        "<node_internals>/**"
       ]
     }
   ]

@@ -141,6 +141,8 @@ Promise.all([global.db.onReady, global.search.onReady]).then(() => {
   global.entries.scan()
 }).then(() => {
   global.uplAgent.initialScan()
+}).catch((error) => {
+  global.winston.error(error.message, '')
 })
 
 // ----------------------------------------

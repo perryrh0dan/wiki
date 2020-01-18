@@ -4,7 +4,7 @@ backend: https://wiki.tpoe.dev
 port: 4000
 
 db: mongodb://localhost:27017/wiki
-search: https://elastic:OwpOhE1fRa6lSSnrftFNcX9D@596c6031dd4245448eaeabe73377f5b1.europe-west3.gcp.cloud.es.io:9243
+search:
 
 paths:
   repo: ./repo

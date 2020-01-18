@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "NODE_ENV=production&&node server.js",
-    "start:win": "Set NODE_ENV=development&&node server.js",
+    "start:win": "node server.js --inspect",
     "eslint": "eslint .\\"
   },
   "dependencies": {
