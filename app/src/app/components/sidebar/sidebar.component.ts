@@ -222,4 +222,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  public getSubPages(document: Document): Array<any> {
+    if (document.children) {
+      return document.children.filter((child: any) => { return child.isEntry })
+    } else {
+      return []
+    }
+  }
 }

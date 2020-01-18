@@ -1,0 +1,73 @@
+2020-01-18T20:33:34.391Z - info: [SERVER] Camelot Wiki is initializing...
+2020-01-18T20:33:34.491Z - info: [SERVER] Checking data directories...
+2020-01-18T20:33:34.492Z - info: [SERVER] Data and Repository directories are OK.
+2020-01-18T20:33:35.181Z - info: [SERVER] HTTP server started successfully! [RUNNING]
+2020-01-18T20:33:35.215Z - error: [SERVER] Failed to connect to MongoDB instance.
+2020-01-18T20:33:35.349Z - error: [SERVER] Gone
+2020-01-18T20:33:35.349Z - info: [SERVER] Starting initial document scan
+2020-01-18T20:33:35.350Z - info: [SERVER] Starting initial file scan
+2020-01-18T20:33:35.353Z - info: [SERVER] Finished initial document scan
+2020-01-18T20:33:35.354Z - info: [SERVER] Starting tree update
+2020-01-18T20:33:39.440Z - info: [SERVER] - SHUTTING DOWN - Terminating Background Agent...
+2020-01-18T20:34:00.381Z - info: [SERVER] Camelot Wiki is initializing...
+2020-01-18T20:34:00.463Z - info: [SERVER] Checking data directories...
+2020-01-18T20:34:00.465Z - info: [SERVER] Data and Repository directories are OK.
+2020-01-18T20:34:01.042Z - info: [SERVER] HTTP server started successfully! [RUNNING]
+2020-01-18T20:34:01.070Z - error: [SERVER] Failed to connect to MongoDB instance.
+2020-01-18T20:34:01.143Z - error: [SERVER] Gone
+2020-01-18T20:34:01.144Z - info: [SERVER] Starting initial document scan
+2020-01-18T20:34:01.145Z - info: [SERVER] Starting initial file scan
+2020-01-18T20:34:01.154Z - info: [SERVER] Finished initial document scan
+2020-01-18T20:34:01.155Z - info: [SERVER] Starting tree update
+2020-01-18T20:34:03.594Z - info: [SERVER] - SHUTTING DOWN - Terminating Background Agent...
+2020-01-18T20:34:18.811Z - info: [SERVER] Camelot Wiki is initializing...
+2020-01-18T20:34:18.897Z - info: [SERVER] Checking data directories...
+2020-01-18T20:34:18.899Z - info: [SERVER] Data and Repository directories are OK.
+2020-01-18T20:34:19.423Z - info: [SERVER] HTTP server started successfully! [RUNNING]
+2020-01-18T20:34:19.437Z - info: [SERVER] Connected to MongoDB instance.
+2020-01-18T20:34:19.586Z - error: [SERVER] Gone
+2020-01-18T20:34:19.586Z - info: [SERVER] Starting initial document scan
+2020-01-18T20:34:19.588Z - info: [SERVER] Starting initial file scan
+2020-01-18T20:34:19.600Z - info: [SERVER] Finished initial document scan
+2020-01-18T20:34:19.600Z - info: [SERVER] Starting tree update
+2020-01-18T20:34:19.626Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:34:19.635Z - info: [SERVER] Finished initial file scan
+2020-01-18T20:34:35.147Z - info: [SERVER] - SHUTTING DOWN - Terminating Background Agent...
+2020-01-18T20:34:36.398Z - info: [SERVER] Camelot Wiki is initializing...
+2020-01-18T20:34:36.482Z - info: [SERVER] Checking data directories...
+2020-01-18T20:34:36.484Z - info: [SERVER] Data and Repository directories are OK.
+2020-01-18T20:34:37.013Z - info: [SERVER] HTTP server started successfully! [RUNNING]
+2020-01-18T20:34:37.022Z - info: [SERVER] Connected to MongoDB instance.
+2020-01-18T20:34:37.193Z - error: [SERVER] Gone
+2020-01-18T20:34:37.194Z - info: [SERVER] Starting initial document scan
+2020-01-18T20:34:37.195Z - info: [SERVER] Starting initial file scan
+2020-01-18T20:34:37.227Z - info: [SERVER] Finished initial document scan
+2020-01-18T20:34:37.228Z - info: [SERVER] Starting tree update
+2020-01-18T20:34:37.237Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:34:37.242Z - info: [SERVER] Finished initial file scan
+2020-01-18T20:41:45.930Z - error: [SERVER] EACCES: permission denied, open '/home/thomas/dev/wiki/server/repo/test.md'
+2020-01-18T20:42:32.747Z - info: [SERVER] - SHUTTING DOWN - Terminating Background Agent...
+2020-01-18T20:42:50.313Z - info: [SERVER] Camelot Wiki is initializing...
+2020-01-18T20:42:50.395Z - info: [SERVER] Checking data directories...
+2020-01-18T20:42:50.397Z - info: [SERVER] Data and Repository directories are OK.
+2020-01-18T20:42:50.961Z - info: [SERVER] HTTP server started successfully! [RUNNING]
+2020-01-18T20:42:50.971Z - info: [SERVER] Connected to MongoDB instance.
+2020-01-18T20:42:51.212Z - error: [SERVER] Gone
+2020-01-18T20:42:51.212Z - info: [SERVER] Starting initial document scan
+2020-01-18T20:42:51.214Z - info: [SERVER] Starting initial file scan
+2020-01-18T20:42:51.227Z - info: [SERVER] Finished initial document scan
+2020-01-18T20:42:51.227Z - info: [SERVER] Starting tree update
+2020-01-18T20:42:51.252Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:42:51.262Z - info: [SERVER] Finished initial file scan
+2020-01-18T20:43:02.950Z - error: [SERVER] Gone
+2020-01-18T20:43:02.951Z - info: [SERVER] Starting tree update
+2020-01-18T20:43:02.959Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:43:04.728Z - error: [SERVER] Gone
+2020-01-18T20:43:04.729Z - info: [SERVER] Starting tree update
+2020-01-18T20:43:04.730Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:43:13.726Z - error: [SERVER] Gone
+2020-01-18T20:43:13.727Z - info: [SERVER] Starting tree update
+2020-01-18T20:43:13.745Z - info: [SERVER] Finished tree update successfull
+2020-01-18T20:43:15.493Z - error: [SERVER] Gone
+2020-01-18T20:43:15.493Z - info: [SERVER] Starting tree update
+2020-01-18T20:43:15.514Z - info: [SERVER] Finished tree update successfull

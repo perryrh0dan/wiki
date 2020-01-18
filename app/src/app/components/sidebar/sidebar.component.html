@@ -32,7 +32,7 @@
       <fa-icon [icon]="faSignOutAlt"></fa-icon>
       <span class="text">Logout</span>
     </div>
-    <div class="page-content" *ngIf="document.children.length >= 1 && state == sitesStatus.view">
+    <div class="page-content" *ngIf="getSubPages(document).length >= 1 && state == sitesStatus.view">
       <div class="element">
         <div (click)="showSubPages = !showSubPages" class="label">
           <span class="long">Sub Pages</span>
@@ -40,8 +40,8 @@
           <fa-icon *ngIf="!showSubPages" [icon]="faChevronUp"></fa-icon>
         </div>
         <div *ngIf="showSubPages" class="content">
-          <div *ngFor="let child of document.children">
-            <div (click)="open(child._id)" *ngIf="child.isEntry" class="header1">
+          <div *ngFor="let child of getSubPages(document)">
+            <div (click)="open(child._id)" class="header1">
               <div class="content-item">
                 <span>{{child.title}}</span>
               </div>
