@@ -19,15 +19,20 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status === 401) {
         this.authenticationService.logout().subscribe(() => {
           this.router.navigate(['login'])
-          this.notificationService.error('Not authenticated','');
+          this.notificationService.error('Not authenticated', '');
         })
-      } else if ([403, 404].indexOf(err.status) !== -1) {
+      } else if (403) {
         // Replacing the wrong route so back navigation is working
         this.router.navigate(['home'], { replaceUrl: true })
+        this.notificationService.error('Not authorized', '')
+      } else if (err.status == 404) {
+        // Replacing the wrong route so back navigation is working
+        this.router.navigate(['home'], { replaceUrl: true })
+        this.notificationService.error('Not found', '')
+      } else {
+        const error = err.error ? err.error.msg : err.message || err.statusText;
+        return throwError(error);
       }
-
-      const error = err.error ? err.error.msg : err.message || err.statusText;
-      return throwError(error);
     }))
   }
 }
