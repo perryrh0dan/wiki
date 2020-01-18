@@ -1,0 +1,42 @@
+# INCLUDE CLIENT PORT IF NOT 80/443!
+frontend: https://johnmcclane.dev
+backend: https://johnmcclane.dev
+
+port: 4000
+
+db: 'mongodb://localhost:27017/wiki'
+search: 'localhost:9200'
+
+paths:
+  repo: ./repo
+  data: ./data
+
+uploads:
+  maxImageFileSize: 3
+  maxOtherFileSize: 100
+
+auth:
+  local:
+    defaultAdminEmail: admin@admin.com
+
+sessionSecret: skjdfz21asiefkasgz213saeifdkhasjk123fhskaje
+
+git:
+  url: https://gitlab.com/JohnMcClan3/camelotwikidata
+  branch: master
+  auth:
+    # Type: basic or ssh
+    type: basic
+    # Only for Basic authentication:
+    username:
+    password:
+    # Only for SSH authentication:
+    privateKey: /etc/wiki/keys/git.pem
+    sslVerify: true
+
+externalLogging:
+  papertrail:
+    active: false
+    host: logs4.papertrailapp.com
+    port: 53072
+    level: info

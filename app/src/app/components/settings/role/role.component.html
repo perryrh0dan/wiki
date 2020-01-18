@@ -1,0 +1,77 @@
+<div class="role">
+  <div class="page-header">
+    <div class="title">
+      <h1>Access Roles</h1>
+      <h2>Manage roles and access rights</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faLock" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <label>Role Name:</label>
+    <input class="is-fullwidth" *ngIf="role" type="text" [(ngModel)]="role.name">
+  </section>
+  <section>
+    <table border="true">
+      <thead>
+        <tr>
+          <td></td>
+          <td>Permission(s)</td>
+          <td>Path</td>
+          <td>Access</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody *ngIf="role">
+        <tr *ngFor="let right of role.rights; let i = index">
+          <td class="icon">
+            <fa-icon [icon]="faPlusSquare"></fa-icon>
+          </td>
+          <td>
+            <select class="is-fullwidth" [(ngModel)]="right.role">
+              <option *ngFor="let permission of permissionsOpt" [value]="permission.value">{{permission.display}}
+              </option>
+            </select>
+          </td>
+          <td>
+            <div class="columns">
+              <div class="column is-narrow">
+                <select [(ngModel)]="right.exact">
+                  <option *ngFor="let path of pathOpt" [value]="path.value">{{path.display}}</option>
+                </select>
+              </div>
+              <div class="column">
+                <input class="is-fullwidth" type="text" [(ngModel)]="right.path">
+              </div>
+            </div>
+          </td>
+          <td>
+            <select class="is-fullwidth" [(ngModel)]="right.deny">
+              <option *ngFor="let access of accessOpt" [value]="access.value">{{access.display}}</option>
+            </select>
+          </td>
+          <td class="action">
+            <fa-icon (click)="removeRightsRow(i)" [icon]="faMinusCircle"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-action">
+      <button class="button is-blue" (click)="addRightsRow()">ADD NEW ROW</button>
+    </div>
+  </section>
+  <div class="columns">
+    <div class="column">
+      <section>
+        <button class="button is-green" (click)="save()">SAVE CHANGES</button>
+        <button class="button" style="margin-left: 10px" (click)="cancel()">DISCARD</button>
+      </section>
+    </div>
+    <div class="column is-narrow">
+      <section>
+        <button class="button is-red" (click)="delete()">Delete Role</button>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="move">
+  <h1 mat-dialog-title>Move Document</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input [(ngModel)]="newpath" matInput placeholder="Path">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="button is-teal is-outlined" (click)="move()">Move</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

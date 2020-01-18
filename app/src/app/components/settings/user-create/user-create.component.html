@@ -1,0 +1,18 @@
+<div class="create-user">
+  <h1 mat-dialog-title>Create User</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input [(ngModel)]="user.email" matInput placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="user.password" type="password" matInput placeholder="Password">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="user.name" matInput placeholder="Name">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="button is-teal is-outlined" (click)="create()">Create</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

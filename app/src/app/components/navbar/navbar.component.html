@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="nav-left">
+    <div class="home">
+      <img (click)="home()" src="assets/images/logo_small.svg" alt="logo" width="35" height="35"><span (click)="home()">Wiki</span>
+    </div>
+  </div>
+  <div class="nav-center">
+    <form *ngIf="state == sitesStatus.view || state == sitesStatus.home"
+      class="form-inline mr-auto ml-auto searchbar">
+      <div class="form-group">
+        <input placeholder="Search..." type="text" class="form-control" (input)="search()" [(ngModel)]="query"
+          name="query" autocomplete="off" />
+        <div style="position: relative">
+          <ul *ngIf="searchresults && searchresults.length >= 1" class="suggestions">
+            <div class="search-label">
+              <span>SEARCH RESULTS</span>
+            </div>
+            <li class="result" (click)="open(result.id)" *ngFor="let result of searchresults; index as i" [ngClass]="{'active': i === selectedSearchResult}">
+              <span [innerHtml]="result.title | safeHtml"></span>
+              <span [innerHtml]="result.subtitle | safeHtml"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+    <span *ngIf="state == sitesStatus.edit" class="mr-auto ml-auto title">{{document.title}}</span>
+  </div>
+  <div class="nav-right">
+    <div class="notifload">
+      <div *ngIf="loading" class="spinner"></div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.view">
+      <div *ngIf="document.write" class="item" (click)="edit()">
+        <div class="content">
+          <fa-icon [icon]="faEdit"></fa-icon><span>Edit</span>
+        </div>
+      </div>
+      <div class="item" (click)="create('document')">
+        <div class="content">
+          <fa-icon [icon]="faPlus"></fa-icon><span>Create</span>
+        </div>
+      </div>
+      <div *ngIf="document.write" class="item" (click)="move()">
+        <div class="content">
+          <fa-icon [icon]="faAngleDoubleRight"></fa-icon><span>Move</span>
+        </div>
+      </div>
+      <div *ngIf="document.write" class="item" (click)="delete()">
+        <div class="content">
+          <fa-icon [icon]="faTrashAlt"></fa-icon><span>Delete</span>
+        </div>
+      </div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.edit">
+      <div class="item" (click)="save()">
+        <div class="content">
+          <fa-icon [icon]="faSave"></fa-icon><span>Save</span>
+        </div>
+      </div>
+      <div class="item" (click)="cancel()">
+        <div class="content">
+          <fa-icon [icon]="faTimes"></fa-icon><span>Cancel</span>
+        </div>
+      </div>
+      <div class="item" (click)="delete()">
+        <div class="content">
+          <fa-icon [icon]="faTrashAlt"></fa-icon><span>Delete</span>
+        </div>
+      </div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.home">
+      <div class="item" (click)="create('document')">
+        <div class="content">
+          <fa-icon [icon]="faPlus"></fa-icon><span>Create</span>
+        </div>
+      </div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.users">
+      <div class="item" (click)="create('user')">
+        <div class="content">
+          <fa-icon [icon]="faPlus"></fa-icon><span>Create User</span>
+        </div>
+      </div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.roles">
+      <div class="item" (click)="create('role')">
+        <div class="content">
+          <fa-icon [icon]="faPlus"></fa-icon><span>Create Role</span>
+        </div>
+      </div>
+    </div>
+    <div class="group" *ngIf="state == sitesStatus.files">
+      <div class="item" (click)="create('directory')">
+        <div class="content">
+          <fa-icon [icon]="faPlus"></fa-icon><span>Create Directory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

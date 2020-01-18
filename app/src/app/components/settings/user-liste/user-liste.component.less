@@ -1,0 +1,55 @@
+.user-list {
+  height: calc(100vh - 50px);
+  overflow: auto;
+
+  table {
+    padding: 1px;
+    width: 100%;
+    font-size: 14px;
+
+    thead {
+      background-color: #607d8b;
+      color: #FFF;
+
+      td {
+        padding: 5px 10px;
+        font-weight: 500;
+        text-align: center;
+        border-left: 1px solid #b0bec5;
+
+        &:first-child {
+          width: 20px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background-color: #cfd8dc;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.3)
+        }
+
+        td {
+          padding: 5px 10px;
+          border-left: 1px solid #FFF;
+          vertical-align: middle;
+
+          fa-icon {
+            width: 20px;
+          }
+        }
+      }
+
+      tr:nth-child(2n+1) {
+        background-color: #eceff1;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.3)
+        }
+      }
+    }
+  }
+}

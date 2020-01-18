@@ -1,0 +1,91 @@
+<div class="user">
+  <div class="page-header">
+    <div class="title">
+      <h1>Edit User</h1>
+      <h2>{{user?.email}}</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faUser" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <label>Email:</label>
+    <input class="is-fullwidth" disabled *ngIf="user" type="text" [(ngModel)]="user.email">
+  </section>
+  <section>
+    <label>Name:</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="user.name">
+  </section>
+  <section>
+    <label>Password:</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="user.password">
+  </section>
+  <section>
+    <label>Roles:</label>
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <td>Role</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of user?.roles; let i = index">
+          <td class="icon">
+            <fa-icon [icon]="faPlusSquare"></fa-icon>
+          </td>
+          <td>
+            <select class="is-fullwidth" [(ngModel)]="user.roles[i]">
+              <option *ngFor="let srole of roles" [value]="srole._id">{{srole.name}}</option>
+            </select>
+          </td>
+          <td class="action">
+            <fa-icon (click)="removeRoleRow(i)" [icon]="faMinusCircle"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-action">
+      <button class="button is-blue" (click)="addRoleRow()">ADD NEW ROW</button>
+    </div>
+  </section>
+  <section>
+    <label>WebAuthn:</label>
+    <span>Changes are directly written into the database</span>
+    <table>
+      <thead>
+        <tr>
+          <td>Public-Key</td>
+          <td>Created On</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let auth of user?.authenticators; let i = index">
+          <td>{{ auth.publicKey }}</td>
+          <td>{{ auth.createdAt | date: 'dd.MM.yyyy HH:mm'}}</td>
+          <td class="action">
+            <fa-icon (click)="removeAuthenticator(auth)" [icon]="faMinusCircle"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-action">
+      <button class="button is-blue" (click)="webauthnRegister()">Active new authenticator</button>
+    </div>
+  </section>
+  <div class="columns">
+    <div class="column">
+      <section>
+        <button class="button is-green" (click)="save()">SAVE CHANGES</button>
+        <button class="button" style="margin-left: 10px" (click)="cancel()">DISCARD</button>
+      </section>
+    </div>
+    <div class="column is-narrow">
+      <section>
+        <button class="button is-red" (click)="delete()">Delete User</button>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="profile">
+  <div class="page-header">
+    <div class="title">
+      <h1>My Profile</h1>
+      <h2>Profile and authentication info</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faUser" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <label>Email</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="user.email" disabled>
+  </section>
+  <section>
+    <label>Display Name</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="user.name">
+  </section>
+  <section>
+    <label>Password</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="password">
+  </section>
+  <section>
+    <label>Verify Password</label>
+    <input class="is-fullwidth" *ngIf="user" type="text" [(ngModel)]="repPassword">
+  </section>
+  <div class="columns">
+    <div class="column">
+      <section>
+        <button class="button is-green" (click)="save()">SAVE CHANGES</button>
+        <button class="button" style="margin-left: 10px" (click)="cancel()">DISCARD</button>
+      </section>
+    </div>
+  </div>
+</div>

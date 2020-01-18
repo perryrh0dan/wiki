@@ -1,0 +1,6 @@
+<div *ngFor="let element of documents">
+  <div *ngIf="element.type === 'file'">{{element.name}}</div>
+  <div *ngIf="element.type === 'directory'">
+    <app-document-list [documents]="element.children"></app-document-list>
+  </div>
+</div>

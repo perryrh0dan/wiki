@@ -1,0 +1,29 @@
+<div class="role-list">
+  <div class="page-header">
+    <div class="title">
+      <h1>Access Roles</h1>
+      <h2>Manage roles and access rights</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faLock" size="3x"></fa-icon>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <td>Name</td>
+        <td>Rights</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles" (click)="select(role._id)">
+        <td>
+          <fa-icon [icon]="faLock"></fa-icon>
+        </td>
+        <td>{{role.name}}</td>
+        <td>{{role.rights.length}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

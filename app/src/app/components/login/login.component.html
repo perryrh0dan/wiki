@@ -1,0 +1,31 @@
+<div class="login">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input type="email" matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="btn btn-default" class="button is-teal is-outlined" (click)="login()">Login</button>
+      <button class="btn btn-default" class="button is-teal is-outlined" (click)="webauthnLogin()">WebAuthN</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

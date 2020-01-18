@@ -1,0 +1,35 @@
+<div class="user-list">
+  <div class="page-header">
+    <div class="title">
+      <h1>Users</h1>
+      <h2>Manage users and access rights</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faUsers" size="3x"></fa-icon>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Roles</td>
+        <td>Created On</td>
+        <td>Updated On</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" (click)="select(user._id)">
+        <td>
+          <fa-icon [icon]="faUser"></fa-icon>
+        </td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{getUserRoles(user)}}</td>
+        <td>{{user.createdAt | date: 'dd.MM.yyyy HH:mm'}}</td>
+        <td>{{user.updatedAt | date: 'dd.MM.yyyy HH:mm'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

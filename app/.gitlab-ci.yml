@@ -1,0 +1,13 @@
+image: docker:stable #registry.tpoe.dev/runnerwiki
+
+stages:
+  - buildnpush
+
+buildnpush:
+  stage: buildnpush
+  only:
+    - master
+  script:
+    - docker build -t registry.tpoe.dev/wiki-app .
+    - docker login registry.tpoe.dev -u $REGISTRYUSER -p $REGISTRYPASSWORD
+    - docker push registry.tpoe.dev/wiki-app

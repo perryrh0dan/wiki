@@ -1,0 +1,13 @@
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### General ###
+node_modules
+dist
+
+### Server ###
+repo

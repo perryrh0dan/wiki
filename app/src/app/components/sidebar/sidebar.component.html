@@ -1,0 +1,104 @@
+<div class="sidebar-wrapper">
+  <nav id="sidebar" [@sidebarEnterAnimation]="sidebarState" [ngClass]="{'compact': treeVisible && sidebarState === 'small'}">
+    <div (click)="command('home')" class="item">
+      <fa-icon [icon]="faHome"></fa-icon>
+      <span class="text">Home</span>
+    </div>
+    <div (click)="toggleTree()" class="item">
+      <fa-icon [icon]="faSitemap"></fa-icon>
+      <span class="text">Documents</span>
+    </div>
+    <div (click)="command('tags')" class="item">
+      <fa-icon [icon]="faTags"></fa-icon>
+      <span class="text">Tags</span>
+    </div>
+    <div *ngIf="document.parentTitle" (click)="open(document.parentPath)" class="item">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+      <span class="text">{{document.parentTitle}}</span>
+    </div>
+    <div (click)="command('files')" class="item">
+      <fa-icon [icon]="faArchive"></fa-icon>
+      <span class="text">Files</span>
+    </div>
+    <div (click)="command('profile')" class="item">
+      <fa-icon [icon]="faUser"></fa-icon>
+      <span class="text">Profile</span>
+    </div>
+    <div *ngIf="authService.getRole() === 'admin'" (click)="command('settings')" class="item">
+      <fa-icon [icon]="faCog"></fa-icon>
+      <span class="text">Settings</span>
+    </div>
+    <div (click)="logout()" class="item">
+      <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      <span class="text">Logout</span>
+    </div>
+    <div class="page-content" *ngIf="state == sitesStatus.view">
+      <div class="element">
+        <div (click)="showSubPages = !showSubPages" class="label">
+          <span class="long">Sub Pages</span>
+          <fa-icon *ngIf="showSubPages" [icon]="faChevronDown"></fa-icon>
+          <fa-icon *ngIf="!showSubPages" [icon]="faChevronUp"></fa-icon>
+        </div>
+        <div *ngIf="showSubPages" class="content">
+          <div *ngFor="let child of document.children">
+            <div (click)="open(child._id)" *ngIf="child.isEntry" class="header1">
+              <div class="content-item">
+                <span>{{child.title}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="state == sitesStatus.settings || state == sitesStatus.roles || state == sitesStatus.users">
+      <div class="label">
+        <span class="long">Administration</span>
+      </div>
+      <div (click)="command('settings/statistics')" class="item">
+        <fa-icon [icon]="faChartArea"></fa-icon>
+        <span class="text">Stats</span>
+      </div>
+      <div (click)="command('settings/users')" class="item">
+        <fa-icon [icon]="faUsers"></fa-icon>
+        <span class="text">Users</span>
+      </div>
+      <div (click)="command('settings/roles')" class="item">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <span class="text">Roles</span>
+      </div>
+      <div (click)="command('settings/system')" class="item">
+        <fa-icon [icon]="faGlobe"></fa-icon>
+        <span class="text">System</span>
+      </div>
+      <div (click)="command('settings/logs')" class="item">
+        <fa-icon [icon]="faHardHat"></fa-icon>
+        <span class="text">Logs</span>
+      </div>
+      <div (click)="command('settings/debug')" class="item">
+        <fa-icon [icon]="faCogs"></fa-icon>
+        <span class="text">Debug</span>
+      </div>
+    </div>
+  </nav>
+  <div class="tree" *ngIf="treeVisible" [@treeEnterAnimation]>
+    <ul class="parents">
+      <li (click)="documentsback(parent)" class="parent" *ngFor="let parent of tree.parents" [@parentTreeEnterAnimation]>
+        <div class="item">
+          <fa-icon [icon]="faFolder"></fa-icon>
+          <span>{{parent.title}}</span>
+        </div>
+      </li>
+    </ul>
+    <ul class="entries">
+      <li (click)="actionTree(entry)" *ngFor="let entry of tree.entries" class="entry">
+        <div class="text">
+          <fa-icon [icon]="faFolder" *ngIf="entry.isDirectory"></fa-icon>
+          <span>{{entry.title}}</span>
+        </div>
+        <div *ngIf="entry.isEntry && entry.isDirectory" class="is-pagelink" (click)="open(entry._id)">
+          <fa-icon [icon]="faArrowRight"></fa-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

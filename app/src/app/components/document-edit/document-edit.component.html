@@ -1,0 +1,19 @@
+<div class="document-edit-component">
+  <div class="editor-toolbar-placeholder"></div>
+  <div class="editor-toolbar">
+    <div class="element" *ngFor="let item of toolbar">
+      <i *ngIf="item.name == 'seperator'" class="seperator"></i>
+      <div *ngIf="item.name != 'seperator'" class="item">
+        <div class="toolbar-button" onmousedown="event.preventDefault()" matTooltip="{{item.tooltip}}"
+          (click)="action($event, item.name)">
+          <fa-icon [icon]="item.icon" size="l">|</fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <textarea #editor spellcheck="false" autocomplete="off" id="editor" class="editor" autosize contenteditable="true"
+      (input)="onChange()" (keydown)="keyDownEditor($event)" key></textarea>
+    <markdown *ngIf="preview" [data]="document.content"></markdown>
+  </div>
+</div>

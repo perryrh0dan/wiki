@@ -1,0 +1,12 @@
+<div class="create-role">
+  <h1 mat-dialog-title>Create Role</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input [(ngModel)]="name" matInput placeholder="Role name">
+    </mat-form-field>  
+  </mat-dialog-content>
+  <div class="buttons">
+    <button class="button is-teal is-outlined" (click)="create()">CREATE ROLE</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">CANCEL</button>
+  </div>
+</div>

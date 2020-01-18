@@ -1,0 +1,41 @@
+frontend: https://wiki.tpoe.dev
+backend: https://wiki.tpoe.dev
+
+port: 4000
+
+db: mongodb://localhost:27017/wiki
+search: https://elastic:OwpOhE1fRa6lSSnrftFNcX9D@596c6031dd4245448eaeabe73377f5b1.europe-west3.gcp.cloud.es.io:9243
+
+paths:
+  repo: ./repo
+  data: ./data
+
+uploads:
+  maxImageFileSize: 3
+  maxOtherFileSize: 100
+
+auth:
+  local:
+    defaultAdminEmail: admin@admin.com
+
+sessionSecret: skjdfz21asiefkasgz213saeifdkhasjk123fhskaje
+
+git:
+  url: https://gitlab.com/JohnMcClan3/wikidata
+  branch: master
+  auth:
+    # Type: basic or ssh
+    type: basic
+    # Only for Basic authentication:
+    username: JohnMcClan3
+    password: Sby%$F!syB4S981udyb7
+    # Only for SSH authentication:
+    privateKey: /etc/wiki/keys/git.pem
+    sslVerify: true
+
+externalLogging:
+  papertrail:
+    active: false
+    host: logs4.papertrailapp.com
+    port: 53072
+    level: info

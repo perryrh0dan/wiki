@@ -1,0 +1,15 @@
+<div class="insert-link">
+  <h1 mat-dialog-title>Insert Link</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input [(ngModel)]="externalUrl" matInput placeholder="External Url">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="internalPath" matInput placeholder="Internal Path">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="button is-teal is-outlined" (click)="insert()">Insert</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

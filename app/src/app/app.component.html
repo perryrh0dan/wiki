@@ -1,0 +1,9 @@
+<app-navbar *ngIf="user"></app-navbar>
+<div class="wrapper">
+  <div class="blur" *ngIf="blurVisible" (click)="closeSidebar()" [@blurEnterAnimation]></div>
+  <app-sidebar *ngIf="user" class="sidebar" ></app-sidebar>
+  <div class="content" [ngClass]="{'full-width':state == sitesStatus.edit || state == sitesStatus.login}">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<button *ngIf="user && sidebarState === 'closed' && state !== sitesStatus.edit" (click)="openSidebar()" class="menu" [@buttonEnterAnimation]><fa-icon [icon]="faBars"></fa-icon></button>

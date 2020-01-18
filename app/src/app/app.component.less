@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+
+  .content {
+    width: 100%;
+    padding: 50px 0px 0px 250px;
+    transition: 250ms padding ease;
+
+    &.full-width {
+      padding: 50px 0px 0px 0px;
+      transition: 0ms
+    }
+  }
+
+  .blur {
+    z-index: 1;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  app-sidebar {
+    display: initial;
+    position: fixed;
+    height: calc(100vh - 50px);
+    top: 50px;
+    z-index: 3;
+  }
+}
+
+.menu {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #1976d2;
+  color: white;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+
+  &:focus {
+    // remove blue outline when clicked
+    outline: 0;
+  }
+}
+
+app-navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 4;
+}
+
+@media screen and (max-width: 1300px) {
+  app-sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 50px 0px 0px 0px !important;
+  }
+
+  .menu {
+    display: initial;
+  }
+}
+
+@media screen and (min-width: 1301px) {
+  app-sidebar {
+    display: initial;
+  }
+}

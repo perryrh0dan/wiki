@@ -1,0 +1,48 @@
+<div class="document-component" (scroll)="onScroll($event)">
+  <div class="layout-row">
+    <div class="content">
+      <div class="page-header">
+        <div class="title">
+          <h1>{{document.title}}</h1>
+          <h2>{{document.subtitle}}</h2>
+        </div>
+      </div>
+      <markdown [data]="document.content"></markdown>
+    </div>
+    <div class="content-list">
+      <div class="content-header">
+        <div class="meta">
+          <span>Last edited by:</span>
+          <span>{{document.updatedBy}}</span>
+          <span>{{document.updatedAt | date:'dd.MM.yyyy HH:mm'}}</span>
+        </div>
+        <div class="favorite">
+          <fa-icon [ngClass]="{'active': document.favorite}" (click)="toggleFavorite()" [icon]="fasHeart" size="2x"></fa-icon>
+          <!-- <fa-icon class="inactive" *ngIf="!document.favorite" (click)="toggleFavorite()" [icon]="farHeart" size="2x"></fa-icon> -->
+        </div>
+      </div>
+      <div class="tags">
+        <div class="placeholder" *ngFor="let tag of document.tags">
+          <span (click)="openTag(tag)" class="tag">{{tag}}</span>
+        </div>
+      </div>
+      <div class="subheader">Table of contents</div>
+      <div class="item" *ngFor="let ele of document.tree">
+        <div (click)="focusContent(ele.anchor)" class="content-item">
+          <span>{{ele.content}}</span>
+        </div>
+        <hr class="divider">
+        <div *ngIf="ele.nodes.length >= 1" class="subcontent">
+          <div (click)="focusContent(el.anchor)" class="item" *ngFor="let el of ele.nodes">
+            <div class="content-item">
+              <span>{{el.content}}</span>
+            </div>
+            <hr class="divider">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button *ngIf="scrollupVisible" (click)="scrollUp()" class="scrollup" [@buttonEnterAnimation]><fa-icon [icon]="faArrowUp"></fa-icon></button>
+

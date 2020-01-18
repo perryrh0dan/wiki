@@ -1,0 +1,22 @@
+<div class="insert-file">
+  <mat-dialog-content class="content">
+    <ul class="folder-list">
+      <li class="item" *ngFor="let folder of folders" [ngClass]="{'active': selectedFolder === folder.name}" (click)="openFolder(folder.name)">
+        <fa-icon [icon]="faFolder"></fa-icon>
+        <span>{{folder.name}}</span>
+      </li>
+    </ul>
+    <div class="file-list">
+      <div class="item" *ngFor="let image of images" [ngClass]="{'active': checkSelectedFile(image)}" (click)="select(image)">
+        <div class="thumbnail">
+          <img [src]="image.thumbnailurl">
+        </div>
+        <span>{{image.filename}}</span>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="actions">
+    <button class="button is-teal is-outlined" (click)="add()">Add</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

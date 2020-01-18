@@ -1,0 +1,14 @@
+<div class="create">
+  <h1 mat-dialog-title>Create Directory</h1>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <input [(ngModel)]="name" matInput placeholder="name">
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="button is-teal is-outlined" (click)="create()">Create</button>
+    <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>

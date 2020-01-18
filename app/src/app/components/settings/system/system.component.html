@@ -1,0 +1,33 @@
+<div class="system">
+  <div class="page-header">
+    <div class="title">
+      <h1>System Info</h1>
+      <h2>Information and utilities for your wiki</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faGlobe" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <label>Host Information</label>
+    <p>Operating System: <strong>{{info.os}}</strong></p>
+    <p>Node.js Version: <strong>{{info.nodeversion}}</strong></p>
+    <p>Hostname: <strong>{{info.hostname}}</strong></p>
+    <p>CPU Cores: <strong>{{info.cpus.length}}</strong></p>
+    <p>Total Memory: <strong>{{info.totalmem}}</strong></p>
+    <p>Working Directory: <strong>{{info.cwd}}</strong></p>
+  </section>
+  <section>
+    <label>Administrative Tools</label>
+    <div class="section-block">
+      <h6>Git Backup</h6>
+      <p>Last Backup: <span *ngIf="backup">{{ backup?.date | date:'dd.MM.yyyy HH.mm.ss' }} by {{ backup?.user }}</span></p>
+      <p><button (click)="createBackup()" class="button is-teal is-outlined">Execute</button></p>
+    </div>
+    <div class="section-block">
+      <h6>Live Info</h6>
+      <p>Active Sessions: <strong>{{liveinfo?.sessions}}</strong></p>
+      <p><button (click)="closeAllSessions()" class="button is-teal is-outlined">Close all active Sessions</button></p>
+    </div>
+  </section>
+</div>

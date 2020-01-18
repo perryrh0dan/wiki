@@ -1,0 +1,10 @@
+<div class="confirmation">
+  <h1 mat-dialog-title>{{data.title}}</h1>
+  <mat-dialog-content>
+    {{data.message}}
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="button is-teal is-outlined" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+    <button class="button is-teal is-outlined" (click)="onNoClick()">No</button>
+  </mat-dialog-actions>
+</div>

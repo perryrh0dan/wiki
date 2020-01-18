@@ -1,0 +1,19 @@
+<div class="system">
+  <div class="page-header">
+    <div class="title">
+      <h1>Statistics</h1>
+      <h2>Informations and Statistics about the wiki</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faSignal" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <div class="graph">
+      <ngx-charts-bar-horizontal [results]="results" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" (select)="onSelect($event)">
+        ></ngx-charts-bar-horizontal>
+    </div>
+  </section>
+</div>

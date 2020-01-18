@@ -1,0 +1,68 @@
+<div class="tags">
+  <header>
+    <div class="label">
+      <span>Current Selection</span>
+    </div>
+    <div class="selection">
+      <div *ngFor="let tag of selectedTags; index as i" class="item">
+        <span>{{ tag }}</span>
+        <fa-icon [icon]="faTimes" (click)="removeTag(i)"></fa-icon>
+      </div>
+    </div>
+    <div class="clear" (click)="clearSelection()">
+      <span>Clear Selection</span>
+    </div>
+  </header>
+  <div class="search">
+    <fa-icon class="item" [icon]="faSearch"></fa-icon>
+    <div class="item form-group">
+      <input placeholder="Search within results..." type="text" class="form-control" [(ngModel)]="query" name="query"
+        autocomplete="off" />
+    </div>
+    <div class="item order">
+      <span>Order By</span>
+      <select [(ngModel)]="sortProperty" (change)="orderBy()">
+        <option *ngFor="let sort of availableSortProperties" value="{{sort.value}}">{{ sort.text }}</option>
+      </select>
+    </div>
+    <div class="item">
+      <div class="sort">
+        <div class="first" (click)="setDirection('up')" [ngClass]="{'active': sortDirection === 'up'}">
+          <fa-icon [icon]="faSortUp" size="2x"></fa-icon>
+        </div>
+        <div (click)="setDirection('down')" [ngClass]="{'active': sortDirection === 'down'}">
+          <fa-icon [icon]="faSortDown" size="2x"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="items" *ngIf="!isLoading">
+      <div class="item" (click)="open(doc)" *ngFor="let doc of documents | searchDocuments : query">
+        <span class="title">{{ doc.title }}</span>
+        <span class="subtitle">{{ doc.subtitle }}</span>
+        <hr class="seperator">
+        <span class="id">/{{ doc._id }}</span>
+      </div>
+    </div>
+    <div class="loading" *ngIf="isLoading">
+      <div class="spinner"></div>
+    </div>
+    <div class="empty" *ngIf="!isLoading && documents.length < 1">
+      <span>Select one or more tags on the right.</span>
+    </div>
+    <div class="tags">
+      <div class="search">
+        <input placeholder="Search for tags" type="text" class="form-control" [(ngModel)]="queryTags" name="queryTags"
+          autocomplete="off" />
+      </div>
+      <ul>
+        <li *ngFor="let tag of availableTags | searchStrings : queryTags" (click)="toggleTag($event, tag)">
+          <fa-icon [icon]="fasSquare" *ngIf="selectedTags.indexOf(tag) !== -1"></fa-icon>
+          <fa-icon [icon]="farSquare" *ngIf="selectedTags.indexOf(tag) === -1"></fa-icon>
+          <span>{{tag}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

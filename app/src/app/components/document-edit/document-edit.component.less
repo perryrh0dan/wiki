@@ -1,0 +1,71 @@
+.document-edit-component {
+  .editor-toolbar {
+    position: fixed;
+    top: 50px;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: #1976d2;
+
+    .element {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .item {
+      display: flex;
+      width: 35px;
+      justify-content: center;
+      align-items: center;
+      color: white;
+
+      .toolbar-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5)
+        }
+      }
+    }
+
+    .seperator {
+      height: 50%;
+      border-right: 1px solid #fff;
+      border-left: 1px solid #fff;
+    }
+  }
+
+  .editor-toolbar-placeholder {
+    height: 50px;
+  }
+
+  .content {
+    height: calc(100vh - 100px);
+    overflow: auto;
+    display: flex;
+    flex-flow: row;
+
+    .editor {
+      min-width: 50%;
+      width: 100%;
+      min-height: calc(100vh - 100px);
+      overflow: hidden;
+      resize: none;
+      border: 10px solid #cfd8dc;
+    }
+
+    @import '../../styles/markdown.less';
+
+    markdown {
+      min-width: 50%;
+      overflow-x: initial;
+    }
+  }
+}

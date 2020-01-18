@@ -1,0 +1,32 @@
+<div class="files">
+  <div class="content">
+    <div class="items" draggable="true" ngClass="{{dragAreaClass}}">
+      <div class="item" *ngFor="let image of images" (click)="selectFile(image)"
+        [ngClass]="{'active': checkSelectedFile(image)}">
+        <div class="thumbnail">
+          <img [src]="image.thumbnailurl">
+        </div>
+        <div class="info">
+          <span>{{image.filename}}</span>
+          <span>{{image.size}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <input style="height:50px" type="file" #file multiple (change)="onFileChange($event)" style="display:none" />
+      <button class="button is-teal is-outlined" (click)="file.click()">
+        Click to Browse and Upload
+      </button>
+      <button class="button is-teal is-outlined" (click)="deleteFile()">
+        Delete selected file
+      </button>
+    </div>
+  </div>
+  <ul class="folders">
+    <li *ngFor="let folder of folders" (click)="loadImages(folder.name)" class="folder"
+      [ngClass]="{'active': selectedFolder === folder.name}">
+      <fa-icon [icon]="faFolder" size="x"></fa-icon>
+      <span>{{folder.name}}</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  wiki-app:
+    build:
+      context: .
+      args:
+        env: sandbox
+    ports:
+      - "8080:80"
