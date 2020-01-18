@@ -32,7 +32,7 @@
       <fa-icon [icon]="faSignOutAlt"></fa-icon>
       <span class="text">Logout</span>
     </div>
-    <div class="page-content" *ngIf="state == sitesStatus.view">
+    <div class="page-content" *ngIf="document.children.length >= 1 && state == sitesStatus.view">
       <div class="element">
         <div (click)="showSubPages = !showSubPages" class="label">
           <span class="long">Sub Pages</span>
