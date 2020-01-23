@@ -43,7 +43,7 @@ export class AuthenticationService {
       }));
   }
 
-  logout(client: boolean = false) {
+  logout(client: boolean = false): Observable<void> {
     if (!client) {
       return this.http.post(`${this.config.apiEndpoint}/auth/logout`, null).pipe(map(() => {
         this.currentUserSubject.next(null)
