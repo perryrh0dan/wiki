@@ -29,10 +29,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         // Replacing the wrong route so back navigation is working
         this.router.navigate(['home'], { replaceUrl: true })
         this.notificationService.error('Not found', '')
-      } else {
-        const error = err.error ? err.error.msg : err.message || err.statusText;
-        return throwError(error);
       }
+
+      const error = err.error ? err.error.msg : err.message || err.statusText;
+      return throwError(error);
     }))
   }
 }

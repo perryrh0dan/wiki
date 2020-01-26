@@ -17,6 +17,7 @@ import { SystemComponent } from './components/settings/system/system.component';
 import { StatisticsComponent } from './components/settings/statistics/statistics.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { LogsComponent } from './components/settings/logs/logs.component';
+import { DebugComponent } from './components/settings/debug/debug.component';
 
 export function customMatcher(
   segments: UrlSegment[],
@@ -108,6 +109,12 @@ const routes: Routes = [
   {
     path: 'settings/logs',
     component: LogsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [MasterRole.Admin] }
+  },
+  {
+    path: 'settings/debug',
+    component: DebugComponent,
     canActivate: [AuthGuard],
     data: { roles: [MasterRole.Admin] }
   },
