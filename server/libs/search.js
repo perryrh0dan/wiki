@@ -18,7 +18,7 @@ module.exports = {
 
     self.onReady = new Promise((resolve, reject) => {
       if (!this.active()) {
-        resolve()
+        return resolve()
       }
 
       self.client.indices.exists({
