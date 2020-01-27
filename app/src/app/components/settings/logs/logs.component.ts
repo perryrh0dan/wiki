@@ -45,11 +45,18 @@ export class LogsComponent implements OnInit {
 
   public loadLog() {
     this.adminService.getLog(this.selectedLog).subscribe(log => {
-      this.log = this.decodeUtf8(log).replace(new RegExp('\n', 'g'), "<br />")
+      this.log = this.reverseLog(this.decodeUtf8(log))
     })
   }
 
-  decodeUtf8(arrayBuffer: ArrayBuffer) {
+  private reverseLog(log: string): string {
+    let lines = log.split('\n')
+    lines = lines.reverse()
+    return lines.join('<br />')
+  }
+
+
+  private decodeUtf8(arrayBuffer: ArrayBuffer) {
     var result = "";
     var i = 0;
     var c = 0;
