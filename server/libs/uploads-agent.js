@@ -12,6 +12,8 @@ const jimp = require('jimp')
 const imageSize = Promise.promisify(require('image-size'))
 const _ = require('lodash')
 
+const logger = require('./logger')(true, 'UPL_AGENT')
+
 module.exports = {
 
   _uploadsPath: './repo/uploads',
@@ -47,7 +49,7 @@ module.exports = {
         return global.db.Upload.findByIdAndUpdate(mData._id, mData, {
           upsert: true
         }).then(() => {
-          global.winston.debug('New File Processed')
+          logger.debug('New File Processed')
           global.socket.emit('fileuploaded')
         })
       })
@@ -56,7 +58,7 @@ module.exports = {
 
   initialScan () {
     let self = this
-    global.winston.info('Starting initial file scan')
+    logger.info('Starting initial file scan')
 
     return fs.readdirAsync(self._uploadsPath).then((ls) => {
       // Get all folders
@@ -118,7 +120,7 @@ module.exports = {
         })
       })
     }).then(() => {
-      global.winston.info('Finished initial file scan')
+      logger.info('Finished initial file scan')
       return self.watch()
     })
   },

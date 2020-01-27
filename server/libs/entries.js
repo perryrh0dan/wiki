@@ -24,10 +24,10 @@ module.exports = {
 
     global.winston.info('Starting initial document scan')
     klaw(self._repoPath, {
-      filter: pathItem => {
-        return !pathItem.endsWith('.git')
-      }
-    })
+        filter: pathItem => {
+          return !pathItem.endsWith('.git')
+        }
+      })
       .on('data', function (item) {
         if (
           path.extname(item.path) === '.md' &&
@@ -38,7 +38,7 @@ module.exports = {
           )
           promises.push(
             self.update(entryPath, {
-              updateTree: true,
+              updateTree: false,
               updateChilds: false
             })
           )
@@ -62,75 +62,78 @@ module.exports = {
       updateChilds: true
     })
 
-    return fs.readFile(fpath, 'utf8', async function (err, data) {
-      if (err) return Promise.reject(err)
+    let data
+    try {
+      data = await fs.readFile(fpath, 'utf8')
+    } catch (error) {
+      Promise.reject(error)
+    }
 
-      let parentPromise = self
-        .getParentInfo(entryPath)
-        .then(parentData => {
-          return parentData
-        })
-        .catch(err => { // eslint-disable-line handle-callback-err
-          return false
-        })
-      let parentPath = _.chain(entryPath)
-        .split('/')
-        .initial()
-        .join('/')
-        .value()
-
-      const pData = await parentPromise
-      let meta = global.mark.parseMeta(data)
-      let tree = global.mark.parseTree(data)
-      // insert correct host for images
-      let content = data.replace(
-        /(!\[.*?\]\()(.*?\/uploads)(\/.*?\))/g,
-        '$1' + global.appconfig.backend + '/api/uploads$3'
-      )
-      // insert correct host for documents
-      content = content.replace(
-        /(\[.*?\]\()(.*?\/document)(\/.*?\))/g,
-        '$1' + global.appconfig.frontend + '/document$3'
-      )
-
-      const updatedEntry = await global.db.Document.findOneAndUpdate({
-        _id: entryPath
-      }, {
-        _id: entryPath,
-        title: meta.title || entryPath,
-        subtitle: meta.subtitle,
-        content: content,
-        author: meta.author,
-        tree: tree,
-        parentTitle: pData ? pData.title : '',
-        parentPath: parentPath || '',
-        tags: meta.tags,
-        isEntry: true
-      }, {
-        upsert: true,
-        new: true,
-        runValidators: true
+    let parentPromise = self
+      .getParentInfo(entryPath)
+      .then(parentData => {
+        return parentData
       })
+      .catch(err => { // eslint-disable-line handle-callback-err
+        return false
+      })
+    let parentPath = _.chain(entryPath)
+      .split('/')
+      .initial()
+      .join('/')
+      .value()
 
-      let updateChildProcessor = options.updateChilds
-        ? self.updateChildInfo(entryPath, meta.title)
-        : Promise.resolve('')
+    const pData = await parentPromise
+    let meta = global.mark.parseMeta(data)
+    let tree = global.mark.parseTree(data)
+    // insert correct host for images
+    let content = data.replace(
+      /(!\[.*?\]\()(.*?\/uploads)(\/.*?\))/g,
+      '$1' + global.appconfig.backend + '/api/uploads$3'
+    )
+    // insert correct host for documents
+    content = content.replace(
+      /(\[.*?\]\()(.*?\/document)(\/.*?\))/g,
+      '$1' + global.appconfig.frontend + '/document$3'
+    )
 
-      await updateChildProcessor
-      global.winston.debug(
-        'Added { title:' +
-        meta.title +
-        ', path:' +
-        entryPath +
-        ' } to Database'
-      )
-
-      await global.search.addEntry(updatedEntry)
-      let updateTreeProcessor = options.updateTree ? self.updateTreeInfo() : Promise.resolve('')
-
-      await updateTreeProcessor
-      Promise.resolve()
+    const updatedEntry = await global.db.Document.findOneAndUpdate({
+      _id: entryPath
+    }, {
+      _id: entryPath,
+      title: meta.title || entryPath,
+      subtitle: meta.subtitle,
+      content: content,
+      author: meta.author,
+      tree: tree,
+      parentTitle: pData ? pData.title : '',
+      parentPath: parentPath || '',
+      tags: meta.tags,
+      isEntry: true
+    }, {
+      upsert: true,
+      new: true,
+      runValidators: true
     })
+
+    let updateChildProcessor = options.updateChilds ?
+      self.updateChildInfo(entryPath, meta.title) :
+      Promise.resolve('')
+
+    await updateChildProcessor
+    global.winston.debug(
+      'Added { title:' +
+      meta.title +
+      ', path:' +
+      entryPath +
+      ' } to Database'
+    )
+
+    await global.search.addEntry(updatedEntry)
+    let updateTreeProcessor = options.updateTree ? self.updateTreeInfo() : Promise.resolve('')
+
+    await updateTreeProcessor
+    Promise.resolve()
   },
 
   async addDocument(entryPath, user, template) {
@@ -359,10 +362,10 @@ module.exports = {
 
   getFromTree(basePath, usr) {
     return global.db.Document.find({
-      parentPath: basePath
-    },
-      'title parentPath isDirectory isEntry'
-    )
+          parentPath: basePath
+        },
+        'title parentPath isDirectory isEntry'
+      )
       .sort({
         title: 'asc'
       })
