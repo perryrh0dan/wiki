@@ -1,32 +1,34 @@
 <div class="home">
   <h1>Favorites</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th style="width:20%">Article<br></th>
-        <th style="width:20%">Author</th>
-        <th style="width:20%">Created</th>
-        <th style="width:20%">Last Update</th>
-        <th style="width:10%">Views</th>
-        <th style="width:10%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr (click)="openDocument(favorite.document._id)" *ngFor="let favorite of favorites">
-        <td>
-          <div style="display: flex; flex-flow: column">
-            <span>{{favorite.document.title}}</span>
-            <span>{{favorite.document.subtitle}}</span>
-          </div>
-        </td>
-        <td>{{favorite.document.author}}</td>
-        <td>{{favorite.document.createdAt | date:'dd.MM.yyyy HH.mm'}}</td>
-        <td>{{favorite.document.updatedAt | date:'dd.MM.yyyy HH.mm'}}</td>
-        <td>{{favorite.document.views}}</td>
-        <td>
-          <fa-icon (click)="toggleFavorite($event, favorite.document._id)" [icon]="faHeart" size="lg"></fa-icon>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="width:20%">Article<br></th>
+          <th style="width:20%">Author</th>
+          <th style="width:20%">Created</th>
+          <th style="width:20%">Last Update</th>
+          <th style="width:10%">Views</th>
+          <th style="width:10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="openDocument(favorite.document._id)" *ngFor="let favorite of favorites">
+          <td>
+            <div style="display: flex; flex-flow: column">
+              <span>{{favorite.document.title}}</span>
+              <span>{{favorite.document.subtitle}}</span>
+            </div>
+          </td>
+          <td>{{favorite.document.author}}</td>
+          <td>{{favorite.document.createdAt | date:'dd.MM.yyyy HH.mm'}}</td>
+          <td>{{favorite.document.updatedAt | date:'dd.MM.yyyy HH.mm'}}</td>
+          <td>{{favorite.document.views}}</td>
+          <td>
+            <fa-icon (click)="toggleFavorite($event, favorite.document._id)" [icon]="faHeart" size="lg"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

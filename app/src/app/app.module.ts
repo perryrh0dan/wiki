@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { ToastrModule } from 'ngx-toastr';
 import { BarChartModule } from '@swimlane/ngx-charts';
 import { AutosizeModule } from 'ngx-autosize';
@@ -96,7 +96,12 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
     NgbModule,
     FontAwesomeModule,
     BarChartModule,
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({
+      markedOptions: {
+        provide: MarkedOptions,
+        useFactory: markedOptionsFactory
+      }
+    }),
     SocketIoModule.forRoot(config),
     ToastrModule.forRoot(),
     AutosizeModule
@@ -119,3 +124,26 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
   ]
 })
 export class AppModule { }
+
+
+// Wrap table in markdown with a div tag
+function markedOptionsFactory(): MarkedOptions {
+  const renderer = new MarkedRenderer()
+
+  const tableRenderer = renderer.table;
+  renderer.table = (header: string, body: string) => {
+    const html = tableRenderer.call(renderer, header, body);
+    return `<div class="table-wrapper">${html}</div>`
+  }
+
+  return {
+    renderer: renderer,
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+  };
+}
