@@ -123,11 +123,11 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
     InsertLinkComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}
 
 
 // Wrap table in markdown with a div tag
-function markedOptionsFactory(): MarkedOptions {
+export function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer()
 
   const tableRenderer = renderer.table;
