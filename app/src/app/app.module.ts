@@ -50,7 +50,7 @@ import { TagsComponent } from './components/tags/tags.component';
 import { LogsComponent } from './components/settings/logs/logs.component';
 import { InsertLinkComponent } from './components/document-edit/insertlink/insertlink.component';
 
-const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/api/socket.io', transport: ['polling'] } }; //websocket
+const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/api/socket.io', transport: ['websocket'] } }; //polling,websocket
 
 @NgModule({
   declarations: [
