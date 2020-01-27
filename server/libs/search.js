@@ -8,6 +8,7 @@ module.exports = {
     let self = this
 
     try {
+      global.winston.info(`Connecting to ElasticSearch Instance: ${global.appconfig.search}`)
       self.client = new elasticsearch.Client({
         host: global.appconfig.search,
         log: 'info'
@@ -84,6 +85,7 @@ module.exports = {
             })
         } else {
           global.winston.info('Searchindex already exists')
+          resolve()
         }
       }).catch(error => {
         reject(error)
@@ -97,6 +99,8 @@ module.exports = {
     if (!global.appconfig.search || global.appconfig.search === '') {
       return false
     }
+
+    return true;
   },
 
   addEntry(document) {
