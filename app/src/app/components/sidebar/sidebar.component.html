@@ -1,5 +1,5 @@
 <div class="sidebar-wrapper">
-  <nav id="sidebar" [@sidebarEnterAnimation]="sidebarState" [ngClass]="{'compact': treeVisible && sidebarState === 'small'}">
+  <nav class="sidebar" [@sidebarEnterAnimation]="sidebarState" [ngClass]="{'compact': treeVisible && sidebarState === 'small'}">
     <div (click)="command('home')" class="item">
       <fa-icon [icon]="faHome"></fa-icon>
       <span class="text">Home</span>

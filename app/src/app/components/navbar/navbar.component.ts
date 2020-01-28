@@ -21,7 +21,7 @@ import { faPlus, faEdit, faSave, faTrashAlt, faTimes, faAngleDoubleRight } from 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.less']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   faPlus = faPlus;

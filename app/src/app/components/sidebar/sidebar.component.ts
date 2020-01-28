@@ -16,7 +16,7 @@ import { faHome, faSitemap, faChevronLeft, faArchive, faUser, faCog, faSignOutAl
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.less',],
+  styleUrls: ['./sidebar.component.scss',],
   animations: [
     trigger('treeEnterAnimation', [
       transition(':enter', [

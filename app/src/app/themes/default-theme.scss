@@ -1,4 +1,68 @@
-$primary: mat-palette($mat-blue-grey);
-$accent:  mat-palette($mat-pink, 500, 900, A100);
-$warn:    mat-palette($mat-green);
-$theme:   mat-light-theme($primary, $accent, $warn);
+// Color paletts
+$primary: (50: #e4e6ea,
+  100: #bcc1cb,
+  200: #8f98a8,
+  300: #626f85,
+  400: #40506b,
+  500: #1e3151,
+  600: #1a2c4a,
+  700: #162540,
+  800: #121f37,
+  900: #0a1327,
+  A100: #648eff,
+  A200: #3169ff,
+  A400: #0045fd,
+  A700: #003ee4,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  ));
+$accent: (50 : #e3effa,
+  100 : #bad6f2,
+  200 : #8cbbe9,
+  300 : #5e9fe0,
+  400 : #3c8bd9,
+  500 : #1976d2,
+  600 : #166ecd,
+  700 : #1263c7,
+  800 : #0e59c1,
+  900 : #0846b6,
+  A100 : #e0eaff,
+  A200 : #adc6ff,
+  A400 : #7aa3ff,
+  A700 : #6191ff,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+$warn: mat-palette($mat-orange);
+$background-color: #ffffff;
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+// Insert custom background color
+$background: map-get($theme, background);
+$background: map_merge($background, (background: $background-color));
+$theme: map_merge($theme, (background: $background));

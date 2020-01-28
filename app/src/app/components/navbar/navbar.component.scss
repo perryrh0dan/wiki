@@ -1,0 +1,229 @@
+@mixin theme-navbar($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .navbar-brand {
+    padding: 0 15px;
+    height: 54px;
+    line-height: 80px;
+  }
+
+  .navbar-toggle {
+    margin-top: 23px;
+    padding: 9px 10px !important;
+  }
+
+  @media (min-width: 768px) {
+    .navbar-nav>li>a {
+      padding-top: 26.5px;
+      padding-bottom: 26.5px;
+      line-height: 27px;
+    }
+  }
+
+  .navbar {
+    height: 50px;
+    min-height: 50px;
+    background-color: mat-color($primary, 500) !important;
+    color: white;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 0;
+
+    .nav-left {
+      flex: 1;
+
+      .home {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        img {
+          margin-left: 15px;
+          cursor: pointer;
+        }
+
+        span {
+          padding-left: 10px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .nav-center {
+      flex: 1;
+      width: 40%;
+
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: auto;
+      }
+
+      .searchbar {
+
+        div {
+          width: 100%;
+          margin: 0 !important;
+
+          input {
+            width: 100%;
+            border: none;
+            border-radius: 20px;
+          }
+        }
+
+        .suggestions {
+          width: 100%;
+          position: absolute;
+          border: 1px solid #ced4da;
+          color: #e8eaee;
+          list-style: none;
+          padding: 0;
+          background-color: #222d32;
+          border: 1px solid #263238;
+          border-color: rgb(38, 50, 56);
+          border-style: solid;
+          border-width: 1px;
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          font-size: 14px;
+
+          .search-label {
+            display: flex;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+            background-color: #37474f;
+          }
+
+          .result {
+            cursor: pointer;
+            padding: 2px 10px;
+            display: flex;
+            flex-direction: column;
+            height: 30;
+            overflow: hidden;
+
+            &.active {
+              background-color: #546e7a !important;
+              color: #4D7DE6 !important;
+            }
+
+            &:nth-child(odd) {
+              background-color: #263238;
+            }
+
+            &:hover {
+              background-color: #546e7a;
+              color: #4D7DE6;
+            }
+          }
+        }
+      }
+    }
+
+    .nav-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .notifload {
+        margin-right: 10px;
+        margin-left: auto;
+
+        .spinner {
+          width: 25px;
+          height: 25px;
+          border: 2px solid #f3f3f3;
+          /* Light grey */
+          border-top: 2px solid #3498db;
+          /* Blue */
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+
+      .group {
+        display: flex;
+        justify-content: flex-end;
+        height: 100%;
+
+        .item {
+          display: flex;
+          flex-direction: row;
+          color: white;
+          padding-left: 10px;
+          padding-right: 10px;
+          cursor: pointer;
+          background-color: mat-color($primary, 600);
+
+          .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            fa-icon {
+              pointer-events: none;
+            }
+
+            span {
+              padding-left: 5px;
+              pointer-events: none
+            }
+          }
+
+          &:hover {
+            background-color: mat-color($primary, 500);
+          }
+        }
+      }
+    }
+  }
+
+  mark {
+    background-color: none !important;
+    color: #1976d2;
+  }
+
+  @media screen and (max-width: 850px) {
+    .group {
+      display: none !important;
+    }
+
+    .nav-right {
+      width: 5% !important;
+      flex: initial !important;
+    }
+
+    .nav-left {
+      padding-right: 10px;
+      flex: initial !important;
+    }
+
+    .home {
+      span {
+        display: none !important;
+      }
+    }
+  }
+
+  .custom-panel {
+    background-color: red;
+  }
+}

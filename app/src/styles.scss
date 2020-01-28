@@ -7,9 +7,14 @@
 @import './app/themes/default-theme.scss';
 @import './app/themes/dark-theme.scss';
 
+@import './app/components/navbar/navbar.component.scss';
+@import './app/components/sidebar/sidebar.component.scss';
 @import './app/components/settings/system/system.component.scss';
 
+
 @mixin custom-component-theme($theme) {
+  @include theme-navbar($theme);
+  @include theme-sidebar($theme);
   @include theme-system($theme);
 }
 

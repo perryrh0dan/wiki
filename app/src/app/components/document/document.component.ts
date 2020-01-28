@@ -15,7 +15,7 @@ import { buttonEnterAnimation } from './../../animations/button.animation';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
-  styleUrls: ['./document.component.less'],
+  styleUrls: ['./document.component.scss'],
   animations: [
     buttonEnterAnimation
   ],
