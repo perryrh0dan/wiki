@@ -7,14 +7,18 @@ module.exports = {
   init() {
     let self = this
 
-    try {
-      global.winston.info(`Connecting to ElasticSearch Instance: ${global.appconfig.search}`)
-      self.client = new elasticsearch.Client({
-        host: global.appconfig.search,
-        log: 'info'
-      })
-    } catch (error) {
-      global.winston.error(error)
+    if (this.active()) {
+      try {
+        global.winston.info(`Connecting to ElasticSearch Instance: ${global.appconfig.search}`)
+        self.client = new elasticsearch.Client({
+          host: global.appconfig.search,
+          log: 'info'
+        })
+      } catch (error) {
+        global.winston.error(error)
+      }
+    } else {
+      global.winston.info("Search is disabled")
     }
 
     self.onReady = new Promise((resolve, reject) => {
@@ -28,58 +32,58 @@ module.exports = {
         if (!exists) {
           global.winston.info('Creating searchindex...')
           return self.client.indices.create({
-            index: 'wiki',
-            body: {
-              settings: {
-                analysis: {
-                  analyzer: {
-                    autocomplete: {
-                      tokenizer: 'autocomplete',
-                      filter: [
-                        'lowercase'
-                      ]
+              index: 'wiki',
+              body: {
+                settings: {
+                  analysis: {
+                    analyzer: {
+                      autocomplete: {
+                        tokenizer: 'autocomplete',
+                        filter: [
+                          'lowercase'
+                        ]
+                      },
+                      autocomplete_search: {
+                        tokenizer: 'lowercase'
+                      }
                     },
-                    autocomplete_search: {
-                      tokenizer: 'lowercase'
-                    }
-                  },
-                  tokenizer: {
-                    autocomplete: {
-                      type: 'edge_ngram',
-                      min_gram: 2,
-                      max_gram: 20,
-                      token_chars: [
-                        'letter'
-                      ]
+                    tokenizer: {
+                      autocomplete: {
+                        type: 'edge_ngram',
+                        min_gram: 2,
+                        max_gram: 20,
+                        token_chars: [
+                          'letter'
+                        ]
+                      }
                     }
                   }
-                }
-              },
-              mappings: {
-                properties: {
-                  title: {
-                    type: 'text',
-                    analyzer: 'autocomplete',
-                    search_analyzer: 'autocomplete_search'
-                  },
-                  subtitle: {
-                    type: 'text'
-                  },
-                  parent: {
-                    type: 'text'
-                  },
-                  content: {
-                    type: 'text'
-                  },
-                  tags: {
-                    type: 'keyword'
+                },
+                mappings: {
+                  properties: {
+                    title: {
+                      type: 'text',
+                      analyzer: 'autocomplete',
+                      search_analyzer: 'autocomplete_search'
+                    },
+                    subtitle: {
+                      type: 'text'
+                    },
+                    parent: {
+                      type: 'text'
+                    },
+                    content: {
+                      type: 'text'
+                    },
+                    tags: {
+                      type: 'keyword'
+                    }
                   }
                 }
               }
-            }
-          }).then(() => {
-            return global.winston.info('Created searchindex successfull')
-          })
+            }).then(() => {
+              return global.winston.info('Created searchindex successfull')
+            })
             .catch(error => {
               return global.winston.error(error)
             })
@@ -150,7 +154,10 @@ module.exports = {
     let self = this
 
     if (!this.active()) {
-      Promise.resolve({ results: [], totalHits: 0 })
+      Promise.resolve({
+        results: [],
+        totalHits: 0
+      })
     } else {
       return self.client
         .search({

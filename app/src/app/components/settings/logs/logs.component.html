@@ -1,0 +1,19 @@
+<div class="logs">
+  <div class="page-header">
+    <div class="title">
+      <h1>Logs</h1>
+      <h2>Serverside logs of the wiki</h2>
+    </div>
+    <div class="icon">
+      <fa-icon [icon]="faHardHat" size="3x"></fa-icon>
+    </div>
+  </div>
+  <section>
+    <select [(ngModel)]="selectedLog" (change)="loadLog()">
+      <option *ngFor="let log of logs" [value]="log.file">{{log.display}}</option>
+    </select>
+    <div class="log">
+      <div [innerHtml]="log | safeHtml"></div>
+    </div>
+  </section>
+</div>
