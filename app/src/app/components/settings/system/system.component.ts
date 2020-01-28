@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -7,14 +7,18 @@ import { SiteService, sites } from 'src/app/services/site.service';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { ThemeService } from 'src/app/services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-system',
   templateUrl: './system.component.html',
-  styleUrls: ['./system.component.less']
+  styleUrls: ['./system.component.scss']
 })
-export class SystemComponent implements OnInit {
+export class SystemComponent implements OnInit, OnDestroy {
   faGlobe = faGlobe
+
+  _themeSubscription: Subscription
 
   info = {
     os: '',
@@ -25,8 +29,9 @@ export class SystemComponent implements OnInit {
     cwd: ''
   }
 
-  backup;
-  liveinfo;
+  backup: any;
+  liveinfo: any;
+  isDarkTheme: Boolean;
 
   constructor(
     private adminService: AdminService,
@@ -34,13 +39,19 @@ export class SystemComponent implements OnInit {
     private loadingService: LoadingService,
     private siteService: SiteService,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private themeService: ThemeService
   ) {
     this.siteService.setState(sites.settings)
   }
 
   ngOnInit() {
     this.loadInfo()
+    this._themeSubscription = this.themeService.isDarkTheme.subscribe(x => this.isDarkTheme = x)
+  }
+
+  ngOnDestroy() {
+    this._themeSubscription.unsubscribe()
   }
 
   closeAllSessions() {
@@ -70,5 +81,9 @@ export class SystemComponent implements OnInit {
       this.loadInfo()
       this.loadingService.stop()
     })
+  }
+
+  toggleTheme() {
+    this.themeService.setDarkTheme(!this.isDarkTheme);
   }
 }

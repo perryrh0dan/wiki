@@ -10,11 +10,12 @@ import { buttonEnterAnimation } from './animations/button.animation';
 
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { User } from './models/user';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less'],
+  styleUrls: ['./app.component.scss'],
   animations: [
     trigger('blurEnterAnimation', [
       transition(':enter', [
@@ -35,10 +36,12 @@ export class AppComponent implements OnInit, OnDestroy {
   private _blurVisibleSubscription: Subscription
   private _sidebarStateSubscription: Subscription
   private _siteStateSubscription: Subscription
+  private _themeSubscription: Subscription
 
   user: User;
   wasInside: Boolean;
   sidebarVisible: Boolean = false;
+  isDarkTheme: Boolean = false;
   sitesStatus: typeof sites = sites;
   blurVisible: Boolean;
   sidebarState: string;
@@ -47,7 +50,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private authenticationService: AuthenticationService,
     private sidebarService: SidebarService,
-    private siteService: SiteService
+    private siteService: SiteService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
@@ -57,12 +61,14 @@ export class AppComponent implements OnInit, OnDestroy {
     })
     this._sidebarStateSubscription = this.sidebarService.state.subscribe(state => this.sidebarState = state.toString())
     this._blurVisibleSubscription = this.sidebarService.blurVisible.subscribe(blur => this.blurVisible = blur);
+    this._themeSubscription = this.themeService.isDarkTheme.subscribe(dark => this.isDarkTheme = dark);
   }
 
   ngOnDestroy() {
     this._blurVisibleSubscription.unsubscribe();
     this._sidebarStateSubscription.unsubscribe();
     this._siteStateSubscription.unsubscribe();
+    this._themeSubscription.unsubscribe();
   }
 
   closeSidebar() {
