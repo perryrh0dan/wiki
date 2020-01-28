@@ -1,11 +1,14 @@
 @import '~@angular/material/theming';
 
 @mixin theme-system($theme) {
+  $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
 
   .system {
     height: calc(100vh - 50px);
     overflow: auto;
+    color: map-get($foreground, base);
 
     section {
       border-top: 1px solid #eee;
@@ -32,10 +35,6 @@
         margin-top: 15px;
         border-bottom: 1px dotted #b0bec5;
       }
-    }
-
-    button {
-      color: mat-color($warn, 500) !important;
     }
   }
 }

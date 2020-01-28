@@ -1,8 +1,8 @@
-<div [ngClass]="{'dark-theme' : isDarkTheme, 'default-theme' : !isDarkTheme }">
+<div class="app" [ngClass]="{'dark-theme' : isDarkTheme, 'default-theme' : !isDarkTheme }">
   <app-navbar *ngIf="user"></app-navbar>
   <div class="wrapper">
     <div class="blur" *ngIf="blurVisible" (click)="closeSidebar()" [@blurEnterAnimation]></div>
-    <app-sidebar *ngIf="user" class="sidebar"></app-sidebar>
+    <sidebar *ngIf="user" class="sidebar"></sidebar>
     <div class="content" [ngClass]="{'full-width':state == sitesStatus.edit || state == sitesStatus.login}">
       <router-outlet></router-outlet>
     </div>

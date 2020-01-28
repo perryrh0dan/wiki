@@ -16,22 +16,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./system.component.scss']
 })
 export class SystemComponent implements OnInit, OnDestroy {
-  faGlobe = faGlobe
+  public faGlobe = faGlobe;
 
-  _themeSubscription: Subscription
+  private themeSubscription: Subscription;
 
-  info = {
+  public info = {
     os: '',
     nodeversion: '',
     hostname: '',
     cpus: [],
     totalmem: '',
-    cwd: ''
-  }
-
-  backup: any;
-  liveinfo: any;
-  isDarkTheme: Boolean;
+    cwd: '',
+  };
+  public backup: any;
+  public liveinfo: any;
+  public isDarkTheme: boolean;
 
   constructor(
     private adminService: AdminService,
@@ -46,44 +45,44 @@ export class SystemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadInfo()
-    this._themeSubscription = this.themeService.isDarkTheme.subscribe(x => this.isDarkTheme = x)
+    this.loadInfo();
+    this.themeSubscription = this.themeService.isDarkTheme.subscribe(x => this.isDarkTheme = x);
   }
 
   ngOnDestroy() {
-    this._themeSubscription.unsubscribe()
+    this.themeSubscription.unsubscribe();
   }
 
   closeAllSessions() {
     this.adminService.closeAllSessions().subscribe(() => {
-      this.notifyService.success('Successfull closed all sessions', '')
+      this.notifyService.success('Successfull closed all sessions', '');
       this.authService.logout(true);
-      this.router.navigate(['login'])
+      this.router.navigate(['login']);
     })
   }
 
   loadInfo() {
     this.adminService.getSystemInfo().subscribe(data => {
-      this.info = data.hostinfo
-      this.liveinfo = data.liveinfo
-      this.backup = data.backup
-    })
+      this.info = data.hostinfo;
+      this.liveinfo = data.liveinfo;
+      this.backup = data.backup;
+    });
   }
 
   createBackup() {
-    this.loadingService.start()
+    this.loadingService.start();
     this.adminService.backup().subscribe(() => {
-      this.notifyService.success('Git Backup was successfull', '')
-      this.loadInfo()
-      this.loadingService.stop()
+      this.notifyService.success('Git Backup was successfull', '');
+      this.loadInfo();
+      this.loadingService.stop();
     }, error => {
-      this.notifyService.error(error, '')
-      this.loadInfo()
-      this.loadingService.stop()
-    })
+      this.notifyService.error(error, '');
+      this.loadInfo();
+      this.loadingService.stop();
+    });
   }
 
   toggleTheme() {
-    this.themeService.setDarkTheme(!this.isDarkTheme);
+    this.themeService.toggleTheme();
   }
 }

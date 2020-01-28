@@ -19,18 +19,18 @@ import { buttonEnterAnimation } from './../../animations/button.animation';
   animations: [
     buttonEnterAnimation
   ],
-  //markdown style are not applied
+  // markdown style are not applied
   encapsulation: ViewEncapsulation.None
 })
 export class DocumentComponent implements OnInit, OnDestroy {
-  faArrowUp = faArrowUp
-  fasHeart = fasHeart
-  farHeart = farHeart
+  faArrowUp = faArrowUp;
+  fasHeart = fasHeart;
+  farHeart = farHeart;
 
-  _documentSubscription: Subscription;
+  documentSubscription: Subscription;
   document: Document;
   favIconEntered = false;
-  scrollupVisible: Boolean = false;
+  scrollupVisible = false;
 
   constructor(
     private documentService: DocumentService,
@@ -39,7 +39,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
     private notifyService: NotificationService,
     private siteService: SiteService
   ) {
-    this.siteService.setState(sites.view)
+    this.siteService.setState(sites.view);
   }
 
   ngOnInit() {
@@ -47,18 +47,18 @@ export class DocumentComponent implements OnInit, OnDestroy {
       this.documentService.loadDocument(params.id).subscribe(
         () => { },
         error => {
-          this.notifyService.error(error, '')
+          this.notifyService.error(error, '');
         }
       )
     })
-    this._documentSubscription = this.documentService.document.subscribe(doc => {
+    this.documentSubscription = this.documentService.document.subscribe(doc => {
       this.document = doc
     })
   }
 
   ngOnDestroy() {
-    this._documentSubscription.unsubscribe()
-    this.documentService.clearDocument()
+    this.documentSubscription.unsubscribe();
+    this.documentService.clearDocument();
   }
 
   onScroll(event) {

@@ -15,7 +15,7 @@ import { faBold, faItalic, faStrikethrough, faHeading, faQuoteLeft, faList, faLi
 import { InsertLinkComponent } from './insertlink/insertlink.component';
 
 @Component({
-  selector: 'app-document-edit',
+  selector: 'document-edit',
   templateUrl: './document-edit.component.html',
   styleUrls: ['./document-edit.component.scss'],
   //markdown style are not applied

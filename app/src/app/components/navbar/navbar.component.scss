@@ -2,25 +2,6 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
 
-  .navbar-brand {
-    padding: 0 15px;
-    height: 54px;
-    line-height: 80px;
-  }
-
-  .navbar-toggle {
-    margin-top: 23px;
-    padding: 9px 10px !important;
-  }
-
-  @media (min-width: 768px) {
-    .navbar-nav>li>a {
-      padding-top: 26.5px;
-      padding-bottom: 26.5px;
-      line-height: 27px;
-    }
-  }
-
   .navbar {
     height: 50px;
     min-height: 50px;
@@ -194,36 +175,27 @@
         }
       }
     }
-  }
 
-  mark {
-    background-color: none !important;
-    color: #1976d2;
-  }
-
-  @media screen and (max-width: 850px) {
-    .group {
-      display: none !important;
-    }
-
-    .nav-right {
-      width: 5% !important;
-      flex: initial !important;
-    }
-
-    .nav-left {
-      padding-right: 10px;
-      flex: initial !important;
-    }
-
-    .home {
-      span {
+    @media screen and (max-width: 850px) {
+      .group {
         display: none !important;
       }
-    }
-  }
 
-  .custom-panel {
-    background-color: red;
+      .nav-right {
+        width: 5% !important;
+        flex: initial !important;
+      }
+
+      .nav-left {
+        padding-right: 10px;
+        flex: initial !important;
+      }
+
+      .home {
+        span {
+          display: none !important;
+        }
+      }
+    }
   }
 }

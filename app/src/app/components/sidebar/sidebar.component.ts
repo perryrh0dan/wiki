@@ -11,10 +11,11 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
-import { faHome, faSitemap, faChevronLeft, faArchive, faUser, faCog, faSignOutAlt, faChevronUp, faChevronDown, faUsers, faChartArea, faLock, faGlobe, faArrowRight, faFolder, faTags, faHardHat, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSitemap, faChevronLeft, faArchive, faUser, faCog, faSignOutAlt, faChevronUp, faChevronDown, faUsers, faChartArea, faLock, faGlobe, faArrowRight, faFolder, faTags, faHardHat, faCogs, faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss',],
   animations: [
@@ -67,43 +68,44 @@ import { faHome, faSitemap, faChevronLeft, faArchive, faUser, faCog, faSignOutAl
   ]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  faHome = faHome;
-  faSitemap = faSitemap
-  faChevronLeft = faChevronLeft
-  faArchive = faArchive
-  faUser = faUser
-  faCog = faCog
-  faSignOutAlt = faSignOutAlt
-  faChevronUp = faChevronUp
-  faChevronDown = faChevronDown
-  faUsers = faUsers
-  faChartArea = faChartArea
-  faLock = faLock
-  faGlobe = faGlobe
-  faArrowRight = faArrowRight
-  faFolder = faFolder
-  faTags = faTags
-  faHardHat = faHardHat
-  faCogs = faCogs
+  public faHome = faHome;
+  public faSitemap = faSitemap;
+  public faChevronLeft = faChevronLeft;
+  public faArchive = faArchive;
+  public faUser = faUser;
+  public faCog = faCog;
+  public faSignOutAlt = faSignOutAlt;
+  public faChevronUp = faChevronUp;
+  public faChevronDown = faChevronDown;
+  public faUsers = faUsers;
+  public faChartArea = faChartArea;
+  public faLock = faLock;
+  public faGlobe = faGlobe;
+  public faArrowRight = faArrowRight;
+  public faFolder = faFolder;
+  public faTags = faTags;
+  public faHardHat = faHardHat;
+  public faCogs = faCogs;
+  public faAdjust = faAdjust;
 
-  _stateSubscription: Subscription
-  _documentSubscription: Subscription
-  _blurVisibleSubscription: Subscription
-  _treeVisibleSubscription: Subscription
-  _sidebarStateSubscription: Subscription
+  private stateSubscription: Subscription;
+  private documentSubscription: Subscription;
+  private blurVisibleSubscription: Subscription;
+  private treeVisibleSubscription: Subscription;
+  private sidebarStateSubscription: Subscription;
 
-  state: sites
-  sitesStatus: typeof sites = sites
+  state: sites;
+  sitesStatus: typeof sites = sites;
   document: Document;
-  showSubPages: Boolean = true;
-  blurVisible: Boolean;
-  treeVisible: Boolean;
+  showSubPages = true;
+  blurVisible: boolean;
+  treeVisible: boolean;
   sidebarState: string;
 
   tree = {
     parents: [],
     entries: []
-  }
+  };
 
   constructor(
     public authService: AuthenticationService,
@@ -111,33 +113,34 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private documentService: DocumentService,
     private sidebarService: SidebarService,
     private siteService: SiteService,
+    private themeService: ThemeService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this._stateSubscription = this.siteService.state.subscribe(state => this.state = state)
-    this._documentSubscription = this.documentService.document.subscribe(doc => this.document = doc)
-    this._blurVisibleSubscription = this.sidebarService.blurVisible.subscribe(blur => this.blurVisible = blur);
-    this._treeVisibleSubscription = this.sidebarService.treeVisible.subscribe(visible => {
+    this.stateSubscription = this.siteService.state.subscribe(state => this.state = state);
+    this.documentSubscription = this.documentService.document.subscribe(doc => this.document = doc);
+    this.blurVisibleSubscription = this.sidebarService.blurVisible.subscribe(blur => this.blurVisible = blur);
+    this.treeVisibleSubscription = this.sidebarService.treeVisible.subscribe(visible => {
       if (!visible) {
         this.resetTree();
       }
-      this.treeVisible = visible
+      this.treeVisible = visible;
     });
-    this._sidebarStateSubscription = this.sidebarService.state.subscribe(state => this.sidebarState = state.toString())
+    this.sidebarStateSubscription = this.sidebarService.state.subscribe(state => this.sidebarState = state.toString())
   }
 
   ngOnDestroy() {
-    this._stateSubscription.unsubscribe()
-    this._documentSubscription.unsubscribe()
-    this._blurVisibleSubscription.unsubscribe()
-    this._treeVisibleSubscription.unsubscribe()
-    this._sidebarStateSubscription.unsubscribe()
+    this.stateSubscription.unsubscribe();
+    this.documentSubscription.unsubscribe();
+    this.blurVisibleSubscription.unsubscribe();
+    this.treeVisibleSubscription.unsubscribe();
+    this.sidebarStateSubscription.unsubscribe();
   }
 
   command(command) {
-    this.router.navigate([command])
-    this.closeSidebar()
+    this.router.navigate([command]);
+    this.closeSidebar();
   }
 
   closeSidebar() {
@@ -153,81 +156,85 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.sidebarService.openTree();
     this.documentService.getAllFromPath('').subscribe(
       data => {
-        this.tree.entries = data
+        this.tree.entries = data;
       },
       error => {
         console.log(error);
-      })
+      });
   }
 
-  resetTree() {
+  public resetTree() {
     this.tree = {
       parents: [],
-      entries: []
-    }
+      entries: [],
+    };
   }
 
-  documentsnext(page) {
-    this.tree.entries = []
-    this.tree.parents.push(page)
+  public documentsnext(page): void {
+    this.tree.entries = [];
+    this.tree.parents.push(page);
     this.documentService.getAllFromPath(page._id).subscribe(
       data => {
-        this.tree.entries = data
+        this.tree.entries = data;
       },
       error => {
         console.log(error);
-      })
+      });
   }
 
-  documentsback(page) {
-    this.tree.entries = []
-    let index = this.tree.parents.indexOf(page)
-    this.tree.parents.length = index
-    let newpage = this.tree.parents.length > 0 ? this.tree.parents[index - 1]._id : ''
+  public documentsback(page): void {
+    this.tree.entries = [];
+    const index = this.tree.parents.indexOf(page);
+    this.tree.parents.length = index;
+    const newpage = this.tree.parents.length > 0 ? this.tree.parents[index - 1]._id : '';
     this.documentService.getAllFromPath(newpage).subscribe(
       data => {
-        this.tree.entries = data
+        this.tree.entries = data;
       },
       error => {
         console.log(error);
-      })
+      });
   }
 
-  actionTree(page) {
+  public actionTree(page: any): void {
     if (page.isDirectory) {
-      this.documentsnext(page)
+      this.documentsnext(page);
     } else {
-      this.open(page._id)
+      this.open(page._id);
     }
   }
 
-  open(id) {
-    this.router.navigate(['document', id])
-    this.closeSidebar()
+  public open(id): void {
+    this.router.navigate(['document', id]);
+    this.closeSidebar();
   }
 
-  logout() {
-    let dialogConfig = new MatDialogConfig()
-    dialogConfig.autoFocus = true
-    dialogConfig.width = '40%'
-    dialogConfig.data = { title: 'Logout', message: 'Are you sure you want to log out of wiki?' }
+  public logout(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    dialogConfig.data = { title: 'Logout', message: 'Are you sure you want to log out of wiki?' };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.authService.logout().subscribe(() => {
-          this.router.navigate(['login'])
-        })
+          this.router.navigate(['login']);
+        });
       }
-    })
+    });
+  }
+
+  public toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
   public getSubPages(document: Document): Array<any> {
     if (document.children) {
-      return document.children.filter((child: any) => { return child.isEntry })
+      return document.children.filter((child: any) => child.isEntry );
     } else {
-      return []
+      return [];
     }
   }
 }

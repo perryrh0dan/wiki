@@ -59,10 +59,35 @@ $accent: (50 : #e3effa,
   ));
 $warn: mat-palette($mat-orange);
 $background-color: #ffffff;
+$foreground-color: #212529;
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
 // Insert custom background color
 $background: map-get($theme, background);
 $background: map_merge($background, (background: $background-color));
+
+// Maps are immutable
 $theme: map_merge($theme, (background: $background));
+
+// Change font color
+@function light-theme-foreground($color) {
+  @return (
+      base:              $color,
+      divider:           $black-12-opacity,
+      dividers:          $black-12-opacity,
+      disabled:          rgba($color, 0.38),
+      disabled-button:   rgba($color, 0.38),
+      disabled-text:     rgba($color, 0.38),
+      hint-text:         rgba($color, 0.38),
+      secondary-text:    rgba($color, 0.54),
+      icon:              rgba($color, 0.54),
+      icons:             rgba($color, 0.54),
+      text:              rgba($color, 0.87),
+      slider-off:        rgba($color, 0.26),
+      slider-off-active: rgba($color, 0.38),
+  );
+};
+
+$foreground: light-theme-foreground($foreground-color);
+$theme: map-merge($theme, (foreground: $foreground));

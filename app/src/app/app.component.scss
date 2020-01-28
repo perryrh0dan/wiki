@@ -22,7 +22,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  app-sidebar {
+  sidebar {
     display: initial;
     position: fixed;
     height: calc(100vh - 50px);
@@ -58,7 +58,7 @@ app-navbar {
 }
 
 @media screen and (max-width: 1300px) {
-  app-sidebar {
+  sidebar {
     display: none;
   }
 
@@ -72,7 +72,7 @@ app-navbar {
 }
 
 @media screen and (min-width: 1301px) {
-  app-sidebar {
+  sidebar {
     display: initial;
   }
 }

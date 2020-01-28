@@ -32,6 +32,10 @@
       <fa-icon [icon]="faSignOutAlt"></fa-icon>
       <span class="text">Logout</span>
     </div>
+    <div (click)="toggleTheme()" class="item">
+      <fa-icon [icon]="faAdjust"></fa-icon>
+      <span class="text">Toggle Dark Theme</span>
+    </div>
     <div class="page-content" *ngIf="getSubPages(document).length >= 1 && state == sitesStatus.view">
       <div class="element">
         <div (click)="showSubPages = !showSubPages" class="label">
