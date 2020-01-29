@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
-import { DocumentService } from '../../services/document.service'
+import { DocumentService } from '../../services/document.service';
 import { Document } from 'src/app/models/document';
 import { DocumentCreateComponent } from '../document-create/document-create.component';
 import { RoleCreateComponent } from '../settings/role-create/role-create.component';
@@ -21,52 +21,52 @@ import { faPlus, faEdit, faSave, faTrashAlt, faTimes, faAngleDoubleRight } from 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  faPlus = faPlus;
-  faEdit = faEdit;
-  faTrashAlt = faTrashAlt;
-  faSave = faSave;
-  faTimes = faTimes;
-  faAngleDoubleRight = faAngleDoubleRight;
+  public faPlus = faPlus;
+  public faEdit = faEdit;
+  public faTrashAlt = faTrashAlt;
+  public faSave = faSave;
+  public faTimes = faTimes;
+  public faAngleDoubleRight = faAngleDoubleRight;
 
-  _stateSubscription: Subscription
-  _documentSubscription: Subscription
-  _loadingSubscription: Subscription
-  state: sites
-  sitesStatus: typeof sites = sites
-  query: String = ''
-  searchresults: Array<any> = new Array<any>();
-  wasInside: Boolean = false
-  document: Document
-  loading: Boolean
-  selectedSearchResult: number = -1;
+  private stateSubscription: Subscription
+  private documentSubscription: Subscription
+  private loadingSubscription: Subscription
+  public state: sites
+  public sitesStatus: typeof sites = sites
+  public query: String = ''
+  public searchresults: Array<any> = new Array<any>();
+  public wasInside: Boolean = false
+  public document: Document
+  public loading: Boolean
+  public selectedSearchResult: number = -1;
 
-  constructor(
+  public constructor(
     public router: Router,
     private documentService: DocumentService,
     private dialog: MatDialog,
     private notifyService: NotificationService,
     private loadingService: LoadingService,
     private siteService: SiteService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
   ) { }
 
-  ngOnInit(): void {
-    this._stateSubscription = this.siteService.state.subscribe(x => this.state = x)
-    this._documentSubscription = this.documentService.document.subscribe(x => this.document = x)
-    this._loadingSubscription = this.loadingService.loading.subscribe(x => this.loading = x)
+  public ngOnInit(): void {
+    this.stateSubscription = this.siteService.state.subscribe(x => this.state = x);
+    this.documentSubscription = this.documentService.document.subscribe(x => this.document = x);
+    this.loadingSubscription = this.loadingService.loading.subscribe(x => this.loading = x);
   }
 
-  ngOnDestroy(): void {
-    this._stateSubscription.unsubscribe()
-    this._documentSubscription.unsubscribe()
-    this._loadingSubscription.unsubscribe()
+  public ngOnDestroy(): void {
+    this.stateSubscription.unsubscribe();
+    this.documentSubscription.unsubscribe();
+    this.loadingSubscription.unsubscribe();
   }
 
   @HostListener('keydown', ['$event'])
-  public onKeyDown(e) {
+  public onKeyDown(e: any): void {
     switch (e.keyCode) {
       case 38: //arrow up
         this.arrowSelectResult(-1);
@@ -93,144 +93,144 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   private enterSelectResult(): void {
     if (this.searchresults.length > 0) {
-      const searchResult = this.searchresults[this.selectedSearchResult]
+      const searchResult = this.searchresults[this.selectedSearchResult];
       if (searchResult) {
-        this.open(searchResult.id)
+        this.open(searchResult.id);
       }
     }
   }
 
-  search(): void {
+  public search(): void {
     // close sidebar when start typing
     this.sidebarService.closeSidebar();
     if (this.query.length <= 2) {
-      this.searchresults = []
+      this.searchresults = [];
     } else {
       this.documentService.search(this.query).subscribe(x => {
-        if (this.query.length <= 2) return
-        this.searchresults = x.results
-      })
+        if (this.query.length <= 2) return;
+        this.searchresults = x.results;
+      });
     }
   }
 
-  create(option): void {
+  public create(option: string): void {
     // close sidebar when clicking on create
     this.sidebarService.closeSidebar();
-    let dialogConfig = new MatDialogConfig()
-    dialogConfig.autoFocus = true
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
     // dialogConfig.width = '50%'
     switch (option) {
       case 'document':
-        let path = this.document._id ? this.document._id + '/' : ''
-        dialogConfig.data = { path: path }
-        this.dialog.open(DocumentCreateComponent, dialogConfig)
+        let path = this.document._id ? this.document._id + '/' : '';
+        dialogConfig.data = { path: path };
+        this.dialog.open(DocumentCreateComponent, dialogConfig);
         break;
       case 'user':
-        this.dialog.open(UserCreateComponent, dialogConfig)
+        this.dialog.open(UserCreateComponent, dialogConfig);
         break;
       case 'role':
-        this.dialog.open(RoleCreateComponent, dialogConfig)
+        this.dialog.open(RoleCreateComponent, dialogConfig);
         break;
       case 'directory':
-        this.dialog.open(FilesCreateComponent, dialogConfig)
+        this.dialog.open(FilesCreateComponent, dialogConfig);
         break;
     }
   }
 
-  save(): void {
+  public save(): void {
     // close sidebar when clicking on save
     this.sidebarService.closeSidebar();
-    this.loadingService.start()
+    this.loadingService.start();
     this.documentService.editDocument().subscribe(() => {
-      this.router.navigate(['document', this.document._id])
-      this.loadingService.stop()
-      this.notifyService.success('Saved successfull', '')
+      this.router.navigate(['document', this.document._id]);
+      this.loadingService.stop();
+      this.notifyService.success('Saved successfull', '');
     }, error => {
-      this.loadingService.stop()
-      this.notifyService.error(error, '')
-    })
+      this.loadingService.stop();
+      this.notifyService.error(error, '');
+    });
   }
 
-  open(path): void {
+  public open(path: string): void {
     // close sidebar when clicking on open
     this.sidebarService.closeSidebar();
     this.selectedSearchResult = -1;
-    this.router.navigate(['document', path])
-    this.resetSearch()
+    this.router.navigate(['document', path]);
+    this.resetSearch();
     this.sidebarService.closeSidebar();
   }
 
-  resetSearch(): void {
-    this.searchresults = []
-    this.query = ''
+  private resetSearch(): void {
+    this.searchresults = [];
+    this.query = '';
   }
 
-  cancel(): void {
+  public cancel(): void {
     // close sidebar when clicking on cancel
     this.sidebarService.closeSidebar();
     // obsolet we are reloading in document component
     // this.documentService.reloadDocument()
-    this.router.navigate(['document', this.document._id])
+    this.router.navigate(['document', this.document._id]);
   }
 
-  edit(): void {
-    this.router.navigate(['edit/document', this.document._id])
+  public edit(): void {
+    this.router.navigate(['edit/document', this.document._id]);
   }
 
-  delete(): void {
+  public delete(): void {
     // close sidebar when clicking on delete
     this.sidebarService.closeSidebar();
-    let dialogConfig = new MatDialogConfig()
-    dialogConfig.autoFocus = true
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
     // dialogConfig.width = '40%'
-    dialogConfig.data = { title: "Delete Document", message: 'Do you confirm the deletion of this document?' }
+    dialogConfig.data = { title: "Delete Document", message: 'Do you confirm the deletion of this document?' };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadingService.start()
+        this.loadingService.start();
         this.documentService.deleteDocument().subscribe(
           () => {
-            this.loadingService.stop()
-            this.router.navigate(['home'])
+            this.loadingService.stop();
+            this.router.navigate(['home']);
           },
           error => {
-            this.loadingService.stop()
-            this.notifyService.error("Something went wrong", "")
-          }
-        )
+            this.loadingService.stop();
+            this.notifyService.error("Something went wrong", "");
+          },
+        );
       }
-    })
+    });
   }
 
-  move(): void {
+  public move(): void {
     // close sidebar when clicking on move
     this.sidebarService.closeSidebar();
-    let dialogConfig = new MatDialogConfig()
-    dialogConfig.autoFocus = true
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
     // dialogConfig.width = '50%'
-    let path = this.document._id ? this.document._id + '/' : ''
-    dialogConfig.data = { path: path }
-    this.dialog.open(DocumentMoveComponent, dialogConfig)
+    let path = this.document._id ? this.document._id + '/' : '';
+    dialogConfig.data = { path: path };
+    this.dialog.open(DocumentMoveComponent, dialogConfig);
   }
 
-  home(): void {
+  public home(): void {
     // close sidebar when clicking on home
     this.sidebarService.closeSidebar();
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
   }
 
   @HostListener('click')
-  clickInside() {
+  public clickInside(): void {
     this.wasInside = true;
   }
 
   @HostListener('document:click')
-  clickout() {
+  public clickout(): void {
     if (!this.wasInside) {
-      this.resetSearch()
+      this.resetSearch();
     }
-    this.wasInside = false
+    this.wasInside = false;
   }
 }

@@ -12,7 +12,7 @@ type TLog = {
 @Component({
   selector: 'app-logs',
   templateUrl: './logs.component.html',
-  styleUrls: ['./logs.component.less']
+  styleUrls: ['./logs.component.less'],
 })
 export class LogsComponent implements OnInit {
   faHardHat = faHardHat
@@ -25,27 +25,27 @@ export class LogsComponent implements OnInit {
     private adminService: AdminService,
     private siteService: SiteService,
   ) {
-    this.siteService.setState(sites.settings)
+    this.siteService.setState(sites.settings);
   }
 
   ngOnInit() {
     this.adminService.getLogs().subscribe(logs => {
       logs.files.filter(file => {
-        return file.endsWith('.json') === false
+        return file.endsWith('.json') === false;
       }).map(file => {
-        this.logs.push({ file: file, display: file.replace(/\.(.)*/, "") })
+        this.logs.push({ file: file, display: file.replace(/\.(.)*/, "") });
       });
 
-      if (this.logs.length <= 0) return
-      this.selectedLog = this.logs[this.logs.length - 1].file
-      this.loadLog()
-    })
+      if (this.logs.length <= 0) return;
+      this.selectedLog = this.logs[this.logs.length - 1].file;
+      this.loadLog();
+    });
   }
 
   public loadLog() {
     this.adminService.getLog(this.selectedLog).subscribe(log => {
-      this.log = this.decodeUtf8(log).replace(new RegExp('\n', 'g'), "<br />")
-    })
+      this.log = this.decodeUtf8(log).replace(new RegExp('\n', 'g'), "<br />");
+    });
   }
 
   decodeUtf8(arrayBuffer: ArrayBuffer) {

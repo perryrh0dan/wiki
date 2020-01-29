@@ -9,7 +9,7 @@ import { faUsers, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-user-liste',
   templateUrl: './user-liste.component.html',
-  styleUrls: ['./user-liste.component.less']
+  styleUrls: ['./user-liste.component.less'],
 })
 export class UserListeComponent implements OnInit {
   faUsers = faUsers
@@ -21,26 +21,26 @@ export class UserListeComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private router: Router,
-    private siteService: SiteService
+    private siteService: SiteService,
   ) { 
-    this.siteService.setState(sites.users)
+    this.siteService.setState(sites.users);
   }
 
   ngOnInit() {
-    this.adminService.getUsers().subscribe(data => this.users = data)
-    this.adminService.getRoles().subscribe(data =>this.roles = data)
+    this.adminService.getUsers().subscribe(data => this.users = data);
+    this.adminService.getRoles().subscribe(data =>this.roles = data);
   }
 
   getUserRoles(user: User) {
-    let roles: Array<string> = new Array<string>()
+    let roles: Array<string> = new Array<string>();
     user.roles.forEach(uRole => {
-      roles.push(this.roles.find(x => x._id === uRole).name)
-    })
+      roles.push(this.roles.find(x => x._id === uRole).name);
+    });
 
-    return roles.join(',')
+    return roles.join(',');
   }
 
   select(id) {
-    this.router.navigate(['settings/users', id])
+    this.router.navigate(['settings/users', id]);
   }
 }

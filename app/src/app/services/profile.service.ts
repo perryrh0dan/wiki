@@ -4,13 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: "root",
 })
 export class ProfileService {
 
     constructor(
         @Inject(APP_CONFIG) private config: AppConfig,
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     get() {
@@ -18,6 +18,6 @@ export class ProfileService {
     }
 
     change(name, password?) {
-        return this.http.post(`${this.config.apiEndpoint}/profile`, { name: name, password: password })
+        return this.http.post(`${this.config.apiEndpoint}/profile`, { name: name, password: password });
     }
 }

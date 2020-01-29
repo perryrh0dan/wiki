@@ -7,7 +7,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-files-create',
   templateUrl: './files-create.component.html',
-  styleUrls: ['./files-create.component.less']
+  styleUrls: ['./files-create.component.less'],
 })
 export class FilesCreateComponent implements OnInit {
   name = ''
@@ -17,24 +17,24 @@ export class FilesCreateComponent implements OnInit {
     public dialogRef: MatDialogRef<FilesCreateComponent>,
     private uploadService: UploadService,
     private loadingService: LoadingService,
-    private notifySerivce: NotificationService
+    private notifySerivce: NotificationService,
   ) { }
 
   ngOnInit() {
   }
 
   create() {
-    this.loadingService.start()
+    this.loadingService.start();
     this.uploadService.createDirectory(this.name).subscribe(res => {
-      this.dialogRef.close()
-      this.loadingService.stop()
+      this.dialogRef.close();
+      this.loadingService.stop();
     }, error => {
-      this.notifySerivce.error(error, '')
-      this.loadingService.stop()
-    })
+      this.notifySerivce.error(error, '');
+      this.loadingService.stop();
+    });
   }
 
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

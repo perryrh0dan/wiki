@@ -17,44 +17,44 @@ import { ThemeService } from 'src/app/services/theme.service';
 @Component({
   selector: 'sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss',],
+  styleUrls: ['./sidebar.component.scss'],
   animations: [
     trigger('treeEnterAnimation', [
       transition(':enter', [
         style({ transform: 'translateX(-250px)' }),
-        animate('150ms', style({ transform: 'translateX(0)' }))
+        animate('150ms', style({ transform: 'translateX(0)' })),
       ]),
       transition(':leave', [
         style({ transform: 'translateX(0)' }),
-        animate('150ms', style({ transform: 'translateX(-250px)' }))
-      ])
+        animate('150ms', style({ transform: 'translateX(-250px)' })),
+      ]),
     ]),
     trigger('parentTreeEnterAnimation', [
       transition(':enter', [
         style({ width: '0px' }),
-        animate('150ms', style({ width: '50px' }))
+        animate('150ms', style({ width: '50px' })),
       ]),
       transition(':leave', [
         style({ width: '50px' }),
-        animate('150ms', style({ width: '0px' }))
-      ])
+        animate('150ms', style({ width: '0px' })),
+      ]),
     ]),
     trigger('sidebarEnterAnimation', [
       state('open', style({
         transform: 'translateX(0)',
-        width: '250px'
+        width: '250px',
       })),
       state('small', style({
         // transform: 'translateX(0)',
-        width: '50px'
+        width: '50px',
       })),
       state('closed', style({
         transform: 'translateX(-250px)',
-        width: '0px'
+        width: '0px',
       })),
       state('blocked', style({
         transform: 'translateX(-250px)',
-        width: '0px'
+        width: '0px',
       })),
       transition('void => open', animate(0)),
       transition('open => closed', animate('250ms')),
@@ -63,9 +63,9 @@ import { ThemeService } from 'src/app/services/theme.service';
       transition('small => open', animate('150ms')),
       transition('open => blocked', animate('0ms')),
       transition('blocked => open', animate('0ms')),
-      transition('* => *', animate('250ms'))
-    ])
-  ]
+      transition('* => *', animate('250ms')),
+    ]),
+  ],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   public faHome = faHome;
@@ -104,7 +104,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   tree = {
     parents: [],
-    entries: []
+    entries: [],
   };
 
   constructor(
@@ -127,7 +127,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
       this.treeVisible = visible;
     });
-    this.sidebarStateSubscription = this.sidebarService.state.subscribe(state => this.sidebarState = state.toString())
+    this.sidebarStateSubscription = this.sidebarService.state.subscribe(state => this.sidebarState = state.toString());
   }
 
   ngOnDestroy() {

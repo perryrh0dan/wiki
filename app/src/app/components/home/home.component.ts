@@ -4,12 +4,12 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { SiteService, sites } from 'src/app/services/site.service';
 import { DocumentService } from 'src/app/services/document.service';
 
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less']
+  styleUrls: ['./home.component.less'],
 })
 export class HomeComponent implements OnInit {
   faHeart = faHeart
@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private notifyService: NotificationService,
     private siteService: SiteService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
   ) { 
-    this.siteService.setState(sites.home)
+    this.siteService.setState(sites.home);
   }
 
   ngOnInit(): void {
@@ -31,20 +31,20 @@ export class HomeComponent implements OnInit {
 
   loadFavorites(): void {
     this.documentService.getFavorites().subscribe(data => {
-      this.favorites = data
+      this.favorites = data;
     },error => {
-      this.notifyService.error(error, '')
-    })
+      this.notifyService.error(error, '');
+    });
   }
 
   openDocument(id) {
-    this.router.navigate(['document', id])
+    this.router.navigate(['document', id]);
   }
 
   toggleFavorite(event, id) {
     this.documentService.toggleFavorite(id).subscribe(() =>{
       this.loadFavorites();
-    })
+    });
     event.stopPropagation();
   }
 }

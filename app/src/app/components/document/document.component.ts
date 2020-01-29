@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { SiteService, sites } from 'src/app/services/site.service';
 
 import { faHeart as fasHeart, faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 
 import { buttonEnterAnimation } from './../../animations/button.animation';
 
@@ -17,10 +17,10 @@ import { buttonEnterAnimation } from './../../animations/button.animation';
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss'],
   animations: [
-    buttonEnterAnimation
+    buttonEnterAnimation,
   ],
   // markdown style are not applied
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class DocumentComponent implements OnInit, OnDestroy {
   faArrowUp = faArrowUp;
@@ -37,7 +37,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private notifyService: NotificationService,
-    private siteService: SiteService
+    private siteService: SiteService,
   ) {
     this.siteService.setState(sites.view);
   }
@@ -48,12 +48,12 @@ export class DocumentComponent implements OnInit, OnDestroy {
         () => { },
         error => {
           this.notifyService.error(error, '');
-        }
-      )
-    })
+        },
+      );
+    });
     this.documentSubscription = this.documentService.document.subscribe(doc => {
-      this.document = doc
-    })
+      this.document = doc;
+    });
   }
 
   ngOnDestroy() {
@@ -63,19 +63,19 @@ export class DocumentComponent implements OnInit, OnDestroy {
 
   onScroll(event) {
     if (event.target.scrollTop > 200) {
-      this.scrollupVisible = true
+      this.scrollupVisible = true;
     } else {
-      this.scrollupVisible = false
+      this.scrollupVisible = false;
     }
   }
 
   scrollUp() {
-    const component = document.getElementsByClassName('document-component')[0]
+    const component = document.getElementsByClassName('document-component')[0];
     component.scrollTop = 0;
   }
 
   focusContent(id) {
-    const component = document.getElementsByClassName('document-component')[0]
+    const component = document.getElementsByClassName('document-component')[0];
     //reason: fixed navbar with 50px height
     let topOfElement = document.getElementById(id).offsetTop - 50;
     component.scroll({ top: topOfElement });
@@ -83,30 +83,30 @@ export class DocumentComponent implements OnInit, OnDestroy {
 
   toggleFavorite() {
     this.documentService.toggleFavorite(this.document._id).subscribe(() => {
-      this.documentService.reloadDocument()
-    })
+      this.documentService.reloadDocument();
+    });
   }
 
   openTag(tag) {
-    this.router.navigate(['tags', {tags: tag}])
+    this.router.navigate(['tags', {tags: tag}]);
   }
 
   @HostListener('click', ['$event'])
   public onclick($event) {
     if ($event.target.tagName === 'A') {
-      let originalpath = $event.target.getAttribute('href')
-      let hostname = location.hostname
+      let originalpath = $event.target.getAttribute('href');
+      let hostname = location.hostname;
       if (originalpath.match("^https?://" + hostname)) {
-        $event.preventDefault()
-        let path = originalpath.split('/document/')[1] || false
-        if (!path) return
-        this.router.navigate(['document', path])
+        $event.preventDefault();
+        let path = originalpath.split('/document/')[1] || false;
+        if (!path) return;
+        this.router.navigate(['document', path]);
 
       } else {
-        return
+        return;
       }
     } else {
-      return
+      return;
     }
   }
 }

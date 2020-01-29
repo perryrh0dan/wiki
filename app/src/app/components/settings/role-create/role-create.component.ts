@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-role-create',
   templateUrl: './role-create.component.html',
-  styleUrls: ['./role-create.component.less']
+  styleUrls: ['./role-create.component.less'],
 })
 export class RoleCreateComponent implements OnInit {
   name = ''
@@ -17,7 +17,7 @@ export class RoleCreateComponent implements OnInit {
     public dialogRef: MatDialogRef<RoleCreateComponent>,
     private adminService: AdminService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -25,15 +25,15 @@ export class RoleCreateComponent implements OnInit {
 
   create() {
     this.adminService.createRole(this.name).subscribe(res => {
-      this.dialogRef.close()
-      this.router.navigate(['settings/roles', res._id])
+      this.dialogRef.close();
+      this.router.navigate(['settings/roles', res._id]);
     },
     error => {
-      this.notifyService.error(error, '')
-    })
+      this.notifyService.error(error, '');
+    });
   }
 
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

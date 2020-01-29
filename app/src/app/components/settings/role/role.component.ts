@@ -7,12 +7,12 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SiteService, sites } from 'src/app/services/site.service';
 
-import { faLock, faPlusSquare, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faPlusSquare, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
-  styleUrls: ['./role.component.less']
+  styleUrls: ['./role.component.less'],
 })
 export class RoleComponent implements OnInit {
   faLock = faLock
@@ -22,30 +22,30 @@ export class RoleComponent implements OnInit {
   public role: Role
   public permissionsOpt = [{
     value: 'read',
-    display: 'Read Only'
+    display: 'Read Only',
   }, {
     value: 'write',
-    display: 'Read and Write'
+    display: 'Read and Write',
   }, {
     value: 'admin',
-    display: 'Admin'
+    display: 'Admin',
   }]
 
   public pathOpt = [{
     value: true,
-    display: 'Path match exactly'
+    display: 'Path match exactly',
   }, {
     value: false,
-    display: 'Path starts with'
+    display: 'Path starts with',
   }]
 
   public accessOpt = [{
     value: false,
-    display: 'Allow'
+    display: 'Allow',
   },
   {
     value: true,
-    display: 'Deny'
+    display: 'Deny',
   }]
 
   constructor(
@@ -54,22 +54,22 @@ export class RoleComponent implements OnInit {
     private router: Router,
     private notifyService: NotificationService,
     private loadingService: LoadingService,
-    private siteService: SiteService
+    private siteService: SiteService,
   ) { 
-    this.siteService.setState(sites.settings)
+    this.siteService.setState(sites.settings);
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.adminService.getRole(params.id).subscribe(
         data => {
-          this.role = data
+          this.role = data;
         },
         error => {
-          this.router.navigate(['settings/roles'])
-        }
-      )
-    })
+          this.router.navigate(['settings/roles']);
+        },
+      );
+    });
   }
 
   addRightsRow() {
@@ -77,38 +77,38 @@ export class RoleComponent implements OnInit {
       role: 'write',
       path: '/',
       exact: false,
-      deny: false
-    })
+      deny: false,
+    });
   }
 
   removeRightsRow(i) {
-    this.role.rights.splice(i, 1)
+    this.role.rights.splice(i, 1);
   }
 
   cancel() {
-    this.router.navigate(['settings/roles'])
+    this.router.navigate(['settings/roles']);
   }
 
   save() {
     this.adminService.editRole(this.role).subscribe(
       () => {
-        this.notifyService.success('Role saved successfull', '')
+        this.notifyService.success('Role saved successfull', '');
       },
       error => {
-        this.notifyService.error('An error occured while saving', '')
-      })
+        this.notifyService.error('An error occured while saving', '');
+      });
   }
 
   delete() {
-    this.loadingService.start()
+    this.loadingService.start();
     this.adminService.deleteRole(this.role._id).subscribe(
       () => {
-        this.loadingService.stop()
-        this.notifyService.success('Role was deleted successfull', '')
-        this.router.navigate(['settings/roles'])
+        this.loadingService.stop();
+        this.notifyService.success('Role was deleted successfull', '');
+        this.router.navigate(['settings/roles']);
       },
       error => {
-        this.notifyService.error('An error occured while deleting', '')
-      })
+        this.notifyService.error('An error occured while deleting', '');
+      });
   }
 }

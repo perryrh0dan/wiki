@@ -8,7 +8,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-document-create',
   templateUrl: './document-create.component.html',
-  styleUrls: ['./document-create.component.less']
+  styleUrls: ['./document-create.component.less'],
 })
 export class DocumentCreateComponent implements OnInit {
   path = ''
@@ -21,30 +21,30 @@ export class DocumentCreateComponent implements OnInit {
     private documentService: DocumentService,
     private router: Router,
     private loadingService: LoadingService,
-    private notifySerivce: NotificationService
+    private notifySerivce: NotificationService,
   ) { 
-    this.path = this.data.path
+    this.path = this.data.path;
   }
 
   ngOnInit() {
     this.documentService.getTemplates().subscribe(templates => {
       this.templates = templates.templates;
-    })
+    });
   }
 
   create() {
-    this.loadingService.start()
+    this.loadingService.start();
     this.documentService.createDocument(this.path, this.selectedTemplate).subscribe(res => {
-      this.dialogRef.close()
-      this.loadingService.stop()
-      this.router.navigate(['edit/document/', this.path])
+      this.dialogRef.close();
+      this.loadingService.stop();
+      this.router.navigate(['edit/document/', this.path]);
     }, error => {
-      this.notifySerivce.error(error, '')
-      this.loadingService.stop()
-    })
+      this.notifySerivce.error(error, '');
+      this.loadingService.stop();
+    });
   }
 
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

@@ -10,7 +10,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-document-move',
   templateUrl: './document-move.component.html',
-  styleUrls: ['./document-move.component.less']
+  styleUrls: ['./document-move.component.less'],
 })
 export class DocumentMoveComponent {
   newpath = ''
@@ -21,13 +21,13 @@ export class DocumentMoveComponent {
     private documentService: DocumentService,
     private router: Router,
     private loadingService: LoadingService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
   ) { 
-    this.newpath = this.data.path
+    this.newpath = this.data.path;
   }
 
   move() {
-    this.loadingService.start()
+    this.loadingService.start();
     this.documentService.moveDocument(this.newpath).subscribe(
       res => {
         this.dialogRef.close();
@@ -38,10 +38,10 @@ export class DocumentMoveComponent {
       error => {
         this.loadingService.stop();
         this.notifyService.error(error, '');
-      })
+      });
   }
 
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

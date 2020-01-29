@@ -9,7 +9,7 @@ export const base64ToArrayBuffer = function (base64url) {
     bytes[i] = binary_string.charCodeAt(i);
   }
   return bytes.buffer;
-}
+};
 
 export const arrayBufferToBase64 = function(buffer) {
   var binary = '';
@@ -22,5 +22,5 @@ export const arrayBufferToBase64 = function(buffer) {
   base64 = base64.replace(/\+/g,'-');
   base64 = base64.replace(/\//g,'_');
   const base64url = base64.replace(/=/g,'');
-  return base64url
-}
+  return base64url;
+};

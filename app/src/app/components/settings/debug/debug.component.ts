@@ -8,7 +8,7 @@ import { faCogs } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-debug',
   templateUrl: './debug.component.html',
-  styleUrls: ['./debug.component.less']
+  styleUrls: ['./debug.component.less'],
 })
 export class DebugComponent implements OnInit {
   faCogs = faCogs
@@ -19,7 +19,7 @@ export class DebugComponent implements OnInit {
     hostname: '',
     cpus: [],
     totalmem: '',
-    cwd: ''
+    cwd: '',
   }
 
   constructor(
@@ -27,22 +27,22 @@ export class DebugComponent implements OnInit {
     private loadingService: LoadingService,
     private siteService: SiteService,
   ) {
-    this.siteService.setState(sites.settings)
+    this.siteService.setState(sites.settings);
   }
 
   ngOnInit() {
   }
 
   spinnertest() {
-    let self = this
+    let self = this;
 
-    this.loadingService.start()
+    this.loadingService.start();
     setTimeout(function () {
-      self.loadingService.stop()
+      self.loadingService.stop();
     }, 3000);
   }
 
   notifytest() {
-    this.notifyService.success('test', 'test')
+    this.notifyService.success('test', 'test');
   }
 }

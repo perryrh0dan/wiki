@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-system',
   templateUrl: './system.component.html',
-  styleUrls: ['./system.component.scss']
+  styleUrls: ['./system.component.scss'],
 })
 export class SystemComponent implements OnInit, OnDestroy {
   public faGlobe = faGlobe;
@@ -39,9 +39,9 @@ export class SystemComponent implements OnInit, OnDestroy {
     private siteService: SiteService,
     private router: Router,
     private authService: AuthenticationService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
   ) {
-    this.siteService.setState(sites.settings)
+    this.siteService.setState(sites.settings);
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class SystemComponent implements OnInit, OnDestroy {
       this.notifyService.success('Successfull closed all sessions', '');
       this.authService.logout(true);
       this.router.navigate(['login']);
-    })
+    });
   }
 
   loadInfo() {

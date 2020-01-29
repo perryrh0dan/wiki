@@ -12,7 +12,7 @@ import * as Material from '@angular/material';
     Material.MatCardModule,
     Material.MatButtonModule,
     Material.MatToolbarModule,
-    Material.MatTooltipModule
+    Material.MatTooltipModule,
   ],
   exports: [
     Material.MatDialogModule,
@@ -22,9 +22,9 @@ import * as Material from '@angular/material';
     Material.MatCardModule,
     Material.MatButtonModule,
     Material.MatToolbarModule,
-    Material.MatTooltipModule
+    Material.MatTooltipModule,
   ],
   providers: [],
-  declarations: []
+  declarations: [],
 })
 export class MaterialModule { }

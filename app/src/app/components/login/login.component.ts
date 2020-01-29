@@ -11,7 +11,7 @@ import { publicKeyCredentialToJSON, preformatGetAssertReq } from 'src/app/helper
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styleUrls: ['./login.component.less'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subscription: Subscription
@@ -24,17 +24,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     public router: Router,
     private authService: AuthenticationService,
     private notifyService: NotificationService,
-    private siteService: SiteService
+    private siteService: SiteService,
   ) {
-    this.siteService.setState(sites.login)
+    this.siteService.setState(sites.login);
   }
 
   ngOnInit() {
     this.subscription = this.authService.currentUser.subscribe(user => {
       if (user) {
-        this.router.navigate(['home'])
+        this.router.navigate(['home']);
       }
-    })
+    });
   }
 
   ngOnDestroy() {
@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate([returnUrl]);
       },
       error => {
-        this.notifyService.error("Wrong credentials", "")
+        this.notifyService.error("Wrong credentials", "");
       },
-    )
+    );
   }
 
   webauthnLogin() {
@@ -63,24 +63,24 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (response.email !== undefined) {
             this.router.navigate([returnUrl]);
           } else {
-            this.notifyService.error("Wrong credentials", "")
+            this.notifyService.error("Wrong credentials", "");
           }
-        })
+        });
       },
         error => {
-          this.notifyService.error(error, '')
-        })
+          this.notifyService.error(error, '');
+        });
     },
       error => {
-        this.notifyService.error(error, '')
-      })
+        this.notifyService.error(error, '');
+      });
   }
 
   @HostListener('keydown', ['$event'])
   public onKeyDown(e) {
     if (e.key === 'Enter') {
-      e.preventDefault()
-      this.login()
+      e.preventDefault();
+      this.login();
     }
   }
 }

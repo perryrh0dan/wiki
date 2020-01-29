@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { UrlSerializer } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -83,7 +83,7 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
     FilesCreateComponent,
     ConfirmationDialogComponent,
     TagsComponent,
-    LogsComponent
+    LogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,17 +99,17 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
     MarkdownModule.forRoot({
       markedOptions: {
         provide: MarkedOptions,
-        useFactory: markedOptionsFactory
-      }
+        useFactory: markedOptionsFactory,
+      },
     }),
     SocketIoModule.forRoot(config),
     ToastrModule.forRoot(),
-    AutosizeModule
+    AutosizeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true },
-    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+    { provide: UrlSerializer, useClass: CustomUrlSerializer },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -120,21 +120,21 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
     RoleCreateComponent,
     FilesCreateComponent,
     InsertFileComponent,
-    InsertLinkComponent
-  ]
+    InsertLinkComponent,
+  ],
 })
 export class AppModule {}
 
 
 // Wrap table in markdown with a div tag
 export function markedOptionsFactory(): MarkedOptions {
-  const renderer = new MarkedRenderer()
+  const renderer = new MarkedRenderer();
 
   const tableRenderer = renderer.table;
   renderer.table = (header: string, body: string) => {
     const html = tableRenderer.call(renderer, header, body);
-    return `<div class="table-wrapper">${html}</div>`
-  }
+    return `<div class="table-wrapper">${html}</div>`;
+  };
 
   return {
     renderer: renderer,

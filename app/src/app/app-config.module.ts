@@ -8,13 +8,13 @@ export class AppConfig {
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-  apiEndpoint: environment.apiEndpoint
+  apiEndpoint: environment.apiEndpoint,
 };
 
 @NgModule({
   providers: [{
     provide: APP_CONFIG,
-    useValue: APP_DI_CONFIG
-  }]
+    useValue: APP_DI_CONFIG,
+  }],
 })
 export class AppConfigModule { }

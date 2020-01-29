@@ -9,7 +9,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
-  styleUrls: ['./user-create.component.less']
+  styleUrls: ['./user-create.component.less'],
 })
 export class UserCreateComponent implements OnInit {
   user = new User()
@@ -18,7 +18,7 @@ export class UserCreateComponent implements OnInit {
     public dialogRef: MatDialogRef<UserCreateComponent>,
     private adminService: AdminService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -27,15 +27,15 @@ export class UserCreateComponent implements OnInit {
   create() {
     this.adminService.createUser(this.user).subscribe(
     user => {
-      this.dialogRef.close()
-      this.router.navigate(['settings/users', user._id])
+      this.dialogRef.close();
+      this.router.navigate(['settings/users', user._id]);
     },
     error => {
-      this.notifyService.error(error, '')
-    })
+      this.notifyService.error(error, '');
+    });
   }
 
   cancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

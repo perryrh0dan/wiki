@@ -15,7 +15,7 @@ export enum sites {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SiteService {
     private stateSubject: BehaviorSubject<sites>;
@@ -23,14 +23,14 @@ export class SiteService {
     public sites: sites;
 
     constructor(
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
     ) {
-        this.stateSubject = new BehaviorSubject<sites>(sites.view)
-        this.state = this.stateSubject.asObservable()
+        this.stateSubject = new BehaviorSubject<sites>(sites.view);
+        this.state = this.stateSubject.asObservable();
     }
 
     setState(state: sites): void {
-        this.stateSubject.next(state)
+        this.stateSubject.next(state);
         switch (state) {
             case sites.edit:
                 this.sidebarService.blockSidebar();

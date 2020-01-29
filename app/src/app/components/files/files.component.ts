@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, HostListener, OnDestroy } from '@angular/core';
-import { HttpEventType } from '@angular/common/http'
+import { HttpEventType } from '@angular/common/http';
 
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
 import { UploadService } from 'src/app/services/upload.service';
@@ -7,12 +7,12 @@ import { SiteService, sites } from 'src/app/services/site.service';
 import { Subscription } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
 
-import { faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.less']
+  styleUrls: ['./files.component.less'],
 })
 export class FilesComponent implements OnInit, OnDestroy {
   faFolder = faFolder
@@ -31,37 +31,37 @@ export class FilesComponent implements OnInit, OnDestroy {
     @Inject(APP_CONFIG) private config: AppConfig,
     private uploadService: UploadService,
     private siteService: SiteService,
-    private socket: Socket
+    private socket: Socket,
   ) {
-    this.siteService.setState(sites.files)
+    this.siteService.setState(sites.files);
     this.filesupdate.subscribe(() => {
       this.loadImages(this.selectedFolder);
-    })
+    });
   }
 
   ngOnInit() {
-    this.loadImages('')
+    this.loadImages('');
     this._foldersSubscription = this.uploadService.loadFolders().subscribe(data => {
-      this.folders = data
+      this.folders = data;
     }, error => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 
   ngOnDestroy() {
-    this._foldersSubscription.unsubscribe()
+    this._foldersSubscription.unsubscribe();
   }
 
   loadImages(folder) {
     this.uploadService.loadImages(folder).subscribe(data => {
-      this.selectedFolder = folder
-      this.images = data
+      this.selectedFolder = folder;
+      this.images = data;
       this.images.forEach(image => {
         image.thumbnailurl = this.config.apiEndpoint + '/uploads/t/' + image._id + '.png';
-      })
+      });
     }, error => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 
   selectFile(file) {
@@ -75,7 +75,7 @@ export class FilesComponent implements OnInit, OnDestroy {
 
   uploadImgage() {
     const formData = new FormData();
-    formData.append('folder', this.selectedFolder)
+    formData.append('folder', this.selectedFolder);
     Array.from(this.fileData).forEach(data => {
       formData.append('imgfile', data);
     });
@@ -86,7 +86,7 @@ export class FilesComponent implements OnInit, OnDestroy {
         console.log(events);
         this.fileData = new Array<File>();
       }
-    })
+    });
   }
 
   uploadFile() {
@@ -100,20 +100,20 @@ export class FilesComponent implements OnInit, OnDestroy {
       } else if (events.type === HttpEventType.Response) {
         console.log(events);
       }
-    })
+    });
   }
 
   deleteFile() {
     console.log(this.selectedFile);
     this.uploadService.deleteFile(this.selectedFile._id).subscribe(result => {
-      this.loadImages(this.selectedFolder)
-    })
+      this.loadImages(this.selectedFolder);
+    });
   }
 
   checkSelectedFile(file) {
-    if (!this.selectedFile) return false
-    if (file.filename === this.selectedFile.filename && file.folder === this.selectedFile.folder) return true
-    return false
+    if (!this.selectedFile) return false;
+    if (file.filename === this.selectedFile.filename && file.folder === this.selectedFile.folder) return true;
+    return false;
   }
 
   @HostListener('dragover', ['$event']) onDragOver(event) {
@@ -141,6 +141,6 @@ export class FilesComponent implements OnInit, OnDestroy {
     event.preventDefault();
     event.stopPropagation();
     this.fileData = <File[]>event.dataTransfer.files;
-    this.uploadImgage()
+    this.uploadImgage();
   }
 }

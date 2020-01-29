@@ -5,12 +5,12 @@ import { Role } from 'src/app/models/role';
 import { Router } from '@angular/router';
 import { SiteService, sites } from 'src/app/services/site.service';
 
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.less']
+  styleUrls: ['./role-list.component.less'],
 })
 export class RoleListComponent implements OnInit {
   faLock = faLock
@@ -20,16 +20,16 @@ export class RoleListComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private router: Router,
-    private siteService: SiteService
+    private siteService: SiteService,
   ) { 
-    this.siteService.setState(sites.roles)
+    this.siteService.setState(sites.roles);
   }
 
   ngOnInit() {
-    this.adminService.getRoles().subscribe(data => this.roles = data)
+    this.adminService.getRoles().subscribe(data => this.roles = data);
   }
 
   select(id) {
-    this.router.navigate(['settings/roles', id])
+    this.router.navigate(['settings/roles', id]);
   }
 }

@@ -7,7 +7,7 @@ import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { Document } from '../models/document';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DocumentService {
   private documentSubject: BehaviorSubject<Document>;
@@ -15,7 +15,7 @@ export class DocumentService {
 
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.documentSubject = new BehaviorSubject<Document>(new Document());
     this.document = this.documentSubject.asObservable();
@@ -37,7 +37,7 @@ export class DocumentService {
   reloadDocument() {
     this.http.post<Document>(`${this.config.apiEndpoint}/documents/get`, {
       id: this.documentSubject.getValue()._id,
-      affectViews: false
+      affectViews: false,
     }).subscribe(doc => {
       this.documentSubject.next(doc);
     });

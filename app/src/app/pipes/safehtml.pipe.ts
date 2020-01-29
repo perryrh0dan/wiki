@@ -1,4 +1,4 @@
-import { DomSanitizer } from '@angular/platform-browser'
+import { DomSanitizer } from '@angular/platform-browser';
 import { PipeTransform, Pipe } from "@angular/core";
 
 @Pipe({ name: 'safeHtml'})

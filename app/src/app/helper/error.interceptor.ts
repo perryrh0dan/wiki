@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

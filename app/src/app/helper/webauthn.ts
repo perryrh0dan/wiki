@@ -7,8 +7,8 @@ export const preformatMakeCredReq = function (makeCredReq) {
   makeCredReq.challenge = base64ToArrayBuffer(makeCredReq.challenge);
   makeCredReq.user.id = base64ToArrayBuffer(makeCredReq.user.id);
 
-  return makeCredReq
-}
+  return makeCredReq;
+};
 
 /**
  * Decodes arrayBuffer required fields for assertion request.
@@ -20,8 +20,8 @@ export const preformatGetAssertReq = function (getAssert) {
     allowCred.id = base64ToArrayBuffer(allowCred.id);
   }
 
-  return getAssert
-}
+  return getAssert;
+};
 
 /**
  * Converts PublicKeyCredential into serialised JSON
@@ -34,22 +34,22 @@ export const publicKeyCredentialToJSON = function (pubKeyCred) {
     for (let i of pubKeyCred)
       arr.push(publicKeyCredentialToJSON(i));
 
-    return arr
+    return arr;
   }
 
   if (pubKeyCred instanceof ArrayBuffer) {
-    return arrayBufferToBase64(pubKeyCred)
+    return arrayBufferToBase64(pubKeyCred);
   }
 
   if (pubKeyCred instanceof Object) {
     let obj = {};
 
     for (let key in pubKeyCred) {
-      obj[key] = publicKeyCredentialToJSON(pubKeyCred[key])
+      obj[key] = publicKeyCredentialToJSON(pubKeyCred[key]);
     }
 
-    return obj
+    return obj;
   }
 
-  return pubKeyCred
-}
+  return pubKeyCred;
+};

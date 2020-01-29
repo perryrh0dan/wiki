@@ -8,11 +8,11 @@ export class SearchDocumentsPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     return items.filter(it => {
       if (it.title && it.title.toLowerCase().includes(searchText)) {
-        return true
+        return true;
       } else if (it.subtitle && it.subtitle.toLowerCase().includes(searchText)) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     });
   }
@@ -25,7 +25,7 @@ export class SearchStringsPipe implements PipeTransform {
     if (!searchText) return items;
     searchText = searchText.toLowerCase();
     return items.filter(it => {
-      return it.toLowerCase().includes(searchText)
-    })
+      return it.toLowerCase().includes(searchText);
+    });
   }
 }

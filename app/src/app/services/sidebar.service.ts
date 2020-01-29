@@ -9,7 +9,7 @@ enum SidebarState {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SidebarService {
   private stateSubject: BehaviorSubject<SidebarState>;

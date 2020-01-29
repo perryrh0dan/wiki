@@ -8,7 +8,7 @@ describe('RoleCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoleCreateComponent ]
+      declarations: [ RoleCreateComponent ],
     })
     .compileComponents();
   }));

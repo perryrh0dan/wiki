@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.less']
+  styleUrls: ['./tags.component.less'],
 })
 export class TagsComponent implements OnInit {
   faTimes = faTimes
@@ -34,26 +34,26 @@ export class TagsComponent implements OnInit {
     private documentService: DocumentService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const tags = params.get('tags')
+      const tags = params.get('tags');
       if (tags) {
-        this.selectedTags = tags.split(',')
+        this.selectedTags = tags.split(',');
       }
-    })
-    this.loadTags()
-    this.loadDocuments()
+    });
+    this.loadTags();
+    this.loadDocuments();
     // TODO this is not good
-    this.location.replaceState(this.createPath())
+    this.location.replaceState(this.createPath());
   }
 
   loadTags(): void {
     this.documentService.getTags().subscribe(tags => {
-      this.availableTags = tags.sort((one, two) => { return one > two ? 1 : -1 });
-    })
+      this.availableTags = tags.sort((one, two) => { return one > two ? 1 : -1; });
+    });
   }
 
   loadDocuments(): void {
@@ -62,11 +62,11 @@ export class TagsComponent implements OnInit {
       this.documentService.getDocumentsByTags(this.selectedTags).subscribe(docs => {
         this.isLoading = false;
         this.documents = docs;
-        this.orderBy()
+        this.orderBy();
       },
         error => {
           this.isLoading = false;
-        })
+        });
     } else {
       this.documents = [];
     }
@@ -75,29 +75,29 @@ export class TagsComponent implements OnInit {
   toggleTag(event, tag: string): void {
     event.preventDefault();
     if (this.selectedTags.includes(tag)) {
-      this.removeTag(tag)
+      this.removeTag(tag);
     } else {
-      this.addTag(tag)
+      this.addTag(tag);
     }
   }
 
   clearSelection() {
     this.selectedTags = [];
     this.documents = [];
-    this.location.replaceState(this.createPath())
+    this.location.replaceState(this.createPath());
   }
 
   addTag(tag: string): void {
-    this.selectedTags.push(tag)
-    this.location.replaceState(this.createPath())
-    this.loadDocuments()
+    this.selectedTags.push(tag);
+    this.location.replaceState(this.createPath());
+    this.loadDocuments();
   }
 
   removeTag(tag): void {
-    const index = this.selectedTags.indexOf(tag)
-    this.selectedTags.splice(index, 1)
-    this.location.replaceState(this.createPath())
-    this.loadDocuments()
+    const index = this.selectedTags.indexOf(tag);
+    this.selectedTags.splice(index, 1);
+    this.location.replaceState(this.createPath());
+    this.loadDocuments();
   }
 
   orderBy(): void {
@@ -107,7 +107,7 @@ export class TagsComponent implements OnInit {
       } else {
         return one[this.sortProperty] < two[this.sortProperty] ? 1 : -1;
       }
-    })
+    });
   }
 
   public setDirection(value: string): void {
@@ -116,12 +116,12 @@ export class TagsComponent implements OnInit {
   }
 
   open(doc): void {
-    this.router.navigate(['document', doc._id])
+    this.router.navigate(['document', doc._id]);
   }
 
   private createPath(): string {
-    const tags = this.selectedTags.join(',')
-    const sTags = encodeURIComponent(tags)
+    const tags = this.selectedTags.join(',');
+    const sTags = encodeURIComponent(tags);
     const path = `/tags;tags=${sTags}`;
     return path;
   }
