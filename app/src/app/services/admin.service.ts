@@ -1,81 +1,82 @@
-import { Injectable, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { Role } from '../models/role';
 import { User } from '../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: "root",
+    providedIn: 'root',
 })
 export class AdminService {
 
-    constructor(
+    public constructor(
         @Inject(APP_CONFIG) private config: AppConfig,
         private http: HttpClient,
     ) { }
 
-    getUsers() {
+    public getUsers(): Observable<User[]> {
         return this.http.get<User[]>(`${this.config.apiEndpoint}/admin/users`);
     }
 
-    getUser(id) {
+    public getUser(id: string): Observable<User> {
         return this.http.get<User>(`${this.config.apiEndpoint}/admin/users/${id}`);
     }
 
-    createUser(user) {
+    public createUser(user: any): Observable<User> {
         return this.http.post<User>(`${this.config.apiEndpoint}/admin/users`, { user });
     }
 
-    deleteUser(id) {
-        return this.http.delete(`${this.config.apiEndpoint}/admin/users/${id}`);
+    public deleteUser(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.config.apiEndpoint}/admin/users/${id}`);
     }
 
-    editUser(user) {
-        return this.http.post(`${this.config.apiEndpoint}/admin/users/${user._id}`, { user });
+    public editUser(user: any): Observable<void> {
+        return this.http.post<void>(`${this.config.apiEndpoint}/admin/users/${user._id}`, { user });
     }
 
-    getRoles() {
+    public getRoles(): Observable<Role[]> {
         return this.http.get<Role[]>(`${this.config.apiEndpoint}/admin/roles`);
     }
 
-    getRole(id) {
+    public getRole(id: string): Observable<Role> {
         return this.http.get<Role>(`${this.config.apiEndpoint}/admin/roles/${id}`);
     }
 
-    createRole(name) {
+    public createRole(name: string): Observable<Role> {
         return this.http.post<Role>(`${this.config.apiEndpoint}/admin/roles`, { name: name });
     }
 
-    deleteRole(id) {
-        return this.http.delete(`${this.config.apiEndpoint}/admin/roles/${id}`);
+    public deleteRole(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.config.apiEndpoint}/admin/roles/${id}`);
     }
 
-    editRole(role) {
-        return this.http.post(`${this.config.apiEndpoint}/admin/roles/${role._id}`, { role });
+    public editRole(role: Role): Observable<void> {
+        return this.http.post<void>(`${this.config.apiEndpoint}/admin/roles/${role._id}`, { role });
     }
 
-    getStatus() {
+    public getStatus(): Observable<any> {
         return this.http.get<any>(`${this.config.apiEndpoint}/admin/statistic`);
     }
 
-    closeAllSessions() {
+    public closeAllSessions(): Observable<any> {
         return this.http.post(`${this.config.apiEndpoint}/admin/system/sessions/kill`, {});
     }
 
-    getSystemInfo() {
+    public getSystemInfo(): Observable<any> {
         return this.http.get<any>(`${this.config.apiEndpoint}/admin/system`);
     }
 
-    backup() {
-        return this.http.post(`${this.config.apiEndpoint}/admin/system/backup`, { });
+    public backup(): Observable<void> {
+        return this.http.post<void>(`${this.config.apiEndpoint}/admin/system/backup`, { });
     }
 
-    getLogs() {
+    public getLogs(): Observable<any> {
         return this.http.get<any>(`${this.config.apiEndpoint}/admin/logs`);
-    }   
+    }
 
-    getLog(id) {
-        return this.http.get(`${this.config.apiEndpoint}/admin/logs/${id}`, { responseType: 'arraybuffer' });
+    public getLog(id: string): Observable<any> {
+        return this.http.get<any>(`${this.config.apiEndpoint}/admin/logs/${id}`, { responseType: 'arraybuffer' });
     }
 }
