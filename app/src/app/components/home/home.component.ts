@@ -7,29 +7,29 @@ import { DocumentService } from 'src/app/services/document.service';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  faHeart = faHeart
+  public faHeart = faHeart;
 
-  favorites: Array<any> = new Array<any>()
+  public favorites: Array<any> = new Array<any>()
 
-  constructor(
+  public constructor(
     private router: Router,
     private notifyService: NotificationService,
     private siteService: SiteService,
     private documentService: DocumentService,
-  ) { 
+  ) {
     this.siteService.setState(sites.home);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadFavorites();
   }
 
-  loadFavorites(): void {
+  public loadFavorites(): void {
     this.documentService.getFavorites().subscribe(data => {
       this.favorites = data;
     },error => {
@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDocument(id) {
+  public openDocument(id): void {
     this.router.navigate(['document', id]);
   }
 
-  toggleFavorite(event, id) {
+  public toggleFavorite(event, id): void {
     this.documentService.toggleFavorite(id).subscribe(() =>{
       this.loadFavorites();
     });

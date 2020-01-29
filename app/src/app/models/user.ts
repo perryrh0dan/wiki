@@ -1,11 +1,11 @@
 export class User {
-  _id: String;
-  email: String;
-  password: String;
-  name: String;
-  roles: String[];
+  _id: string;
+  email: string;
+  password: string;
+  name: string;
+  roles: string[];
   rights: [];
-  masterrole: String;
+  masterrole: string;
   authenticators: [];
   createdAt: Date;
   updatedAt: Date;

@@ -36,11 +36,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
   private loadingSubscription: Subscription
   public state: sites
   public sitesStatus: typeof sites = sites
-  public query: String = ''
+  public query: string = ''
   public searchresults: Array<any> = new Array<any>();
-  public wasInside: Boolean = false
+  public wasInside: boolean = false
   public document: Document
-  public loading: Boolean
+  public loading: boolean
   public selectedSearchResult: number = -1;
 
   public constructor(

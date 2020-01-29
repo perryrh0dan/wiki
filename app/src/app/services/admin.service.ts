@@ -77,6 +77,6 @@ export class AdminService {
     }
 
     public getLog(id: string): Observable<any> {
-        return this.http.get<any>(`${this.config.apiEndpoint}/admin/logs/${id}`, { responseType: 'arraybuffer' });
+        return this.http.get(`${this.config.apiEndpoint}/admin/logs/${id}`, { responseType: 'arraybuffer' });
     }
 }

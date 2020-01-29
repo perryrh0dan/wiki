@@ -58,7 +58,8 @@ $accent: (50 : #e3effa,
     A700 : #000000,
   ));
 $warn: mat-palette($mat-orange);
-$background-color: #121212;
+$background-color: #393939;
+$foreground-color: #E1E1E1;
 
 $dark-theme: mat-light-theme($primary, $accent, $warn);
 
@@ -88,5 +89,5 @@ $dark-theme: map_merge($dark-theme, (background: $background));
   );
 };
 
-$foreground: light-theme-foreground(#E1E1E1);
+$foreground: light-theme-foreground($foreground-color);
 $dark-theme: map-merge($dark-theme, (foreground: $foreground));

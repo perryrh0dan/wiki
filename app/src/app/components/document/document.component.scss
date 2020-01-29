@@ -1,168 +1,172 @@
-.document-component {
-  height: calc(100vh - 50px);
-  overflow: auto;
-  scroll-behavior: smooth;
+@mixin theme-document($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
 
-  .layout-row {
-    display: flex;
-    flex-direction: row
-  }
+  document .document-component {
+    height: calc(100vh - 50px);
+    overflow: auto;
+    scroll-behavior: smooth;
 
-  .content-list {
-    max-width: 16.66%;
-    height: min-content;
-    flex: 1;
-    background-color: #f5f5f5;
-    font-size: 13px;
+    .content {
+      max-width: 83.34%;
+      flex: 1;
+    }
 
-    .content-header {
+    .layout-row {
       display: flex;
-      flex-flow: row;
-      padding: 20px;
-      height: 100px;
-      background-color: #fafafa;
-      border-bottom: 1px solid #eee;
+      flex-direction: row
+    }
 
-      .meta {
+    .content-list {
+      max-width: 16.66%;
+      height: min-content;
+      flex: 1;
+      background-color: rgba(0,0,0,0.05);
+      font-size: 13px;
+
+      .content-header {
         display: flex;
-        flex-flow: column;
-      }
+        flex-flow: row;
+        padding: 20px;
+        height: 100px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
 
-      .favorite {
-        display: flex;
-        flex-grow: 1;
-        align-items: center;
-        justify-content: center;
+        .meta {
+          display: flex;
+          flex-flow: column;
+        }
 
-        fa-icon {
-          transition: 0.5s;
-          color: transparent;
-          cursor: pointer;
+        .favorite {
+          display: flex;
+          flex-grow: 1;
+          align-items: center;
+          justify-content: center;
 
-          svg {
-            stroke: red;
-            stroke-width: 1.8em;
-          }
+          fa-icon {
+            transition: 0.5s;
+            color: transparent;
+            cursor: pointer;
 
-          &:hover {
-            color: red;
-          }
-
-          &.active {
-            color: red;
+            svg {
+              stroke: red;
+              stroke-width: 1.8em;
+            }
 
             &:hover {
-              color: transparent;
+              color: red;
+            }
 
-              svg {
-                stroke: red;
-                stroke-width: 1.8em;
+            &.active {
+              color: red;
+
+              &:hover {
+                color: transparent;
+
+                svg {
+                  stroke: red;
+                  stroke-width: 1.8em;
+                }
               }
             }
           }
         }
       }
-    }
 
-    .tags {
-      display: flex;
-      flex-flow: row wrap;
-      padding-top: 10px;
-      padding-left: 20px;
-      padding-right: 20px;
+      .tags {
+        display: flex;
+        flex-flow: row wrap;
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
 
-      .placeholder {
-        padding: 1px;
+        .placeholder {
+          padding: 1px;
 
-        .tag {
-          cursor: pointer;
-          color: white;
-          background-color: #1976d2;
-          border-radius: 10px;
-          padding-left: 10px;
-          padding-right: 10px;
+          .tag {
+            cursor: pointer;
+            color: white;
+            background-color: #1976d2;
+            border-radius: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+        }
+      }
+
+      .subheader {
+        padding: 8px 20px;
+        font-weight: 530;
+        color: #1976d2 !important;
+        caret-color: #1976d2 !important;
+      }
+
+      .divider {
+        margin: 0 0 0 20px;
+        border-top: none;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+      }
+
+      .content-item {
+        padding: 5px 0px 5px 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05)
+        }
+      }
+
+      .subcontent {
+        .content-item {
+          padding: 5px 0px 5px 30px;
+        }
+
+        .divider {
+          margin: 0 0 0 30px;
         }
       }
     }
 
-    .subheader {
-      padding: 8px 20px;
-      font-weight: 530;
-      color: #1976d2 !important;
-      caret-color: #1976d2 !important;
-    }
 
-    .divider {
-      margin: 0 0 0 20px;
-      border-top: none;
-      border-bottom: 1px solid rgba(0, 0, 0, .1);
-    }
 
-    .content-item {
-      padding: 5px 0px 5px 20px;
-      cursor: pointer;
+    @media screen and (max-width: 1700px) {
+      .content-list {
+        max-width: 25%;
+      }
 
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.05)
+      .content {
+        max-width: 75%;
       }
     }
 
-    .subcontent {
-      .content-item {
-        padding: 5px 0px 5px 30px;
+    @media screen and (max-width: 1300px) {
+      .content-list {
+        display: none
       }
 
-      .divider {
-        margin: 0 0 0 30px;
+      .content {
+        max-width: 100%;
       }
     }
-  }
 
-  .content {
-    max-width: 83.34%;
-    font-size: 14px;
-    color: #616161;
-    flex: 1;
+    .scrollup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background-color: #1976d2;
+      color: white;
+      box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 
-    @import '../../styles/markdown.scss';
-  }
-
-  @media screen and (max-width: 1700px) {
-    .content-list {
-      max-width: 25%;
+      &:focus {
+        // remove blue outline when clicked
+        outline: 0;
+      }
     }
-
-    .content {
-      max-width: 75%;
-    }
-  }
-
-  @media screen and (max-width: 1300px) {
-    .content-list {
-      display: none
-    }
-
-    .content {
-      max-width: 100%;
-    }
-  }
-}
-
-.scrollup {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  background-color: #1976d2;
-  color: white;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
-
-  &:focus {
-    // remove blue outline when clicked
-    outline: 0;
   }
 }

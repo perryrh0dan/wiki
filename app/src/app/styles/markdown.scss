@@ -1,136 +1,145 @@
-markdown {
-  overflow-x: scroll;
+@mixin theme-markdown($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
 
-  >p,
-  >h2,
-  >h3,
-  >h4,
-  >h5,
-  >div,
-  >span {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  markdown {
+    overflow-x: scroll;
+    font-size: 14px;
+    color: map-get($foreground, base);
 
-  pre,
-  table {
-    margin: 10px 20px;
-  }
-
-  pre>code {
-    background-color: #31465d
-  }
-
-  pre[class*="language-"] {
-    background-color: #31465d;
-
-    &::-webkit-scrollbar {
-      border-bottom-left-radius: 0.3em;
-      border-bottom-right-radius: 0.3em;
+    >p,
+    >h2,
+    >h3,
+    >h4,
+    >h5,
+    >div,
+    >span {
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
-    &::-webkit-scrollbar-thumb {
-      border-bottom-left-radius: 0.3em;
-      border-bottom-right-radius: 0.3em;
-    }
-
-    &::-webkit-scrollbar-track {
-      border-bottom-left-radius: 0.3em;
-      border-bottom-right-radius: 0.3em;
-    }
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  h1 {
-    // background: linear-gradient(to bottom, #eceff1, #e8eaf6);
-    // border-bottom: 2px solid #c5cae9;
-    font-size: 20px;
-    color: #3f51b5;
-    padding: 8px 20px;
-    font-weight: 500;
-    position: relative;
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: -webkit-gradient(linear, left top, right top, from(#1976d2), to(rgba(25, 118, 210, 0)));
-      background: linear-gradient(90deg, #1976d2, rgba(25, 118, 210, 0));
-    }
-  }
-
-  h2 {
-    font-size: 18px;
-    margin-left: 20px;
-    padding: 8px 0 0;
-    color: #424242;
-    position: relative;
-    margin-top: 1rem;
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: -webkit-gradient(linear, left top, right top, from(#616161), to(rgba(97, 97, 97, 0)));
-      background: linear-gradient(90deg, #616161, rgba(97, 97, 97, 0));
-    }
-  }
-
-  h3 {
-    font-size: 16px;
-    margin-left: 20px;
-    padding: 8px 0 0;
-    color: #616161;
-    position: relative;
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: -webkit-gradient(linear, left top, right top, from(#9e9e9e), to(hsla(0, 0%, 62%, 0)));
-      background: linear-gradient(90deg, #9e9e9e, hsla(0, 0%, 62%, 0));
-    }
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-
+    pre,
     table {
-      thead {
-        th {
-          padding: .75rem;
-          border-bottom: 1px solid #9e9e9e;
-          color: #757575;
-          padding: 5px 15px;
-        }
+      margin: 15px 0px;
+    }
+
+    pre>code {
+      background-color: #31465d
+    }
+
+    pre[class*="language-"] {
+      background-color: #31465d;
+
+      &::-webkit-scrollbar {
+        border-bottom-left-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
       }
 
-      tbody {
-        td {
-          border-bottom: 1px solid #eee;
-          padding: 5px 15px;
+      &::-webkit-scrollbar-thumb {
+        border-bottom-left-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
+      }
+
+      &::-webkit-scrollbar-track {
+        border-bottom-left-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
+      }
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    h1 {
+      // background: linear-gradient(to bottom, #eceff1, #e8eaf6);
+      // border-bottom: 2px solid #c5cae9;
+      font-size: 20px;
+      color: map-get($accent, 500);
+      padding: 8px 20px;
+      font-weight: 500;
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: -webkit-gradient(linear, left top, right top, from(#1976d2), to(rgba(25, 118, 210, 0)));
+        background: linear-gradient(90deg, #1976d2, rgba(25, 118, 210, 0));
+      }
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-left: 20px;
+      padding: 8px 0 0;
+      color: map-get($accent, 600);
+      position: relative;
+      margin-top: 1rem;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: -webkit-gradient(linear, left top, right top, from(#616161), to(rgba(97, 97, 97, 0)));
+        background: linear-gradient(90deg, #616161, rgba(97, 97, 97, 0));
+      }
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-left: 20px;
+      padding: 8px 0 0;
+      color: map-get($accent, 700);
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: -webkit-gradient(linear, left top, right top, from(#9e9e9e), to(hsla(0, 0%, 62%, 0)));
+        background: linear-gradient(90deg, #9e9e9e, hsla(0, 0%, 62%, 0));
+      }
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+
+      table {
+        color: map-get($foreground, base);
+
+        thead {
+          th {
+            padding: .75rem;
+            border-bottom: 1px solid #9e9e9e;
+            padding: 5px 15px;
+          }
+        }
+
+        tbody {
+          td {
+            border-bottom: 1px solid #eee;
+            padding: 5px 15px;
+          }
         }
       }
     }
-  }
 
-  code {
-    font-size: 100%;
-  }
+    code {
+      font-size: 100%;
+    }
 
-  ::-webkit-scrollbar {
-    height: 6px;
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
   }
 }

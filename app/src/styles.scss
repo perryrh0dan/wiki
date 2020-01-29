@@ -7,16 +7,22 @@
 @import './app/themes/default-theme.scss';
 @import './app/themes/dark-theme.scss';
 
-@import './app/themes/general.scss';
+@import './app/styles/general.scss';
+@import './app/styles/markdown.scss';
 @import './app/components/navbar/navbar.component.scss';
 @import './app/components/sidebar/sidebar.component.scss';
+@import './app/components/home/home.component.scss';
+@import './app/components/document/document.component.scss';
 @import './app/components/settings/system/system.component.scss';
 
 
 @mixin custom-component-theme($theme) {
   @include theme-general($theme);
+  @include theme-markdown($theme);
   @include theme-navbar($theme);
   @include theme-sidebar($theme);
+  @include theme-home($theme);
+  @include theme-document($theme);
   @include theme-system($theme);
 }
 

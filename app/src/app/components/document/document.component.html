@@ -43,6 +43,5 @@
       </div>
     </div>
   </div>
+  <button *ngIf="scrollupVisible" (click)="scrollUp()" class="scrollup" [@buttonEnterAnimation]><fa-icon [icon]="faArrowUp"></fa-icon></button>
 </div>
-<button *ngIf="scrollupVisible" (click)="scrollUp()" class="scrollup" [@buttonEnterAnimation]><fa-icon [icon]="faArrowUp"></fa-icon></button>
-
