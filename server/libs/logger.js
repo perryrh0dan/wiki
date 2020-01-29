@@ -13,14 +13,14 @@ module.exports = (isDebug, processName) => {
     message,
     timestamp
   }) => {
-    return `${timestamp} - ${level}: [${processName}] ${message}`
+    return `${timestamp} - ${processName}: [${level}] ${message}`
   })
 
   // Console and File
   let logger = winston.createLogger({
     level: (isDebug) ? 'debug' : 'info',
     format: winston.format.combine(
-      winston.format.timestamp(),
+      winston.format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
       appendProcess
     ),
     transports: [
