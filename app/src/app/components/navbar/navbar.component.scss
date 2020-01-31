@@ -2,7 +2,7 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
 
-  .navbar {
+  navbar .navbar {
     height: 50px;
     min-height: 50px;
     background-color: mat-color($primary, 500) !important;

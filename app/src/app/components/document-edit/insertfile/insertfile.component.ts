@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UploadService } from 'src/app/services/upload.service';
 import { AppConfig, APP_CONFIG } from 'src/app/app-config.module';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 

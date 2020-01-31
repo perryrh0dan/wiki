@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as _ from "lodash";
+import find from 'lodash.find';
 
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { User } from '../models/user';
@@ -11,11 +11,11 @@ import { MasterRole } from '../models/masterrole';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  userupdate = this.socket.fromEvent<Document>('updateuser');
+  private userupdate = this.socket.fromEvent<Document>('updateuser');
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(
+  public constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient,
     private socket: Socket,
@@ -31,7 +31,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
+  public login(email: string, password: string) {
     return this.http.post<User>(`${this.config.apiEndpoint}/auth/login`, { email, password })
       .pipe(map(user => {
         if (user) {
@@ -43,7 +43,7 @@ export class AuthenticationService {
       }));
   }
 
-  logout(client: boolean = false): Observable<void> {
+  public logout(client: boolean = false): Observable<void> {
     if (!client) {
       return this.http.post(`${this.config.apiEndpoint}/auth/logout`, null).pipe(map(() => {
         this.currentUserSubject.next(null);
@@ -55,11 +55,11 @@ export class AuthenticationService {
     }
   }
 
-  getRole() {
+  public getRole() {
     if (this.currentUserSubject.value) return this.currentUserSubject.value.masterrole;
   }
 
-  reloadUser() {
+  public reloadUser(): void {
     this.http.get<User>(`${this.config.apiEndpoint}/auth/profile`).subscribe(user => {
       if (user) {
         user.masterrole = this.getMasterRole(user);
@@ -69,12 +69,12 @@ export class AuthenticationService {
     });
   }
 
-  getMasterRole(user) {
+  public getMasterRole(user): string {
     let rights = [{}];
     user.roles.forEach(role => {
       rights = rights.concat(role.rights);
     });
-    if (_.find(rights, {
+    if (find(rights, {
       role: 'admin',
     })) {
       return MasterRole.Admin;
@@ -82,19 +82,19 @@ export class AuthenticationService {
     return MasterRole.User;
   }
 
-  webauthnLogin(username) {
+  public webauthnLogin(username: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiEndpoint}/auth/webauthn/login`, { username: username });
   }
 
-  webauthnRegister(userID) {
+  public webauthnRegister(userID: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/register`, { userID: userID });
   }
 
-  webauthnRegisterResponse(body) {
+  public webauthnRegisterResponse(body) {
     return this.http.post(`${this.config.apiEndpoint}/admin/users/authenticator/response`, body);
   }
 
-  webauthnLoginResponse(body) {
+  public webauthnLoginResponse(body) {
     return this.http.post<User>(`${this.config.apiEndpoint}/auth/webauthn/response`, body)
       .pipe(map(user => {
         if (user) {
@@ -106,7 +106,7 @@ export class AuthenticationService {
       }));
   }
 
-  webauthnUnregister(userID, credID) {
+  public webauthnUnregister(userID, credID) {
     return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/unregister`, { userID: userID, credID: credID });
   }
 }

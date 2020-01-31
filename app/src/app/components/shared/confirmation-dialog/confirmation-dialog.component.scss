@@ -1,0 +1,10 @@
+@mixin theme-confirmation-dialog($theme) {
+  confirmation-dialog .confirmation {
+    display: flex;
+    flex-direction: column;
+
+    .button {
+      margin-right: 10px;
+    }
+  }
+}

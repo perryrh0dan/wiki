@@ -19,7 +19,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
 import { faPlus, faEdit, faSave, faTrashAlt, faTimes, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })

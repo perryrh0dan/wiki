@@ -1,6 +1,6 @@
 <div class="create">
   <h1 mat-dialog-title>Create Document</h1>
-  
+
   <mat-dialog-content>
     <mat-form-field>
       <mat-select [(ngModel)]="selectedTemplate" matInput placeholder="Template">
@@ -14,7 +14,7 @@
       <input [(ngModel)]="path" matInput placeholder="Path">
     </mat-form-field>
   </mat-dialog-content>
-  
+
   <mat-dialog-actions>
     <button class="button is-teal is-outlined" (click)="create()">Create</button>
     <button class="button is-teal is-outlined" (click)="cancel()">Cancel</button>

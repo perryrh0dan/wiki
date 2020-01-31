@@ -1,5 +1,5 @@
 <div class="app" [ngClass]="{'dark-theme' : isDarkTheme, 'default-theme' : !isDarkTheme }">
-  <app-navbar *ngIf="user"></app-navbar>
+  <navbar *ngIf="user"></navbar>
   <div class="wrapper">
     <div class="blur" *ngIf="blurVisible" (click)="closeSidebar()" [@blurEnterAnimation]></div>
     <sidebar *ngIf="user" class="sidebar"></sidebar>

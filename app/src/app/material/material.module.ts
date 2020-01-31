@@ -1,28 +1,29 @@
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
-import * as Material from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
-    Material.MatDialogModule,
-    Material.MatFormFieldModule,
-    Material.MatInputModule,
-    Material.MatSelectModule,
-    Material.MatCardModule,
-    Material.MatButtonModule,
-    Material.MatToolbarModule,
-    Material.MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatTooltipModule,
   ],
   exports: [
-    Material.MatDialogModule,
-    Material.MatFormFieldModule,
-    Material.MatInputModule,
-    Material.MatSelectModule,
-    Material.MatCardModule,
-    Material.MatButtonModule,
-    Material.MatToolbarModule,
-    Material.MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatTooltipModule,
   ],
   providers: [],
   declarations: [],

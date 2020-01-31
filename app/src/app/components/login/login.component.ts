@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
 import { publicKeyCredentialToJSON, preformatGetAssertReq } from 'src/app/helper/webauthn';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subscription: Subscription
