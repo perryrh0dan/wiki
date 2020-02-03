@@ -83,10 +83,11 @@ export class AuthenticationService {
   }
 
   public updateSettings(key: string, value: any) {
-    const updatedUser = this.currentUserValue.settings
+    const updatedUser = this.currentUserValue
+    updatedUser.settings = updatedUser.settings ? updatedUser.settings : {}
     updatedUser.settings[key] = value
     return this.http.post(`${this.config.apiEndpoint}/profile/settings`, updatedUser.settings).pipe(map(() => {
-      localStorage.setItem('currentUser', updatedUser)
+      localStorage.setItem('currentUser', JSON.stringify(updatedUser))
     }));
   }
 

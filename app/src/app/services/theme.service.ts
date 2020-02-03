@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticationService } from './auth.service';
 import { ProfileService } from './profile.service';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +26,7 @@ export class ThemeService {
   }
 
   private setDarkTheme(isDarkTheme: boolean): void {
-    this.profileService.updateSettings(this.settings, 'darkTheme', isDarkTheme).subscribe(() => {
+    this.authService.updateSettings('darkTheme', isDarkTheme).subscribe(() => {
       this.darkThemeSubject.next(isDarkTheme);
     })
   }
