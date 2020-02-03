@@ -83,12 +83,9 @@ export class AuthenticationService {
   }
 
   public updateSettings(key: string, value: any) {
-    const updatedUser = this.currentUserValue
-    updatedUser.settings = updatedUser.settings ? updatedUser.settings : {}
-    updatedUser.settings[key] = value
-    return this.http.post(`${this.config.apiEndpoint}/profile/settings`, updatedUser.settings).pipe(map(() => {
-      localStorage.setItem('currentUser', JSON.stringify(updatedUser))
-    }));
+    const settings = this.currentUserValue.settings ? this.currentUserValue.settings : {}
+    settings[key] = value
+    return this.http.post(`${this.config.apiEndpoint}/profile/settings`, settings)
   }
 
   public webauthnLogin(username: string): Observable<any> {
