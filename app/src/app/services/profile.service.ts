@@ -20,4 +20,13 @@ export class ProfileService {
     change(name, password?) {
         return this.http.post(`${this.config.apiEndpoint}/profile`, { name: name, password: password });
     }
+
+    loadSettings() {
+      return this.http.get(`${this.config.apiEndpoint}/profile/settings`);
+    }
+
+    updateSettings(settings: any, key: string, value: any) {
+      settings[key] = value;
+      return this.http.post(`${this.config.apiEndpoint}/profile/settings`, settings);
+    }
 }

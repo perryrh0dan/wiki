@@ -82,6 +82,14 @@ export class AuthenticationService {
     return MasterRole.User;
   }
 
+  public updateSettings(key: string, value: any) {
+    const updatedUser = this.currentUserValue.settings
+    updatedUser.settings[key] = value
+    return this.http.post(`${this.config.apiEndpoint}/profile/settings`, updatedUser.settings).pipe(map(() => {
+      localStorage.setItem('currentUser', updatedUser)
+    }));
+  }
+
   public webauthnLogin(username: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiEndpoint}/auth/webauthn/login`, { username: username });
   }

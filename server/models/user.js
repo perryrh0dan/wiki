@@ -18,6 +18,7 @@ let UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Role'
   }],
+  settings: Object,
   authenticators: [{
     fmt: {
       type: String

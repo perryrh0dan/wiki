@@ -7,7 +7,7 @@ profileRoutes.route('').get(function (req, res, next) {
   return res.status(200).send(req.user)
 })
 
-profileRoutes.route('').post(async function (req, res, next) {
+profileRoutes.route('').post(async function(req, res, next) {
   // check if user is logged in
   if (!req.user) {
     return res.status(401).send()
@@ -34,6 +34,31 @@ profileRoutes.route('').post(async function (req, res, next) {
     msg: 'OK',
     user: user
   })
+})
+
+profileRoutes.route('/settings').get(async function(req, res, next) {
+  if (!req.user) {
+    return res.status(401).send()
+  }
+
+  const user = await global.db.User.findById(req.user._id)
+
+  return res.status(200).json(user.settings)
+})
+
+profileRoutes.route('/settings').post(async function (req, res, next) {
+  if (!req.user) {
+    return res.status(401).send()
+  }
+
+  const user = await global.db.User.findById(req.user._id)
+
+  if (req.body) {
+    user.settings = req.body;
+    await user.save()
+  }
+
+  return res.status(200).send()
 })
 
 module.exports = profileRoutes

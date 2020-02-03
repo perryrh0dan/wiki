@@ -5,6 +5,7 @@ export class User {
   name: string;
   roles: string[];
   rights: [];
+  settings: any;
   masterrole: string;
   authenticators: [];
   createdAt: Date;

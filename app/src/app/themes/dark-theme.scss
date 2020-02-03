@@ -1,93 +1,116 @@
 // Color paletts
-$primary: (50: #e4e6ea,
-  100: #bcc1cb,
-  200: #8f98a8,
-  300: #626f85,
-  400: #40506b,
-  500: #1e3151,
-  600: #1a2c4a,
-  700: #162540,
-  800: #121f37,
-  900: #0a1327,
-  A100: #648eff,
-  A200: #3169ff,
-  A400: #0045fd,
-  A700: #003ee4,
-  contrast: (50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #ffffff,
-    A400 : #ffffff,
-    A700 : #ffffff,
-  ));
-$accent: (50 : #e3effa,
-  100 : #bad6f2,
-  200 : #8cbbe9,
-  300 : #5e9fe0,
-  400 : #3c8bd9,
-  500 : #1976d2,
-  600 : #166ecd,
-  700 : #1263c7,
-  800 : #0e59c1,
-  900 : #0846b6,
-  A100 : #e0eaff,
-  A200 : #adc6ff,
-  A400 : #7aa3ff,
-  A700 : #6191ff,
-  contrast: (50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  ));
+$primary: (
+  50: #53b59d,
+  100: #48a68f,
+  200: #409480,
+  300: #388371,
+  400: #317161,
+  500: #295f52,
+  600: #214d43,
+  700: #1a3b33,
+  800: #122a24,
+  900: #0a1814,
+  A100: #65bca7,
+  A200: #76c4b1,
+  A400: #88ccbb,
+  A700: #030605,
+  contrast:
+    (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #ffffff,
+      400: #ffffff,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #ffffff,
+      A400: #ffffff,
+      A700: #ffffff
+    )
+);
+$accent: (
+  50: #000000,
+  100: #001513,
+  200: #002f2b,
+  300: #004842,
+  400: #006259,
+  500: #007b70,
+  600: #00ae9e,
+  700: #00c8b5,
+  800: #00e1cc,
+  900: #00fbe3,
+  A100: #00ae9e,
+  A200: #009587,
+  A400: #007b70,
+  A700: #15ffe9,
+  contrast:
+    (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #ffffff,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+);
 $warn: mat-palette($mat-orange);
 $background-color: #393939;
-$foreground-color: #E1E1E1;
+$foreground-color: #e1e1e1;
 
 $dark-theme: mat-light-theme($primary, $accent, $warn);
 
 // Insert custom background color
 $background: map-get($dark-theme, background);
-$background: map_merge($background, (background: $background-color));
+$background: map_merge(
+  $background,
+  (
+    background: $background-color
+  )
+);
 
 // Maps are immutable
-$dark-theme: map_merge($dark-theme, (background: $background));
+$dark-theme: map_merge(
+  $dark-theme,
+  (
+    background: $background
+  )
+);
 
 // Change font color
 @function light-theme-foreground($color) {
   @return (
-      base:              $color,
-      divider:           $black-12-opacity,
-      dividers:          $black-12-opacity,
-      disabled:          rgba($color, 0.38),
-      disabled-button:   rgba($color, 0.38),
-      disabled-text:     rgba($color, 0.38),
-      hint-text:         rgba($color, 0.38),
-      secondary-text:    rgba($color, 0.54),
-      icon:              rgba($color, 0.54),
-      icons:             rgba($color, 0.54),
-      text:              rgba($color, 0.87),
-      slider-off:        rgba($color, 0.26),
-      slider-off-active: rgba($color, 0.38),
+    base: $color,
+    divider: $black-12-opacity,
+    dividers: $black-12-opacity,
+    disabled: rgba($color, 0.38),
+    disabled-button: rgba($color, 0.38),
+    disabled-text: rgba($color, 0.38),
+    hint-text: rgba($color, 0.38),
+    secondary-text: rgba($color, 0.54),
+    icon: rgba($color, 0.54),
+    icons: rgba($color, 0.54),
+    text: rgba($color, 0.87),
+    slider-off: rgba($color, 0.26),
+    slider-off-active: rgba($color, 0.38)
   );
-};
+}
 
 $foreground: light-theme-foreground($foreground-color);
-$dark-theme: map-merge($dark-theme, (foreground: $foreground));
+$dark-theme: map-merge(
+  $dark-theme,
+  (
+    foreground: $foreground
+  )
+);
