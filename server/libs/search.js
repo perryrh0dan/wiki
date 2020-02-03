@@ -113,6 +113,13 @@ module.exports = {
     if (!this.active()) {
       return Promise.resolve()
     } else {
+      global.winston.debug(
+        'Added { title:' +
+        document.title +
+        ', path:' +
+        document._id +
+        ' } to search index'
+      )
       return self.client
         .index({
           index: 'wiki',
