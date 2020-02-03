@@ -9,7 +9,7 @@ RUN apk update && apk add --no-cache make git
 WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install @angular/cli@8.3.22 -g
-COPY .  /app
+COPY .  .
 RUN npm install --silent
 
 # Build with $env variable from outside

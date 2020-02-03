@@ -1,0 +1,23 @@
+@mixin theme-document-create($theme) {
+  document-create .create {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      border: none;
+    }
+
+    mat-dialog-content {
+      display: flex;
+      flex-flow: column;
+
+      mat-form-field {
+        width: 300px;
+      }
+    }
+
+    .button {
+      margin-right: 10px;
+    }
+  }
+}

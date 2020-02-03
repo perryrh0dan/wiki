@@ -3,11 +3,13 @@ import { UploadService } from 'src/app/services/upload.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ThemeService } from 'src/app/services/theme.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
-  selector: 'app-files-create',
+  selector: 'files-create',
   templateUrl: './files-create.component.html',
-  styleUrls: ['./files-create.component.less'],
+  styleUrls: ['./files-create.component.scss'],
 })
 export class FilesCreateComponent {
   public name = ''
@@ -18,7 +20,17 @@ export class FilesCreateComponent {
     private uploadService: UploadService,
     private loadingService: LoadingService,
     private notifySerivce: NotificationService,
-  ) { }
+    private overlayContainer: OverlayContainer,
+    private themeService: ThemeService,
+  ) {
+    this.themeService.isDarkTheme.subscribe((x: boolean) => {
+      this.setTheme(x ? 'dark-theme' : 'default-theme');
+    });
+  }
+
+  private setTheme(theme: string = 'default-theme'): void {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+  }
 
   public create(): void {
     this.loadingService.start();

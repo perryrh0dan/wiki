@@ -1,0 +1,44 @@
+2020-02-03 10:51:20 - SERVER: [info] Camelot Wiki is initializing...
+2020-02-03 10:51:20 - SERVER: [info] Checking data directories...
+2020-02-03 10:51:20 - SERVER: [info] Data and Repository directories are OK.
+2020-02-03 10:51:23 - SERVER: [info] Search is disabled
+2020-02-03 10:51:28 - SERVER: [info] HTTP server started successfully! [RUNNING]
+2020-02-03 10:51:29 - SERVER: [info] Connected to MongoDB instance.
+2020-02-03 10:51:29 - UPL_AGENT: [info] Starting initial file scan
+2020-02-03 10:51:29 - SERVER: [info] Starting initial document scan
+2020-02-03 10:52:41 - SERVER: [info] Finished initial document scan
+2020-02-03 10:52:41 - SERVER: [info] Starting tree update
+2020-02-03 10:52:41 - UPL_AGENT: [info] Finished initial file scan
+2020-02-03 10:52:41 - SERVER: [info] Finished tree update successfull
+2020-02-03 11:17:22 - SERVER: [info] Camelot Wiki is initializing...
+2020-02-03 11:17:23 - SERVER: [info] Checking data directories...
+2020-02-03 11:17:23 - SERVER: [info] Data and Repository directories are OK.
+2020-02-03 11:17:24 - SERVER: [info] Connecting to ElasticSearch Instance: localhost:9200
+2020-02-03 11:17:27 - SERVER: [info] HTTP server started successfully! [RUNNING]
+2020-02-03 11:17:27 - SERVER: [info] Connected to MongoDB instance.
+2020-02-03 11:17:27 - SERVER: [info] Searchindex already exists
+2020-02-03 11:17:27 - UPL_AGENT: [info] Starting initial file scan
+2020-02-03 11:17:27 - SERVER: [info] Starting initial document scan
+2020-02-03 11:17:27 - UPL_AGENT: [info] Finished initial file scan
+2020-02-03 11:17:27 - SERVER: [error] [cluster_block_exception] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+2020-02-03 11:17:27 - SERVER: [error] [cluster_block_exception] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+2020-02-03 11:17:27 - SERVER: [error] [cluster_block_exception] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+2020-02-03 11:17:27 - SERVER: [info] Finished initial document scan
+2020-02-03 11:17:27 - SERVER: [info] Starting tree update
+2020-02-03 11:17:27 - SERVER: [info] Finished tree update successfull
+2020-02-03 11:27:13 - SERVER: [info] Camelot Wiki is initializing...
+2020-02-03 11:27:13 - SERVER: [info] Checking data directories...
+2020-02-03 11:27:13 - SERVER: [info] Data and Repository directories are OK.
+2020-02-03 11:27:15 - SERVER: [info] Connecting to ElasticSearch Instance: localhost:9200
+2020-02-03 11:27:17 - SERVER: [info] HTTP server started successfully! [RUNNING]
+2020-02-03 11:27:17 - SERVER: [info] Searchindex already exists
+2020-02-03 11:27:17 - SERVER: [info] Connected to MongoDB instance.
+2020-02-03 11:27:18 - UPL_AGENT: [info] Starting initial file scan
+2020-02-03 11:27:18 - SERVER: [info] Starting initial document scan
+2020-02-03 11:29:00 - SERVER: [error] Request Timeout after 30000ms
+2020-02-03 11:29:03 - SERVER: [error] [cluster_block_exception] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+2020-02-03 11:29:03 - SERVER: [error] [cluster_block_exception] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];
+2020-02-03 11:29:03 - SERVER: [info] Finished initial document scan
+2020-02-03 11:29:03 - SERVER: [info] Starting tree update
+2020-02-03 11:29:04 - UPL_AGENT: [info] Finished initial file scan
+2020-02-03 11:29:04 - SERVER: [info] Finished tree update successfull

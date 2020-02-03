@@ -1,0 +1,20 @@
+@mixin theme-document-move($theme) {
+  document-move .move {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      border: none;
+    }
+
+    mat-form-field {
+      width: 300px;
+    }
+
+    .button {
+      margin-right: 10px;
+    }
+  }
+}
+
+
