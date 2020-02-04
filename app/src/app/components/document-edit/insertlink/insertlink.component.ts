@@ -1,28 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-insertlink',
+  selector: 'insert-link',
   templateUrl: './insertlink.component.html',
-  styleUrls: ['./insertlink.component.less'],
+  styleUrls: ['./insertlink.component.scss'],
 })
-export class InsertLinkComponent implements OnInit {
-  externalUrl: string = ''
-  internalPath: string = ''
+export class InsertLinkComponent {
+  public externalUrl: string = ''
+  public internalPath: string = ''
 
-  constructor(
+  public constructor(
     public dialogRef: MatDialogRef<InsertLinkComponent>,
   ) { }
 
-  ngOnInit() {
-
-  }
-
-  insert() {
+  public insert(): void {
     this.dialogRef.close({ url: '[](/document/)' });
   }
 
-  cancel() {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

@@ -22,15 +22,15 @@ import { InsertLinkComponent } from './insertlink/insertlink.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class DocumentEditComponent implements OnInit, OnDestroy {
-  @ViewChild('editor', { static: true }) editor: ElementRef;
+  @ViewChild('editor', { static: true }) private editor: ElementRef;
 
-  _documentSubscription: Subscription
-  document: Document
-  toolbar: any
-  preview = false
-  history: Array<string> = new Array<string>()
+  private documentSubscription: Subscription
+  public document: Document
+  public toolbar: Array<any>
+  public preview = false
+  public history: Array<string> = new Array<string>()
 
-  constructor(
+  public constructor(
     private documentService: DocumentService,
     private activatedRoute: ActivatedRoute,
     private notifyService: NotificationService,
@@ -110,7 +110,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     }];
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.activatedRoute.params.pipe(delay(0)).subscribe(params => {
       this.loadingService.start();
       this.documentService.loadDocument(params.id, false).subscribe(
@@ -123,46 +123,46 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
         },
       );
     });
-    this._documentSubscription = this.documentService.document.subscribe(doc => {
+    this.documentSubscription = this.documentService.document.subscribe(doc => {
       this.document = doc;
       if (!doc.content) return;
       this.editor.nativeElement.value = doc.content;
     });
   }
 
-  ngOnDestroy() {
-    this._documentSubscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this.documentSubscription.unsubscribe();
     this.documentService.clearDocument();
   }
 
-  writeValue(value: string): void {
+  public writeValue(value: string): void {
     this.editor.nativeElement.value = value;
   }
 
-  getValue(): string {
+  public getValue(): string {
     return this.editor.nativeElement.value;
   }
 
-  onChange(): void {
+  public onChange(): void {
     let value = this.getValue();
     this.document.content = value;
     this.updateHistory(value);
   }
 
-  updateHistory(value: string): void {
+  public updateHistory(value: string): void {
     this.history.push(value);
     if (this.history.length >= 100) {
       this.history.shift();
     }
   }
 
-  revertChange(): void {
+  public revertChange(): void {
     let value = this.history.pop();
     this.writeValue(value);
     this.document.content = value;
   }
 
-  action(event: Event, action: string) {
+  public action(event: Event, action: string): void {
     event.preventDefault();
     switch (action) {
       case 'bold':
@@ -202,7 +202,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  insert(text) {
+  private insert(text: string): void {
     if (this.editor) {
       const start = this.editor.nativeElement.selectionStart;
 
@@ -215,7 +215,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  surround(text) {
+  private surround(text: string): void {
     if (this.editor) {
       const start = this.editor.nativeElement.selectionStart;
       const end = this.editor.nativeElement.selectionEnd;
@@ -232,7 +232,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  insertLink() {
+  private insertLink(): void {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     this.dialog.open(InsertLinkComponent, dialogConfig).afterClosed().subscribe(response => {
@@ -240,7 +240,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  insertImage() {
+  private insertImage(): void {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = '70%';
@@ -255,7 +255,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  save() {
+  private save(): void {
     this.loadingService.start();
     this.documentService.editDocument().subscribe(() => {
       this.loadingService.stop();
@@ -264,12 +264,12 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
   }
 
   // Editor key events
-  keyDownEditor(event: KeyboardEvent) {
+  public keyDownEditor(event: KeyboardEvent): void {
     const keyCode = event.keyCode || event.which;
 
     if (keyCode == 9) {
       event.preventDefault();
-      this.insert("\t");
+      this.insert('\t');
     }
 
     // Strg + b
@@ -285,7 +285,7 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
 
   // Keyevent for the whole route
   @HostListener('keydown', ['$event'])
-  public onKeyDown(e) {
+  public onKeyDown(e: any): void {
     if (e.ctrlKey && e.keyCode == 83) {
       e.preventDefault();
       this.save();

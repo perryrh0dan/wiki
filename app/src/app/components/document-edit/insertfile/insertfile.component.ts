@@ -6,26 +6,26 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-insertfile',
+  selector: 'insert-file',
   templateUrl: './insertfile.component.html',
-  styleUrls: ['./insertfile.component.less'],
+  styleUrls: ['./insertfile.component.scss'],
 })
 export class InsertFileComponent implements OnInit {
-  faFolder = faFolder;
+  public faFolder = faFolder;
 
-  type = 'image'
-  folders: []
-  images: any[]
-  selectedFolder: any = '';
-  selectedFiles: Array<any> = new Array<any>();
+  public type = 'image'
+  public folders: []
+  public images: any[]
+  public selectedFolder: any = '';
+  private selectedFiles: Array<any> = new Array<any>();
 
-  constructor(
+  public constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     public dialogRef: MatDialogRef<InsertFileComponent>,
     private uploadService: UploadService,
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.uploadService.loadFolders().subscribe(folders => {
       this.folders = folders;
     });
@@ -36,7 +36,7 @@ export class InsertFileComponent implements OnInit {
     }
   }
 
-  openFolder(name) {
+  public openFolder(name: string): void {
     this.selectedFolder = name;
     this.uploadService.loadImages(name).subscribe(images => {
       this.images = images;
@@ -46,7 +46,7 @@ export class InsertFileComponent implements OnInit {
     });
   }
 
-  select(file) {
+  public select(file: any): void {
     if (this.checkSelectedFile(file)) {
       const index = this.selectedFiles.indexOf(file);
       this.selectedFiles.splice(index, 1);
@@ -55,7 +55,7 @@ export class InsertFileComponent implements OnInit {
     }
   }
 
-  add() {
+  public add(): void {
     const urls = Array<any>();
     this.selectedFiles.forEach(file => {
       const url = this.buildFileUrl(file);
@@ -64,14 +64,14 @@ export class InsertFileComponent implements OnInit {
     this.dialogRef.close({ urls: urls });
   }
 
-  buildFileUrl(file) {
+  private buildFileUrl(file: any): string {
     const folder = file.folder !== 'f:' ? file.folder.substring(2, file.folder.length) + '/' : '';
     const url = this.config.apiEndpoint + '/uploads/' + folder + file.filename;
     const markdown = `![${file.filename}](${url}) "${file.filename}"`;
     return markdown;
   }
 
-  checkSelectedFile(file) {
+  public checkSelectedFile(file: any): boolean {
     for (let i = 0; i < this.selectedFiles.length; i++) {
       if (file.filename === this.selectedFiles[i].filename && file.folder === this.selectedFiles[i].folder) {
         return true;

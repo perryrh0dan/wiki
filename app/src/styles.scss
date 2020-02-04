@@ -18,6 +18,8 @@
 @import './app/components/document-move/document-move.component.scss';
 @import './app/components/files-create/files-create.component.scss';
 @import './app/components/shared/confirmation-dialog/confirmation-dialog.component.scss';
+@import './app/components/document-edit/insertlink/insertlink.component.scss';
+@import './app/components/document-edit/insertfile/insertfile.component.scss';
 
 
 @mixin custom-component-theme($theme) {
@@ -32,6 +34,8 @@
   @include theme-document-move($theme);
   @include theme-files-create($theme);
   @include theme-confirmation-dialog($theme);
+  @include theme-insert-link($theme);
+  @include theme-insert-file($theme);
 }
 
 .default-theme {
