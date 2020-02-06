@@ -31,7 +31,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  public login(email: string, password: string) {
+  public login(email: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.config.apiEndpoint}/auth/login`, { email, password })
       .pipe(map(user => {
         if (user) {
@@ -55,7 +55,7 @@ export class AuthenticationService {
     }
   }
 
-  public getRole() {
+  public getRole(): string {
     if (this.currentUserSubject.value) return this.currentUserSubject.value.masterrole;
   }
 
@@ -69,7 +69,17 @@ export class AuthenticationService {
     });
   }
 
-  public getMasterRole(user): string {
+  public updateSettings(key: string, value: any): Observable<void> {
+    const user = this.currentUserValue;
+    user.settings = user.settings ? user.settings : {};
+    user.settings[key] = value;
+    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    return this.http.post<void>(`${this.config.apiEndpoint}/profile/settings`, user.settings);
+  }
+
+  public getMasterRole(user: any): string {
     let rights = [{}];
     user.roles.forEach(role => {
       rights = rights.concat(role.rights);
@@ -82,12 +92,6 @@ export class AuthenticationService {
     return MasterRole.User;
   }
 
-  public updateSettings(key: string, value: any) {
-    const settings = this.currentUserValue.settings ? this.currentUserValue.settings : {}
-    settings[key] = value
-    return this.http.post(`${this.config.apiEndpoint}/profile/settings`, settings)
-  }
-
   public webauthnLogin(username: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiEndpoint}/auth/webauthn/login`, { username: username });
   }
@@ -96,11 +100,11 @@ export class AuthenticationService {
     return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/register`, { userID: userID });
   }
 
-  public webauthnRegisterResponse(body) {
+  public webauthnRegisterResponse(body: any): Observable<any> {
     return this.http.post(`${this.config.apiEndpoint}/admin/users/authenticator/response`, body);
   }
 
-  public webauthnLoginResponse(body) {
+  public webauthnLoginResponse(body: any): Observable<any> {
     return this.http.post<User>(`${this.config.apiEndpoint}/auth/webauthn/response`, body)
       .pipe(map(user => {
         if (user) {
@@ -112,7 +116,7 @@ export class AuthenticationService {
       }));
   }
 
-  public webauthnUnregister(userID, credID) {
+  public webauthnUnregister(userID: any, credID: any): Observable<any> {
     return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/unregister`, { userID: userID, credID: credID });
   }
 }

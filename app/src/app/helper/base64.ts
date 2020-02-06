@@ -1,4 +1,4 @@
-export const base64ToArrayBuffer = function (base64url) {
+export const base64ToArrayBuffer = function (base64url: string): any {
   base64url = base64url.replace(/-/g,'+');
   base64url = base64url.replace(/_/g,'/');
   const base64 = base64url.replace(/%3d/g,'=');
@@ -11,7 +11,7 @@ export const base64ToArrayBuffer = function (base64url) {
   return bytes.buffer;
 };
 
-export const arrayBufferToBase64 = function(buffer) {
+export const arrayBufferToBase64 = function(buffer: any): string {
   var binary = '';
   var bytes = new Uint8Array(buffer);
   var len = bytes.byteLength;

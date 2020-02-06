@@ -58,7 +58,6 @@ profileRoutes.route('/settings').post(async function (req, res, next) {
     await user.save()
   }
 
-  req.app.io.emit('updateuser')
   return res.status(200).send()
 })
 

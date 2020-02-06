@@ -7,12 +7,12 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(
+  public constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
   ) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
         this.authenticationService.logout(true);
