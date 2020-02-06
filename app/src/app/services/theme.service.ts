@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthenticationService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ThemeService {
+export class ThemeService implements OnDestroy {
+  private userSubscription: Subscription;
   private darkThemeSubject: BehaviorSubject<boolean>;
   public isDarkTheme: Observable<boolean>;
 
@@ -15,9 +16,15 @@ export class ThemeService {
     this.darkThemeSubject = new BehaviorSubject<boolean>(false);
     this.isDarkTheme = this.darkThemeSubject.asObservable();
 
-    this.authService.currentUser.subscribe((x) => {
-      this.darkThemeSubject.next(x.settings ? x.settings.darkTheme : {})
+    this.userSubscription = this.authService.currentUser.subscribe((user) => {
+      if (user) {
+        this.darkThemeSubject.next(user.settings ? user.settings.darkTheme : {})
+      }
     })
+  }
+
+  public ngOnDestroy() {
+    this.userSubscription.unsubscribe()
   }
 
   private setDarkTheme(isDarkTheme: boolean): void {

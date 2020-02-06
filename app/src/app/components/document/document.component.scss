@@ -1,3 +1,5 @@
+@import '../../styles/markdown.scss';
+
 @mixin theme-document($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -13,6 +15,8 @@
       max-width: 83.34%;
       flex: 1;
     }
+
+    @include theme-markdown($theme);
 
     .layout-row {
       display: flex;

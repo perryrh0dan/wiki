@@ -1,71 +1,80 @@
-.document-edit-component {
-  .editor-toolbar {
-    position: fixed;
-    top: 50px;
-    display: flex;
-    width: 100%;
-    height: 50px;
-    background-color: #1976d2;
+@import '../../styles/markdown.scss';
 
-    .element {
+@mixin theme-document-edit($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  document-edit .document-edit-component {
+    .editor-toolbar {
+      position: fixed;
+      top: 50px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      width: 100%;
+      height: 50px;
+      background-color: map-get($accent, 500);
 
-    .item {
-      display: flex;
-      width: 35px;
-      justify-content: center;
-      align-items: center;
-      color: white;
-
-      .toolbar-button {
-        width: 30px;
-        height: 30px;
-        border-radius: 4px;
+      .element {
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
+      }
 
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.5)
+      .item {
+        display: flex;
+        width: 35px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+
+        .toolbar-button {
+          width: 30px;
+          height: 30px;
+          border-radius: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.5)
+          }
         }
+      }
+
+      .seperator {
+        height: 50%;
+        border-right: 1px solid #fff;
+        border-left: 1px solid #fff;
       }
     }
 
-    .seperator {
-      height: 50%;
-      border-right: 1px solid #fff;
-      border-left: 1px solid #fff;
-    }
-  }
-
-  .editor-toolbar-placeholder {
-    height: 50px;
-  }
-
-  .content {
-    height: calc(100vh - 100px);
-    overflow: auto;
-    display: flex;
-    flex-flow: row;
-
-    .editor {
-      min-width: 50%;
-      width: 100%;
-      min-height: calc(100vh - 100px);
-      overflow: hidden;
-      resize: none;
-      border: 10px solid #cfd8dc;
+    .editor-toolbar-placeholder {
+      height: 50px;
     }
 
-    @import '../../styles/markdown.scss';
+    .content {
+      height: calc(100vh - 100px);
+      overflow: auto;
+      display: flex;
+      flex-flow: row;
 
-    markdown {
-      min-width: 50%;
-      overflow-x: initial;
+      .editor {
+        min-width: 50%;
+        width: 100%;
+        min-height: calc(100vh - 100px);
+        overflow: hidden;
+        resize: none;
+        border: 10px solid #cfd8dc;
+      }
+
+      @include theme-markdown($theme);
+
+      markdown {
+        min-width: 50%;
+        overflow-x: initial;
+      }
     }
   }
 }
