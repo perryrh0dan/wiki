@@ -131,7 +131,7 @@ export function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
 
   const tableRenderer = renderer.table;
-  renderer.table = (header: string, body: string) => {
+  renderer.table = (header: string, body: string): string => {
     const html = tableRenderer.call(renderer, header, body);
     return `<div class="table-wrapper">${html}</div>`;
   };
@@ -139,10 +139,8 @@ export function markedOptionsFactory(): MarkedOptions {
   return {
     renderer: renderer,
     gfm: true,
-    tables: true,
     breaks: false,
     pedantic: false,
-    sanitize: false,
     smartLists: true,
     smartypants: false,
   };
