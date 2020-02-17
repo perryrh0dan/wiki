@@ -161,7 +161,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #1976d2;
+    background-color: map-get($map: $accent, $key: 500);
     // border-radius: 10px;
   }
 }

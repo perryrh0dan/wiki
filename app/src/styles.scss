@@ -13,6 +13,7 @@
 @import './app/components/sidebar/sidebar.component.scss';
 @import './app/components/home/home.component.scss';
 @import './app/components/document/document.component.scss';
+@import './app/components/document-edit/document-edit.component.scss';
 @import './app/components/settings/system/system.component.scss';
 @import './app/components/document-create/document-create.component.scss';
 @import './app/components/document-move/document-move.component.scss';
@@ -24,11 +25,11 @@
 
 @mixin custom-component-theme($theme) {
   @include theme-general($theme);
-  @include theme-markdown($theme);
   @include theme-navbar($theme);
   @include theme-sidebar($theme);
   @include theme-home($theme);
   @include theme-document($theme);
+  @include theme-document-edit($theme);
   @include theme-system($theme);
   @include theme-document-create($theme);
   @include theme-document-move($theme);
