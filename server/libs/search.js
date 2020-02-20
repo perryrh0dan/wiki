@@ -161,7 +161,7 @@ module.exports = {
     let self = this
 
     if (!this.active()) {
-      Promise.resolve({
+      return Promise.resolve({
         results: [],
         totalHits: 0
       })
