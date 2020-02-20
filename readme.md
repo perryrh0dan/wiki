@@ -18,6 +18,10 @@
 - User and role management
 - Advanced search
 - Darkmode
+- Tag functionality
+- Favorites functionality
+- Code highlighting 
+- File and Image upload
 
 ## Contents
 
@@ -42,6 +46,13 @@ During the initial setup the default user `admin@admin.com` with the password `a
 ## Configuration
 
 ### Server
+The backend application can be configured with the config.yml file that is mounted into the docker image. 
+
+### In Detail
+
+#### frontend
+- Type `string
+- important
 
 ### App
 
