@@ -16,7 +16,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class FilesComponent implements OnInit, OnDestroy {
   faFolder = faFolder
 
-  private api_url = window["_env_"]["API_URL"];
+  private api_url = `${window["_env_"]["API_URL"]}/api`;
 
   private filesupdate = this.socket.fromEvent<Document>('fileuploaded');
   private foldersSubscription: Subscription

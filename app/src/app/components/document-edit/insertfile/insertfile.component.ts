@@ -12,7 +12,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class InsertFileComponent implements OnInit {
   public faFolder = faFolder;
 
-  private api_url = window["_env_"]["API_URL"];
+  private api_url = `${window["_env_"]["API_URL"]}/api`;
 
   public type = 'image'
   public folders: []

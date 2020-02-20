@@ -50,7 +50,7 @@ import { LogsComponent } from './components/settings/logs/logs.component';
 import { InsertLinkComponent } from './components/document-edit/insertlink/insertlink.component';
 
 const api_url = window["_env_"]["API_URL"];
-const config: SocketIoConfig = { url: api_url, options: { path: '/socket.io', transport: ['websocket'] } }; //polling,websocket
+const config: SocketIoConfig = { url: api_url, options: { path: '/api/socket.io', transport: ['websocket'] } }; //polling,websocket
 
 @NgModule({
   declarations: [

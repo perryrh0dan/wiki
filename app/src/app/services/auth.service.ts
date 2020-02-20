@@ -10,7 +10,7 @@ import { MasterRole } from '../models/masterrole';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private api_url = window["_env_"]["API_URL"];
+  private api_url = `${window["_env_"]["API_URL"]}/api`;
   private userupdate = this.socket.fromEvent<Document>('updateuser');
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

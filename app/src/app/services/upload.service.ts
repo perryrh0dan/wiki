@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class UploadService {
-  private api_url = window["_env_"]["API_URL"];
+  private api_url = `${window["_env_"]["API_URL"]}/api`;
 
   constructor(
     private http: HttpClient,

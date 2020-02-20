@@ -4,9 +4,9 @@ services:
     container_name: wiki-es01
     image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
     environment:
-      - node.name=es01
-      - discovery.seed_hosts=es02
-      - cluster.initial_master_nodes=es01,es02
+      - node.name=wiki-es01
+      - discovery.seed_hosts=wiki-es02
+      - cluster.initial_master_nodes=wiki-es01,wiki-es02
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -24,9 +24,9 @@ services:
     container_name: wiki-es02
     image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
     environment:
-      - node.name=es02
-      - discovery.seed_hosts=es01
-      - cluster.initial_master_nodes=es01,es02
+      - node.name=wiki-es02
+      - discovery.seed_hosts=wiki-es01
+      - cluster.initial_master_nodes=wiki-es01,wiki-es02
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -68,7 +68,7 @@ services:
     ports:
       - 3000:80
     environment: 
-      API_URL: http://localhost:4000/api
+      API_URL: http://localhost:4000
 
 volumes:
   esdata01:

@@ -9,7 +9,7 @@ import { Document } from '../models/document';
   providedIn: 'root',
 })
 export class DocumentService {
-  private api_url = window["_env_"]["API_URL"];
+  private api_url = `${window["_env_"]["API_URL"]}/api`;
   private documentSubject: BehaviorSubject<Document>;
   public document: Observable<Document>;
 
