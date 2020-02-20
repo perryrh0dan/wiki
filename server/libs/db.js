@@ -14,15 +14,6 @@ module.exports = {
 
     mongoose.Promise = require('bluebird')
 
-    // Event handlers
-    mongoose.connection.on('error', err => {
-      global.winston.error('Failed to connect to MongoDB instance.')
-      return err
-    })
-    mongoose.connection.once('open', function () {
-      global.winston.info('Connected to MongoDB instance.')
-    })
-
     // Store connection handle
     self.connection = mongoose.connection
     self.ObjectId = mongoose.Types.ObjectId
@@ -41,6 +32,12 @@ module.exports = {
     global.winston.info(`Connecting to MongoDB instance: ${global.appconfig.db}`)
     self.onReady = mongoose.connect(global.appconfig.db, {
       useNewUrlParser: true
+    }).then(() => {
+      global.winston.info('Connected to MongoDB instance.')
+      return Promise.resolve()
+    }).catch((error) => {
+      global.winston.error('Failed to connect to MongoDB instance.')
+      return Promise.reject(error)
     })
 
     return self

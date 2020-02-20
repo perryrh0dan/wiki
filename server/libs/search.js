@@ -89,10 +89,10 @@ module.exports = {
             })
         } else {
           global.winston.info('Searchindex already exists')
-          resolve()
+          return resolve()
         }
       }).catch(error => {
-        reject(error)
+        return reject(error)
       })
     })
 
