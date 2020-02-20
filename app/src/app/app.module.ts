@@ -15,7 +15,6 @@ import { AutosizeModule } from 'ngx-autosize';
 import { MaterialModule } from './material/material.module';
 import { AppConfigModule } from './app-config.module';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -50,7 +49,8 @@ import { TagsComponent } from './components/tags/tags.component';
 import { LogsComponent } from './components/settings/logs/logs.component';
 import { InsertLinkComponent } from './components/document-edit/insertlink/insertlink.component';
 
-const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/api/socket.io', transport: ['websocket'] } }; //polling,websocket
+const api_url = window["_env_"]["API_URL"];
+const config: SocketIoConfig = { url: api_url, options: { path: '/socket.io', transport: ['websocket'] } }; //polling,websocket
 
 @NgModule({
   declarations: [
@@ -124,7 +124,6 @@ const config: SocketIoConfig = { url: environment.endpoint, options: { path: '/a
   ],
 })
 export class AppModule {}
-
 
 // Wrap table in markdown with a div tag
 export function markedOptionsFactory(): MarkedOptions {

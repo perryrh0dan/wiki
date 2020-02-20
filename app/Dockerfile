@@ -1,23 +1,36 @@
+# build environment
 FROM node:alpine as builder
-
-# prod|sandbox its value will be come from outside
-ARG env=prod
-
-RUN apk update && apk add --no-cache make git
 
 # Move our files into directory name "app"
 WORKDIR /app
-COPY package.json /app/package.json
-RUN npm install @angular/cli@9.0.2 -g
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+
 COPY .  .
-RUN npm install --silent
+RUN npm run build:prod
 
-# Build with $env variable from outside
-RUN npm run build:$env
-
-# Build a small nginx image with static website
+# production environment
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
+
+# Nginx config
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
+
+# Static build
 COPY --from=builder /app/dist /usr/share/nginx/html/
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+# Copy .env file and shell script to container
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY .env .
+
+# Add bash
+RUN apk add --no-cache bash
+
+# Make our shell script executable
+RUN chmod +x env.sh
+
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]

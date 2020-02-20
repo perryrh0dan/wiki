@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 
-import { APP_CONFIG, AppConfig } from '../../app-config.module';
 import { UploadService } from 'src/app/services/upload.service';
 import { SiteService, sites } from 'src/app/services/site.service';
 import { Subscription } from 'rxjs';
@@ -17,18 +16,19 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class FilesComponent implements OnInit, OnDestroy {
   faFolder = faFolder
 
-  filesupdate = this.socket.fromEvent<Document>('fileuploaded');
-  _foldersSubscription: Subscription
+  private api_url = window["_env_"]["API_URL"];
+
+  private filesupdate = this.socket.fromEvent<Document>('fileuploaded');
+  private foldersSubscription: Subscription
 
   fileData: File[] = null;
   dragAreaClass: string = 'dragarea';
   selectedFolder = ''
   selectedFile: any;
-  images = [];
-  folders = [];
+  public images = [];
+  public folders = [];
 
   constructor(
-    @Inject(APP_CONFIG) private config: AppConfig,
     private uploadService: UploadService,
     private siteService: SiteService,
     private socket: Socket,
@@ -41,7 +41,7 @@ export class FilesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadImages('');
-    this._foldersSubscription = this.uploadService.loadFolders().subscribe(data => {
+    this.foldersSubscription = this.uploadService.loadFolders().subscribe(data => {
       this.folders = data;
     }, error => {
       console.log(error);
@@ -49,7 +49,7 @@ export class FilesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._foldersSubscription.unsubscribe();
+    this.foldersSubscription.unsubscribe();
   }
 
   loadImages(folder) {
@@ -57,7 +57,7 @@ export class FilesComponent implements OnInit, OnDestroy {
       this.selectedFolder = folder;
       this.images = data;
       this.images.forEach(image => {
-        image.thumbnailurl = this.config.apiEndpoint + '/uploads/t/' + image._id + '.png';
+        image.thumbnailurl = this.api_url + '/uploads/t/' + image._id + '.png';
       });
     }, error => {
       console.log(error);

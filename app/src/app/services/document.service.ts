@@ -1,20 +1,19 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { Document } from '../models/document';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocumentService {
+  private api_url = window["_env_"]["API_URL"];
   private documentSubject: BehaviorSubject<Document>;
   public document: Observable<Document>;
 
   constructor(
-    @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient,
   ) {
     this.documentSubject = new BehaviorSubject<Document>(new Document());
@@ -22,7 +21,7 @@ export class DocumentService {
   }
 
   loadDocument(id, affectViews = true) {
-    return this.http.post<Document>(`${this.config.apiEndpoint}/documents/get`, {
+    return this.http.post<Document>(`${this.api_url}/documents/get`, {
       id,
       affectViews,
     }).pipe(map(
@@ -35,7 +34,7 @@ export class DocumentService {
   }
 
   reloadDocument() {
-    this.http.post<Document>(`${this.config.apiEndpoint}/documents/get`, {
+    this.http.post<Document>(`${this.api_url}/documents/get`, {
       id: this.documentSubject.getValue()._id,
       affectViews: false,
     }).subscribe(doc => {
@@ -44,25 +43,25 @@ export class DocumentService {
   }
 
   createDocument(id: string, template?: string) {
-    return this.http.put<any>(`${this.config.apiEndpoint}/documents/create/`, { id, template });
+    return this.http.put<any>(`${this.api_url}/documents/create/`, { id, template });
   }
 
   search(query) {
-    return this.http.get<any>(`${this.config.apiEndpoint}/documents/search/${query}`);
+    return this.http.get<any>(`${this.api_url}/documents/search/${query}`);
   }
 
   editDocument() {
-    return this.http.post(`${this.config.apiEndpoint}/documents/edit/`, { id: this.documentSubject.getValue()._id, content: this.documentSubject.getValue().content });
+    return this.http.post(`${this.api_url}/documents/edit/`, { id: this.documentSubject.getValue()._id, content: this.documentSubject.getValue().content });
   }
 
   deleteDocument() {
-    return this.http.delete(`${this.config.apiEndpoint}/documents/${this.documentSubject.getValue()._id}`).pipe(map(() => {
+    return this.http.delete(`${this.api_url}/documents/${this.documentSubject.getValue()._id}`).pipe(map(() => {
       this.documentSubject.next(new Document());
     }));
   }
 
   moveDocument(newpath) {
-    return this.http.put(`${this.config.apiEndpoint}/documents/${this.documentSubject.getValue()._id}`, { newpath });
+    return this.http.put(`${this.api_url}/documents/${this.documentSubject.getValue()._id}`, { newpath });
   }
 
   clearDocument() {
@@ -70,26 +69,26 @@ export class DocumentService {
   }
 
   getAllFromPath(path) {
-    return this.http.post<[]>(`${this.config.apiEndpoint}/documents/all`, { path });
+    return this.http.post<[]>(`${this.api_url}/documents/all`, { path });
   }
 
   getFavorites() {
-    return this.http.get<any>(`${this.config.apiEndpoint}/documents/favorites`);
+    return this.http.get<any>(`${this.api_url}/documents/favorites`);
   }
 
   toggleFavorite(id) {
-    return this.http.post<[]>(`${this.config.apiEndpoint}/documents/favorites/`, { id });
+    return this.http.post<[]>(`${this.api_url}/documents/favorites/`, { id });
   }
 
   getTemplates() {
-    return this.http.get<any>(`${this.config.apiEndpoint}/documents/templates/`);
+    return this.http.get<any>(`${this.api_url}/documents/templates/`);
   }
 
   getTags() {
-    return this.http.get<[]>(`${this.config.apiEndpoint}/documents/tags/`);
+    return this.http.get<[]>(`${this.api_url}/documents/tags/`);
   }
 
   getDocumentsByTags(tags: Array<string>) {
-    return this.http.get<Document[]>(`${this.config.apiEndpoint}/documents/tags/${encodeURIComponent(tags.join(','))}`);
+    return this.http.get<Document[]>(`${this.api_url}/documents/tags/${encodeURIComponent(tags.join(','))}`);
   }
 }

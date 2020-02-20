@@ -1,50 +1,47 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { APP_CONFIG, AppConfig } from '../app-config.module';
-
 @Injectable({
-    providedIn: "root",
+  providedIn: "root",
 })
 export class UploadService {
-    folder: []
+  private api_url = window["_env_"]["API_URL"];
 
-    constructor(
-        @Inject(APP_CONFIG) private config: AppConfig,
-        private http: HttpClient,
-    ) { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
-    loadFolders() {
-        return this.http.get<[]>(`${this.config.apiEndpoint}/uploads/folders`);
-    }
+  loadFolders() {
+    return this.http.get<[]>(`${this.api_url}/uploads/folders`);
+  }
 
-    loadImages(folder) {
-        return this.http.post<[]>(`${this.config.apiEndpoint}/uploads/images`, { folder: folder });
-    }
+  loadImages(folder) {
+    return this.http.post<[]>(`${this.api_url}/uploads/images`, { folder: folder });
+  }
 
-    loadThumbnail(name) {
-        return this.http.get(`${this.config.apiEndpoint}/uploads/t/${name}`, { responseType: 'blob' });
-    }
+  loadThumbnail(name) {
+    return this.http.get(`${this.api_url}/uploads/t/${name}`, { responseType: 'blob' });
+  }
 
-    uploadImages(formData) {
-        return this.http.post(`${this.config.apiEndpoint}/uploads/img`, formData, {
-            reportProgress: true,
-            observe: 'events',
-        });
-    }
+  uploadImages(formData) {
+    return this.http.post(`${this.api_url}/uploads/img`, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
 
-    uploadFile(formData) {
-        return this.http.post(`${this.config.apiEndpoint}/uploads/file`, formData, {
-            reportProgress: true,
-            observe: 'events',
-        });
-    }
+  uploadFile(formData) {
+    return this.http.post(`${this.api_url}/uploads/file`, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
 
-    createDirectory(name) {
-        return this.http.post(`${this.config.apiEndpoint}/uploads/folders`, { name: name });
-    }
+  createDirectory(name) {
+    return this.http.post(`${this.api_url}/uploads/folders`, { name: name });
+  }
 
-    deleteFile(id) {
-        return this.http.delete(`${this.config.apiEndpoint}/uploads/${id}`);
-    }
+  deleteFile(id) {
+    return this.http.delete(`${this.api_url}/uploads/${id}`);
+  }
 }

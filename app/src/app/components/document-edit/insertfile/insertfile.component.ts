@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UploadService } from 'src/app/services/upload.service';
-import { AppConfig, APP_CONFIG } from 'src/app/app-config.module';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +12,8 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class InsertFileComponent implements OnInit {
   public faFolder = faFolder;
 
+  private api_url = window["_env_"]["API_URL"];
+
   public type = 'image'
   public folders: []
   public images: any[]
@@ -20,7 +21,6 @@ export class InsertFileComponent implements OnInit {
   private selectedFiles: Array<any> = new Array<any>();
 
   public constructor(
-    @Inject(APP_CONFIG) private config: AppConfig,
     public dialogRef: MatDialogRef<InsertFileComponent>,
     private uploadService: UploadService,
   ) { }
@@ -41,7 +41,7 @@ export class InsertFileComponent implements OnInit {
     this.uploadService.loadImages(name).subscribe(images => {
       this.images = images;
       this.images.forEach(image => {
-        image.thumbnailurl = this.config.apiEndpoint + '/uploads/t/' + image._id + '.png';
+        image.thumbnailurl = this.api_url + '/uploads/t/' + image._id + '.png';
       });
     });
   }
@@ -66,7 +66,7 @@ export class InsertFileComponent implements OnInit {
 
   private buildFileUrl(file: any): string {
     const folder = file.folder !== 'f:' ? file.folder.substring(2, file.folder.length) + '/' : '';
-    const url = this.config.apiEndpoint + '/uploads/' + folder + file.filename;
+    const url = this.api_url + '/uploads/' + folder + file.filename;
     const markdown = `![${file.filename}](${url}) "${file.filename}"`;
     return markdown;
   }

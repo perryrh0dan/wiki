@@ -1,22 +1,21 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import find from 'lodash.find';
 
-import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { User } from '../models/user';
 import { Socket } from 'ngx-socket-io';
 import { MasterRole } from '../models/masterrole';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  private api_url = window["_env_"]["API_URL"];
   private userupdate = this.socket.fromEvent<Document>('updateuser');
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
   public constructor(
-    @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient,
     private socket: Socket,
   ) {
@@ -32,7 +31,7 @@ export class AuthenticationService {
   }
 
   public login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.config.apiEndpoint}/auth/login`, { email, password })
+    return this.http.post<User>(`${this.api_url}/auth/login`, { email, password })
       .pipe(map(user => {
         if (user) {
           user.masterrole = this.getMasterRole(user);
@@ -45,7 +44,7 @@ export class AuthenticationService {
 
   public logout(client: boolean = false): Observable<void> {
     if (!client) {
-      return this.http.post(`${this.config.apiEndpoint}/auth/logout`, null).pipe(map(() => {
+      return this.http.post(`${this.api_url}/auth/logout`, null).pipe(map(() => {
         this.currentUserSubject.next(null);
         localStorage.removeItem('currentUser');
       }));
@@ -60,7 +59,7 @@ export class AuthenticationService {
   }
 
   public reloadUser(): void {
-    this.http.get<User>(`${this.config.apiEndpoint}/auth/profile`).subscribe(user => {
+    this.http.get<User>(`${this.api_url}/auth/profile`).subscribe(user => {
       if (user) {
         user.masterrole = this.getMasterRole(user);
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -76,7 +75,7 @@ export class AuthenticationService {
     this.currentUserSubject.next(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
 
-    return this.http.post<void>(`${this.config.apiEndpoint}/profile/settings`, user.settings);
+    return this.http.post<void>(`${this.api_url}/profile/settings`, user.settings);
   }
 
   public getMasterRole(user: any): string {
@@ -93,19 +92,19 @@ export class AuthenticationService {
   }
 
   public webauthnLogin(username: string): Observable<any> {
-    return this.http.post<any>(`${this.config.apiEndpoint}/auth/webauthn/login`, { username: username });
+    return this.http.post<any>(`${this.api_url}/auth/webauthn/login`, { username: username });
   }
 
   public webauthnRegister(userID: string): Observable<any> {
-    return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/register`, { userID: userID });
+    return this.http.post<any>(`${this.api_url}/admin/users/authenticator/register`, { userID: userID });
   }
 
   public webauthnRegisterResponse(body: any): Observable<any> {
-    return this.http.post(`${this.config.apiEndpoint}/admin/users/authenticator/response`, body);
+    return this.http.post(`${this.api_url}/admin/users/authenticator/response`, body);
   }
 
   public webauthnLoginResponse(body: any): Observable<any> {
-    return this.http.post<User>(`${this.config.apiEndpoint}/auth/webauthn/response`, body)
+    return this.http.post<User>(`${this.api_url}/auth/webauthn/response`, body)
       .pipe(map(user => {
         if (user) {
           user.masterrole = this.getMasterRole(user);
@@ -117,6 +116,6 @@ export class AuthenticationService {
   }
 
   public webauthnUnregister(userID: any, credID: any): Observable<any> {
-    return this.http.post<any>(`${this.config.apiEndpoint}/admin/users/authenticator/unregister`, { userID: userID, credID: credID });
+    return this.http.post<any>(`${this.api_url}/admin/users/authenticator/unregister`, { userID: userID, credID: credID });
   }
 }

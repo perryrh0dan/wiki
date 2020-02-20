@@ -1,9 +1,11 @@
-version: '3'
+version: '3.7'
 services:
   wiki-app:
+    container_name: wiki-app
     build:
       context: .
-      args:
-        env: sandbox
+      dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "4200:80"
+    environment:
+      API_URL: http://localhost:4000
