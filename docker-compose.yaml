@@ -57,7 +57,7 @@ services:
       - wiki-es01
       - wiki-es02
     volumes:
-      - ./server/config.yml:/var/wiki/config.yml
+      - ./config.yml:/var/wiki/config.yml
       - ./server/repo:/var/wiki/repo:rw
     networks:
       - backend

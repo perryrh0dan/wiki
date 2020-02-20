@@ -89,7 +89,7 @@ const homeRoutes = require('./routes/home')
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: ['http://localhost:4200'],
+    origin: [global.appconfig.frontend],
     credentials: true
   })
 )
