@@ -3,7 +3,7 @@
   "version": "0.9.0",
   "scripts": {
     "ng": "ng",
-    "start": "./env.sh && cp env-config.js ./src/assets/ ng serve",
+    "start": "./env.sh && cp env-config.js ./src/assets/ && ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod --build-optimizer",
     "build:sandbox": "ng build --build-optimizer",

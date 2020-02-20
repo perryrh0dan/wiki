@@ -30,9 +30,6 @@ git:
     # Only for Basic authentication:
     username:
     password:
-    # Only for SSH authentication:
-    privateKey: /etc/wiki/keys/git.pem
-    sslVerify: true
 
 externalLogging:
   papertrail:
