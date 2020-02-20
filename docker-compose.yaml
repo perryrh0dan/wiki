@@ -1,0 +1,80 @@
+version: '3'
+services:
+  wiki-es01:
+    container_name: wiki-es01
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    environment:
+      - node.name=es01
+      - discovery.seed_hosts=es02
+      - cluster.initial_master_nodes=es01,es02
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - backend
+  wiki-es02:
+    container_name: wiki-es02
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    environment:
+      - node.name=es02
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01,es02
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata02:/usr/share/elasticsearch/data
+    networks:
+      - backend
+  wiki-mongodb:
+    container_name: wiki-mongodb
+    image: mongo
+    restart: always
+    volumes:
+      - /home/tpoe/Dev/wiki/data:/data/db
+    networks:
+      - backend
+  wiki-server:
+    container_name: wiki-server
+    image: perryrh0dan/wiki-server
+    restart: always
+    ports:
+      - 4000:4000
+    depends_on:
+      - wiki-mongodb
+      - wiki-es01
+      - wiki-es02
+    volumes:
+      - ./server/config.yml:/var/wiki/config.yml
+      - ./server/repo:/var/wiki/repo:rw
+    networks:
+      - backend
+  wiki-app:
+    container_name: wiki-app
+    image: perryrh0dan/wiki-app
+    restart: always
+    ports:
+      - 3000:80
+    environment: 
+      API_URL: http://localhost:4000/api
+
+volumes:
+  esdata01:
+    driver: local
+  esdata02:
+    driver: local
+
+networks: 
+  backend:

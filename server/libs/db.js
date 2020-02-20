@@ -7,7 +7,7 @@ const path = require('path')
 const _ = require('lodash')
 
 module.exports = {
-  init () {
+  init() {
     let self = this
 
     let dbModelsPath = path.join(global.appRoot, 'models')
@@ -38,6 +38,7 @@ module.exports = {
       })
 
     // Connect
+    global.winston.info(`Connecting to MongoDB instance: ${global.appconfig.db}`)
     self.onReady = mongoose.connect(global.appconfig.db, {
       useNewUrlParser: true
     })
