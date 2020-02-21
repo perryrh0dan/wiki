@@ -52,7 +52,7 @@ module.exports = function (passport) {
     return User.find({}).then(users => {
       if (!users.length < 1) return true
       return User.create({
-        email: global.appconfig.auth.local.defaultAdminEmail,
+        email: global.appconfig.auth.defaultAdminEmail,
         password: '$2a$04$MAHRw785Xe/Jd5kcKzr3D.VRZDeomFZu2lius4gGpZZ9cJw7B7Mna' // admin123
       }).then(() => {
         global.winston.info('Root admin account created successfully')
@@ -71,7 +71,7 @@ module.exports = function (passport) {
           }).then((role) => {
             global.winston.info('Admin role created successfully')
             return User.updateOne({
-              email: global.appconfig.auth.local.defaultAdminEmail
+              email: global.appconfig.auth.defaultAdminEmail
             }, {
               roles: [role._id]
             }).then(() => {

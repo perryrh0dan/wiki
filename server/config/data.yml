@@ -11,6 +11,8 @@ defaults:
     uploads:
       maxImageFileSize: 3,
       maxOtherFileSize: 100
+    auth:
+      defaultAdminEmail: admin@admin.com
     lang: en
     langRtl: false
     public: false

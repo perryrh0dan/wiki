@@ -4,8 +4,8 @@ backend: https://johnmcclane.dev
 
 port: 4000
 
-db: 'mongodb://localhost:27017/wiki'
-search: 'localhost:9200'
+db: "mongodb://localhost:27017/wiki"
+search: "localhost:9200"
 
 paths:
   repo: ./repo
@@ -16,8 +16,7 @@ uploads:
   maxOtherFileSize: 100
 
 auth:
-  local:
-    defaultAdminEmail: admin@admin.com
+  defaultAdminEmail: admin@admin.com
 
 sessionSecret: skjdfz21asiefkasgz213saeifdkhasjk123fhskaje
 

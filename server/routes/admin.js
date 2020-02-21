@@ -377,7 +377,7 @@ adminRoutes.post('/users/authenticator/response', async (req, res) => {
   }
 
   /* ...and origin */
-  if (clientData.origin !== global.appconfig.backend && clientData.origin !== 'http://localhost:4200') {
+  if (clientData.origin !== global.appconfig.backend && clientData.origin !== global.appconfig.frontend) {
     global.winston.debug('Origins don\'t match!')
     return res.status(400).json({
       'message': 'Origins don\'t match!'

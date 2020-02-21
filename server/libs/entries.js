@@ -15,6 +15,8 @@ module.exports = {
     self._repoPath = path.resolve(global.appRoot, global.appconfig.paths.repo)
     global.appdata.repoPath = self._repoPath
 
+    //TODO check if path exists
+
     return self
   },
 

@@ -16,8 +16,7 @@ uploads:
   maxOtherFileSize: 100
 
 auth:
-  local:
-    defaultAdminEmail: admin@admin.com
+  defaultAdminEmail: admin@admin.com
 
 sessionSecret: skjdfz21asiefkasgz213saeifdkhasjk123fhskaje
 
