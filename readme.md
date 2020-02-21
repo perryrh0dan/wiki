@@ -26,6 +26,7 @@ Visit the [contributing guidelines](https://github.com/perryrh0dan/wiki/blob/mas
 - Code highlighting 
 - File and Image upload
 - Git backup
+- Responsive Design for mobile phones
 
 ## Contents
 
@@ -185,4 +186,10 @@ Path to Private Key for auth type ssh
 
 <div align="center">
   <img alt="List" width="70%" src="media/user_management.png">
+</div>
+
+### Mobile view
+
+<div align="center">
+  <img alt="List" width="70%" src="media/mobile.png">
 </div>
