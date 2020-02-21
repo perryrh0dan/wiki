@@ -31,28 +31,8 @@ Documents are stored in a mongodb for fast access and queries. Additional for ea
 - [Highlights](#highlights)
 - [Contents](#contents)
 - [Install](#install)
-  - [Docker-Compose](#docker-compose)
 - [Usage](#usage)
 - [Configuration](#configuration)
-  - [Server](#server)
-  - [In Detail](#in-detail)
-    - [frontend](#frontend)
-    - [backend](#backend)
-    - [port](#port)
-    - [db](#db)
-    - [search](#search)
-    - [paths](#paths)
-      - [repo](#repo)
-      - [data](#data)
-    - [uploads](#uploads)
-      - [maxImageFileSize](#maximagefilesize)
-      - [maxOtherFileSize](#maxotherfilesize)
-    - [auth](#auth)
-      - [defaultAdminEmail](#defaultadminemail)
-    - [sessionSecret](#sessionsecret)
-    - [git](#git)
-      - [url](#url)
-  - [App](#app)
 - [Images](#images)
 
 ## Install
@@ -101,6 +81,7 @@ Database connection string
 
 #### search
 - Type `string`
+- Default ``
 - optional
 
 Elasticsearch connection string. Search will be disabled if empty
@@ -123,18 +104,21 @@ Path to the data directory where all the thumbnails, tempfolders and cache is lo
 
 ##### maxImageFileSize
 - Type `number`
-- optional
+- Default `3`
 - Unit `mb`
+- optional
 
 ##### maxOtherFileSize
 - Type `number`
-- optional
+- Default `100`
 - Unit `mb`
+- optional
 
 #### auth
 
 ##### defaultAdminEmail
 - Type `string`
+- Default `admin@admin.com`
 - optional
 
 #### sessionSecret
@@ -149,23 +133,62 @@ Random string that is used as the session secret.
 - Type `string`
 - necessary
 
+##### branch
+- Type `string`
+- Default `master`
+- optional
+
+##### auth
+
+###### type
+- Type `enum`
+- Default `basic`
+- Values `auth, `ssh`
+- optional
+
+###### username
+- Type `string`
+- necessary
+
+###### password
+- Type `string`
+- necessary
+
+###### privatekey
+- Type `string`
+- optional
+
+Path to Private Key for auth type ssh
+
+###### sslVerify
+- Type `boolean`
+- Default `true`
+- optional
 
 
 ### App
 
 ## Images
 
+### Darkmode
+
 <div align="center">
   <img alt="List" width="70%" src="media/dark_mode.png">
 </div>
+
+### Markdown Editor
 
 <div align="center">
   <img alt="List" width="70%" src="media/edit_mode.png">
 </div>
 
+### Search
+
 <div align="center">
   <img alt="List" width="70%" src="media/search.png">
 </div>
+
+### User management
 
 <div align="center">
   <img alt="List" width="70%" src="media/user_management.png">
