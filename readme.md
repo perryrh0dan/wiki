@@ -191,5 +191,5 @@ Path to Private Key for auth type ssh
 ### Mobile view
 
 <div align="center">
-  <img alt="List" width="70%" src="media/mobile.png">
+  <img alt="List" width="20%" src="media/mobile.png">
 </div>
