@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.authenticationService.logout(true);
         this.router.navigate(['login']);
         return throwError(new Error('Not authenticated'));
-      } else if (403) {
+      } else if (err.status === 403) {
         // Replacing the wrong route so back navigation is working
         this.router.navigate(['home'], { replaceUrl: true });
         return throwError(new Error('Not authorized'));
