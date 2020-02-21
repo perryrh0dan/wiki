@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-  Modern, lightweight and powerful wiki app built with Angular and Node.js
+  Modern, lightweight and powerful wiki app built on Node.js, Angular, Git and Markdown
 </h4>
 
 <div align="center">
@@ -11,6 +11,9 @@
 </div>
 
 ## Description
+Documents are stored in a mongodb for fast access and queries. Additional for each document a markdown file is created and stored in the `repo` directory. For this directory the administrator can initiliaize a git backup. That pushs all the files to the configured git repository for backup.  
+
+Visit the [contributing guidelines](https://github.com/perryrh0dan/wiki/blob/master/contributing.md) to learn more on how to help developing this project.
 
 ## Highlights
 
@@ -22,6 +25,8 @@
 - Favorites functionality
 - Code highlighting 
 - File and Image upload
+- Git backup
+- Responsive Design for mobile phones
 
 ## Contents
 
@@ -29,28 +34,8 @@
 - [Highlights](#highlights)
 - [Contents](#contents)
 - [Install](#install)
-  - [Docker-Compose](#docker-compose)
 - [Usage](#usage)
 - [Configuration](#configuration)
-  - [Server](#server)
-  - [In Detail](#in-detail)
-    - [frontend](#frontend)
-    - [backend](#backend)
-    - [port](#port)
-    - [db](#db)
-    - [search](#search)
-    - [paths](#paths)
-      - [repo](#repo)
-      - [data](#data)
-    - [uploads](#uploads)
-      - [maxImageFileSize](#maximagefilesize)
-      - [maxOtherFileSize](#maxotherfilesize)
-    - [auth](#auth)
-      - [defaultAdminEmail](#defaultadminemail)
-    - [sessionSecret](#sessionsecret)
-    - [git](#git)
-      - [url](#url)
-  - [App](#app)
 - [Images](#images)
 
 ## Install
@@ -99,72 +84,112 @@ Database connection string
 
 #### search
 - Type `string`
+- Default ``
 - optional
 
 Elasticsearch connection string. Search will be disabled if empty
 
-#### paths
-
-##### repo
+#### paths/repo
 - Type `string`
 - necessary
 
 Path to the repo directory where all documents, file and images are stored
 
-##### data
+#### paths/data
 - Type `string`
 - necessary
 
 Path to the data directory where all the thumbnails, tempfolders and cache is located.
 
-#### uploads
-
-##### maxImageFileSize
+#### uploads/maxImageFileSize
 - Type `number`
-- optional
+- Default `3`
 - Unit `mb`
+- optional
 
-##### maxOtherFileSize
+#### uploads/maxOtherFileSize
 - Type `number`
-- optional
+- Default `100`
 - Unit `mb`
+- optional
 
-#### auth
-
-##### defaultAdminEmail
+#### auth/defaultAdminEmail
 - Type `string`
+- Default `admin@admin.com`
 - optional
 
-#### sessionSecret
+#### auth/sessionSecret
 - Type `string`
 - necessary
 
 Random string that is used as the session secret.
 
-#### git
-
-##### url
+#### git/url
 - Type `string`
 - necessary
 
+#### git/branch
+- Type `string`
+- Default `master`
+- optional
 
+#### git/auth
+
+#### git/auth/type
+- Type `enum`
+- Default `basic`
+- Values `auth, `ssh`
+- optional
+
+#### git/auth/username
+- Type `string`
+- necessary
+
+#### git/auth/password
+- Type `string`
+- necessary
+
+#### git/auth/privatekey
+- Type `string`
+- optional
+
+Path to Private Key for auth type ssh
+
+#### git/auth/sslVerify
+- Type `boolean`
+- Default `true`
+- optional
 
 ### App
 
 ## Images
 
+### Darkmode
+
 <div align="center">
   <img alt="List" width="70%" src="media/dark_mode.png">
 </div>
+
+### Markdown Editor
 
 <div align="center">
   <img alt="List" width="70%" src="media/edit_mode.png">
 </div>
 
+### Search
+
 <div align="center">
   <img alt="List" width="70%" src="media/search.png">
 </div>
 
+### User management
+
 <div align="center">
   <img alt="List" width="70%" src="media/user_management.png">
+</div>
+
+### Mobile view
+
+<div align="center">
+  <img alt="List" width="20%" src="media/mobile.png">
 </div>

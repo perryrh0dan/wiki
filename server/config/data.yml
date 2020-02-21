@@ -17,6 +17,7 @@ defaults:
     langRtl: false
     public: false
     db: mongodb://localhost/wiki
+    search:
     sessionSecret: null
     admin: null
     git:
