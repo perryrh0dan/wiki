@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-  Modern, lightweight and powerful wiki app built with Angular and Node.js
+  Modern, lightweight and powerful wiki app built on Node.js, Angular, Git and Markdown
 </h4>
 
 <div align="center">
@@ -11,6 +11,7 @@
 </div>
 
 ## Description
+Documents are stored in a mongodb for fast access and queries. Additional for each document a markdown file is created and stored in the `repo` directory. For this directory the administrator can initiliaize a git backup. That pushs all the files to the configured git repository for backup.  
 
 ## Highlights
 
@@ -22,6 +23,7 @@
 - Favorites functionality
 - Code highlighting 
 - File and Image upload
+- Git backup
 
 ## Contents
 
