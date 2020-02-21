@@ -86,85 +86,76 @@ Database connection string
 
 Elasticsearch connection string. Search will be disabled if empty
 
-#### paths
-
-##### repo
+#### paths/repo
 - Type `string`
 - necessary
 
 Path to the repo directory where all documents, file and images are stored
 
-##### data
+#### paths/data
 - Type `string`
 - necessary
 
 Path to the data directory where all the thumbnails, tempfolders and cache is located.
 
-#### uploads
-
-##### maxImageFileSize
+#### uploads/maxImageFileSize
 - Type `number`
 - Default `3`
 - Unit `mb`
 - optional
 
-##### maxOtherFileSize
+#### uploads/maxOtherFileSize
 - Type `number`
 - Default `100`
 - Unit `mb`
 - optional
 
-#### auth
-
-##### defaultAdminEmail
+#### auth/defaultAdminEmail
 - Type `string`
 - Default `admin@admin.com`
 - optional
 
-#### sessionSecret
+#### auth/sessionSecret
 - Type `string`
 - necessary
 
 Random string that is used as the session secret.
 
-#### git
-
-##### url
+#### git/url
 - Type `string`
 - necessary
 
-##### branch
+#### git/branch
 - Type `string`
 - Default `master`
 - optional
 
-##### auth
+#### git/auth
 
-###### type
+#### git/auth/type
 - Type `enum`
 - Default `basic`
 - Values `auth, `ssh`
 - optional
 
-###### username
+#### git/auth/username
 - Type `string`
 - necessary
 
-###### password
+#### git/auth/password
 - Type `string`
 - necessary
 
-###### privatekey
+#### git/auth/privatekey
 - Type `string`
 - optional
 
 Path to Private Key for auth type ssh
 
-###### sslVerify
+#### git/auth/sslVerify
 - Type `boolean`
 - Default `true`
 - optional
-
 
 ### App
 
