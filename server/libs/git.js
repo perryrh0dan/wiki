@@ -44,7 +44,7 @@ module.exports = {
     let self = this
 
     global.winston.info('Initializing local repository...')
-    self._git.init().then(() => {
+    return self._git.init().then(() => {
       global.winston.info('Adding origin remote via HTTP/S')
       let urlObj = URL.parse(global.appconfig.git.url)
 
@@ -95,22 +95,19 @@ module.exports = {
     })
   },
 
-  push() {
+  async push() {
     let self = this
 
     global.winston.info('Start pushing to git repository')
-    return self._git.add('./*').then(() => {
-      return self._git.commit('wiki backup').then(() => {
-        return self._git.push('origin', 'master').then(() => {
-          global.winston.info('Finished git push successfull')
-        }).catch(error => {
-          global.winston.error(error)
-        })
-      }).catch(error => {
-        global.winston.error(error)
-      })
-    }).catch(error => {
+
+    try {
+      await self._git.add('./*');
+      await self._git.commit('wiki backup')
+      await self._git.push('origin', self._repo.branch)
+
+      global.winston.info('Finished git push successfull')
+    } catch (error) {
       global.winston.error(error)
-    })
+    }
   }
 }

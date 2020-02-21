@@ -137,7 +137,7 @@ server.on('listening', () => {
 // ----------------------------------------
 // Start file and upload scan and upload Agent
 // ----------------------------------------
-Promise.all([global.db.onReady, global.search.onReady]).then(() => {
+Promise.all([global.db.onReady, global.search.onReady, global.git.onReady]).then(() => {
   global.entries.scan()
 }).then(() => {
   global.uplAgent.initialScan()

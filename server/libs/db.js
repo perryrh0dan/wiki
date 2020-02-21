@@ -34,10 +34,10 @@ module.exports = {
       useNewUrlParser: true
     }).then(() => {
       global.winston.info('Connected to MongoDB instance.')
-      return Promise.resolve()
+      return true
     }).catch((error) => {
       global.winston.error('Failed to connect to MongoDB instance.')
-      return Promise.reject(error)
+      throw error
     })
 
     return self

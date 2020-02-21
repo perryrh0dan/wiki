@@ -145,7 +145,7 @@ module.exports = {
       _id: entryPath
     })
     if (!entry || entry.isEntry === false) {
-      const filepath = (global.appRoot + '/repo/' + entryPath.toLowerCase() + '.md')
+      const filepath = (self._repoPath + '/' + entryPath.toLowerCase() + '.md')
       const content = await self.getStarter(entryPath, user, template)
 
       await fs.outputFileAsync(filepath, content)

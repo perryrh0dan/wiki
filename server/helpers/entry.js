@@ -27,7 +27,7 @@ module.exports = {
   },
 
   getEntryPathFromFullPath (fullPath) {
-    let absRepoPath = path.resolve(global.appRoot, global.appdata.repoPath)
+    let absRepoPath = path.resolve(global.appdata.repoPath)
     return _.chain(fullPath).replace(absRepoPath, '').replace('.md', '').replace(new RegExp('\\\\', 'g'), '/').value()
   }
 }
