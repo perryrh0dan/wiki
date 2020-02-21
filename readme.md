@@ -13,6 +13,8 @@
 ## Description
 Documents are stored in a mongodb for fast access and queries. Additional for each document a markdown file is created and stored in the `repo` directory. For this directory the administrator can initiliaize a git backup. That pushs all the files to the configured git repository for backup.  
 
+Visit the [contributing guidelines](https://github.com/perryrh0dan/wiki/blob/master/contributing.md) to learn more on how to help developing this project.
+
 ## Highlights
 
 - Markdown editor
