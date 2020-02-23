@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
+mongoose.set('useUnifiedTopology', true)
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
