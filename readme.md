@@ -194,3 +194,9 @@ Path to Private Key for auth type ssh
 <div align="center">
   <img alt="List" width="20%" src="media/mobile.png">
 </div>
+
+## Development
+
+1. Start a mongodb instance
+2. Start the server with following command `node server.js`
+3. To start the app. Change in the index.html file script import `/env-config.js` to `/assets/env-config.js` and run `npm start`.
