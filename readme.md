@@ -38,6 +38,7 @@ Visit the [contributing guidelines](https://github.com/perryrh0dan/wiki/blob/mas
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Images](#images)
+- [Development](#development)
 
 ## Install
 
