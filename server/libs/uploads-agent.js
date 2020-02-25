@@ -148,7 +148,7 @@ module.exports = {
 
       // Get MIME info
 
-      let mimeInfo = fileType(readChunk.sync(fPath, 0, 262))
+      let mimeInfo = fileType.fromBuffer(readChunk.sync(fPath, 0, 262))
       if (_.isNil(mimeInfo)) {
         mimeInfo = {
           mime: mime.lookup(fPathObj.ext) || 'application/octet-stream'

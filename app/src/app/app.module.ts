@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { UrlSerializer } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -101,6 +101,8 @@ const config: SocketIoConfig = { url: api_url, options: { path: '/api/socket.io'
         provide: MarkedOptions,
         useFactory: markedOptionsFactory,
       },
+      // TODO temp solution
+      sanitize: SecurityContext.NONE
     }),
     SocketIoModule.forRoot(config),
     ToastrModule.forRoot(),
@@ -123,7 +125,7 @@ const config: SocketIoConfig = { url: api_url, options: { path: '/api/socket.io'
     InsertLinkComponent,
   ],
 })
-export class AppModule {}
+export class AppModule { }
 
 // Wrap table in markdown with a div tag
 export function markedOptionsFactory(): MarkedOptions {
@@ -137,6 +139,7 @@ export function markedOptionsFactory(): MarkedOptions {
 
   return {
     renderer: renderer,
+    headerIds: true,
     gfm: true,
     breaks: false,
     pedantic: false,

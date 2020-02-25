@@ -48,7 +48,7 @@ uploadRoutes.post('/img', global.lcdata.uploadImgHandler, (req, res, next) => {
 
         return readChunk(f.path, 0, 262)
       }).then((buf) => {
-        let mimeInfo = fileType(buf)
+        let mimeInfo = fileType.fromBuffer(buf)
         if (!_.includes(['image/png', 'image/jpeg', 'image/gif', 'image/webp'], mimeInfo.mime)) {
           return Promise.reject(new Error('invalidfiletype'))
         }
