@@ -7,14 +7,14 @@ import { SiteService, sites } from 'src/app/services/site.service';
 import { faUsers, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-user-liste',
+  selector: 'user-liste',
   templateUrl: './user-liste.component.html',
   styleUrls: ['./user-liste.component.less'],
 })
 export class UserListeComponent implements OnInit {
   faUsers = faUsers
   faUser = faUser
-  
+
   users: User[]
   roles: Array<any>
 
@@ -22,7 +22,7 @@ export class UserListeComponent implements OnInit {
     private adminService: AdminService,
     private router: Router,
     private siteService: SiteService,
-  ) { 
+  ) {
     this.siteService.setState(sites.users);
   }
 

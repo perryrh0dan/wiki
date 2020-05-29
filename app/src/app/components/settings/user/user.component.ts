@@ -16,9 +16,9 @@ import { publicKeyCredentialToJSON, preformatMakeCredReq } from 'src/app/helper/
 import { faUser, faPlusSquare, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-user',
+  selector: 'user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.less'],
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
   faUser = faUser

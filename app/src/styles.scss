@@ -22,6 +22,10 @@
 @import './app/components/document-edit/insertlink/insertlink.component.scss';
 @import './app/components/document-edit/insertfile/insertfile.component.scss';
 
+//settings
+@import './app/components/settings/role-create/role-create.component.scss';
+@import './app/components/settings/user-create/user-create.component.scss';
+
 
 @mixin custom-component-theme($theme) {
   @include theme-general($theme);
@@ -37,6 +41,9 @@
   @include theme-confirmation-dialog($theme);
   @include theme-insert-link($theme);
   @include theme-insert-file($theme);
+
+  @include theme-role-create($theme);
+  @include theme-user-create($theme);
 }
 
 .default-theme {

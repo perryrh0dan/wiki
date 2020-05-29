@@ -1,15 +1,15 @@
-@mixin theme-document-create($theme) {
-  document-create .document-create {
+@mixin theme-user-create($theme) {
+  user-create .user-create {
     display: flex;
     flex-direction: column;
-
-    input {
-      border: none;
-    }
 
     mat-dialog-content {
       display: flex;
       flex-flow: column;
+
+      input {
+        border: none;
+      }
 
       mat-form-field {
         width: 300px;

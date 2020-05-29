@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { AdminService } from 'src/app/services/admin.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ThemeService } from 'src/app/services/theme.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
-  selector: 'app-role-create',
+  selector: 'role-create',
   templateUrl: './role-create.component.html',
-  styleUrls: ['./role-create.component.less'],
+  styleUrls: ['./role-create.component.scss'],
 })
-export class RoleCreateComponent implements OnInit {
+export class RoleCreateComponent {
   name = ''
 
   constructor(
@@ -18,9 +20,16 @@ export class RoleCreateComponent implements OnInit {
     private adminService: AdminService,
     private router: Router,
     private notifyService: NotificationService,
-  ) { }
+    private overlayContainer: OverlayContainer,
+    private themeService: ThemeService
+    ) {
+    this.themeService.isDarkTheme.subscribe((x: boolean) => {
+      this.setTheme(x ? 'dark-theme' : 'default-theme');
+    });
+  }
 
-  ngOnInit() {
+  private setTheme(theme: string = 'default-theme'): void {
+    this.overlayContainer.getContainerElement().classList.add(theme);
   }
 
   create() {
