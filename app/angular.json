@@ -34,7 +34,6 @@
               "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
               "./node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
               "./node_modules/ngx-toastr/toastr.css"
-
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -53,8 +52,7 @@
               "./node_modules/prismjs/components/prism-http.min.js",
               "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js",
               "./node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js"
-            ],
-            "es5BrowserSupport": true
+            ]
           },
           "configurations": {
             "production": {
