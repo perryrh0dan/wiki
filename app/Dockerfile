@@ -1,5 +1,5 @@
 # build environment
-FROM node:alpine as builder
+FROM node as builder
 
 # Move our files into directory name "app"
 WORKDIR /app
