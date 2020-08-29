@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from 'src/app/services/upload.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
+// Icons
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'insert-file',
@@ -23,7 +26,17 @@ export class InsertFileComponent implements OnInit {
   public constructor(
     public dialogRef: MatDialogRef<InsertFileComponent>,
     private uploadService: UploadService,
-  ) { }
+    private overlayContainer: OverlayContainer,
+    private themeService: ThemeService,
+  ) { 
+    this.themeService.isDarkTheme.subscribe((x: boolean) => {
+      this.setTheme(x ? 'dark-theme' : 'default-theme');
+    });
+  }
+
+  private setTheme(theme: string = 'default-theme'): void {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+  }
 
   public ngOnInit(): void {
     this.uploadService.loadFolders().subscribe(folders => {

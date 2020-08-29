@@ -7,12 +7,86 @@ import { DocumentService } from 'src/app/services/document.service';
 import { Document } from 'src/app/models/document';
 import { NotificationService } from 'src/app/services/notification.service';
 import { InsertFileComponent } from './insertfile/insertfile.component';
+import { InsertLinkComponent } from './insertlink/insertlink.component';
 import { LoadingService } from 'src/app/services/loading.service';
 import { delay } from 'rxjs/operators';
 import { SiteService, sites } from 'src/app/services/site.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { ThemeService } from 'src/app/services/theme.service';
 
+// Icons
 import { faBold, faItalic, faStrikethrough, faHeading, faQuoteLeft, faList, faListOl, faLink, faImage, faTable, faGripLines, faEye } from '@fortawesome/free-solid-svg-icons';
-import { InsertLinkComponent } from './insertlink/insertlink.component';
+
+// Toolbar items
+const toolbar = [{
+  icon: faBold,
+  name: 'bold',
+  tooltip: 'Bold',
+},
+{
+  icon: faItalic,
+  name: 'italic',
+  tooltip: 'Italic',
+},
+{
+  icon: faStrikethrough,
+  name: 'strikethrough',
+  tooltip: 'Strikethrough',
+},
+{
+  name: 'seperator',
+},
+{
+  icon: faHeading,
+  name: 'heading',
+  tooltip: 'Heading',
+},
+{
+  icon: faQuoteLeft,
+  name: 'quote',
+  tooltip: 'Quote',
+},
+{
+  name: 'seperator',
+},
+{
+  icon: faList,
+  name: 'list',
+  tooltip: 'Bullets',
+},
+{
+  icon: faListOl,
+  name: 'listol',
+  tooltip: 'Numbering',
+},
+{
+  name: 'seperator',
+},
+{
+  icon: faLink,
+  name: 'link',
+  tooltip: 'Link',
+},
+{
+  icon: faImage,
+  name: 'image',
+  tooltip: 'Image',
+},
+{
+  icon: faTable,
+  name: 'table',
+  tooltip: 'Table',
+},
+{
+  icon: faGripLines,
+  name: 'horline',
+  tooltip: 'Horizontal line',
+},
+{
+  icon: faEye,
+  name: 'preview',
+  tooltip: 'Preview',
+}];
 
 @Component({
   selector: 'document-edit',
@@ -37,77 +111,18 @@ export class DocumentEditComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private loadingService: LoadingService,
     private siteService: SiteService,
+    private overlayContainer: OverlayContainer,
+    private themeService: ThemeService,
   ) {
     this.siteService.setState(sites.edit);
-    this.toolbar = [{
-      icon: faBold,
-      name: 'bold',
-      tooltip: 'Bold',
-    },
-    {
-      icon: faItalic,
-      name: 'italic',
-      tooltip: 'Italic',
-    },
-    {
-      icon: faStrikethrough,
-      name: 'strikethrough',
-      tooltip: 'Strikethrough',
-    },
-    {
-      name: 'seperator',
-    },
-    {
-      icon: faHeading,
-      name: 'heading',
-      tooltip: 'Heading',
-    },
-    {
-      icon: faQuoteLeft,
-      name: 'quote',
-      tooltip: 'Quote',
-    },
-    {
-      name: 'seperator',
-    },
-    {
-      icon: faList,
-      name: 'list',
-      tooltip: 'Bullets',
-    },
-    {
-      icon: faListOl,
-      name: 'listol',
-      tooltip: 'Numbering',
-    },
-    {
-      name: 'seperator',
-    },
-    {
-      icon: faLink,
-      name: 'link',
-      tooltip: 'Link',
-    },
-    {
-      icon: faImage,
-      name: 'image',
-      tooltip: 'Image',
-    },
-    {
-      icon: faTable,
-      name: 'table',
-      tooltip: 'Table',
-    },
-    {
-      icon: faGripLines,
-      name: 'horline',
-      tooltip: 'Horizontal line',
-    },
-    {
-      icon: faEye,
-      name: 'preview',
-      tooltip: 'Preview',
-    }];
+    this.themeService.isDarkTheme.subscribe((x: boolean) => {
+      this.setTheme(x ? 'dark-theme' : 'default-theme');
+    });
+    this.toolbar = toolbar;
+  }
+
+  private setTheme(theme: string = 'default-theme'): void {
+    this.overlayContainer.getContainerElement().classList.add(theme);
   }
 
   public ngOnInit(): void {
