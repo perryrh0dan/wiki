@@ -39,7 +39,7 @@
     "remove-markdown": "^0.3.0",
     "simple-git": "^1.132.0",
     "socket.io": "^2.3.0",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^3.10.0",
     "winston-papertrail": "^1.0.5"
