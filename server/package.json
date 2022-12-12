@@ -18,7 +18,7 @@
     "cors": "^2.8.5",
     "cron": "^1.8.2",
     "elasticsearch": "^16.7.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.1",
     "file-type": "^14.7.1",
     "filesize": "^6.1.0",
